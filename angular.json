@@ -63,7 +63,8 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "e-words-ru:build"
+                        "browserTarget": "e-words-ru:build",
+                        "port": 4000
                     },
                     "configurations": {
                         "production": {
