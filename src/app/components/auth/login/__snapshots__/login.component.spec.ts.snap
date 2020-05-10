@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginComponent - компонент входа в приложение Если компонент загрузился, то все элементы отрисовались 1`] = `
+<div
+  id="root0"
+>
+  <form
+    class="form"
+  >
+    <h2
+      class="form-title"
+    >
+       Войти в тренажер 
+    </h2>
+    <div
+      class="form-content"
+    >
+      <div
+        class="form-row"
+      >
+        <mat-form-field
+          class="form-field"
+        >
+          <mat-label>
+            E-mail
+          </mat-label>
+          <input
+            matinput=""
+            placeholder="Введите e-mail"
+          />
+          <app-form-control-error
+            class="form-error"
+          />
+        </mat-form-field>
+      </div>
+      <div
+        class="form-row"
+      >
+        <mat-form-field
+          class="form-field"
+        >
+          <mat-label>
+            Пароль
+          </mat-label>
+          <input
+            matinput=""
+            placeholder="Введите пароль"
+            type="password"
+          />
+          <app-form-control-error
+            class="form-error"
+          />
+        </mat-form-field>
+      </div>
+      <div
+        class="form-row form-row_actions"
+      >
+        <button
+          class="button"
+          color="primary"
+          mat-raised-button=""
+        >
+           Войти 
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+`;
