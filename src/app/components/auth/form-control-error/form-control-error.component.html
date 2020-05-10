@@ -2,21 +2,17 @@
     <mat-error
         *ngIf="control.errors.required"
         automation-id="error-required"
-        class="control-error"
+        class="error"
     >
         Поле обязательно для заполнения
     </mat-error>
-    <mat-error
-        *ngIf="control.errors.email"
-        automation-id="error-email"
-        class="control-error"
-    >
+    <mat-error *ngIf="control.errors.email" automation-id="error-email" class="error">
         Неверный формат E-mail
     </mat-error>
     <mat-error
         *ngIf="control.errors.minlength"
         automation-id="error-minlength"
-        class="control-error"
+        class="error"
     >
         Пароль должен быть не менее
         {{ control.errors.minlength.requiredLength }} символов. Сейчас
