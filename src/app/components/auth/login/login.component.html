@@ -1,0 +1,46 @@
+<form class="form" [formGroup]="form">
+    <h2 class="form-title">
+        Войти в тренажер
+    </h2>
+    <div class="form-content">
+        <div class="form-row">
+            <mat-form-field class="form-field">
+                <mat-label>E-mail</mat-label>
+                <input
+                    matInput
+                    placeholder="Введите e-mail"
+                    [formControl]="emailControl"
+                />
+                <app-form-control-error
+                    class="form-error"
+                    [control]="emailControl"
+                ></app-form-control-error>
+            </mat-form-field>
+        </div>
+        <div class="form-row">
+            <mat-form-field class="form-field">
+                <mat-label>Пароль</mat-label>
+                <input
+                    type="password"
+                    matInput
+                    placeholder="Введите пароль"
+                    [formControl]="passwordControl"
+                />
+                <app-form-control-error
+                    class="form-error"
+                    [control]="passwordControl"
+                ></app-form-control-error>
+            </mat-form-field>
+        </div>
+        <div class="form-row form-row_actions">
+            <button
+                mat-raised-button
+                color="primary"
+                class="button"
+                [disabled]="form.invalid"
+            >
+                Войти
+            </button>
+        </div>
+    </div>
+</form>
