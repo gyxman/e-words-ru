@@ -5,7 +5,8 @@ import {FormControl} from '@angular/forms';
     selector: 'app-form-control-error',
     templateUrl: './form-control-error.component.html',
     styleUrls: ['./form-control-error.component.less'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    // https://github.com/angular/angular/issues/10887
+    // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormControlErrorComponent {
     @Input() control: FormControl;
