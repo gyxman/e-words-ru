@@ -2,6 +2,7 @@ import {ComponentFixture} from '@angular/core/testing';
 import {DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
 
+/* istanbul ignore next */
 export class PageObject<T> {
     constructor(protected fixture: ComponentFixture<T>) {}
 
