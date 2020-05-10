@@ -6,6 +6,8 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
+import {environment} from '../environments/environment';
+import {AngularFireModule} from '@angular/fire';
 
 @NgModule({
     declarations: [AppComponent],
@@ -15,6 +17,7 @@ import {EffectsModule} from '@ngrx/effects';
         BrowserAnimationsModule,
         StoreModule.forRoot({}),
         EffectsModule.forRoot([]),
+        AngularFireModule.initializeApp(environment.firebase),
     ],
     providers: [],
     bootstrap: [AppComponent],
