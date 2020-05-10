@@ -35,10 +35,10 @@ describe('FormControlErrorComponent - компонент отображения 
 
     it('Если пришел control с ошибкой об обязательности поля, отображаем эту ошибку', () => {
         // arrange
-        fixture.detectChanges();
+        testComponent.control.markAsTouched();
+        testComponent.control.setErrors({required: true});
 
         // act
-        testComponent.control.setErrors({required: true});
         fixture.detectChanges();
 
         // assert
@@ -49,10 +49,10 @@ describe('FormControlErrorComponent - компонент отображения 
 
     it('Если пришел control с ошибкой о невалидном e-mail, отображаем эту ошибку', () => {
         // arrange
-        fixture.detectChanges();
+        testComponent.control.markAsTouched();
+        testComponent.control.setErrors({email: true});
 
         // act
-        testComponent.control.setErrors({email: true});
         fixture.detectChanges();
 
         // assert
@@ -63,12 +63,12 @@ describe('FormControlErrorComponent - компонент отображения 
 
     it('Если пришел control с ошибкой о минимальной длине пароля, отображаем эту ошибку', () => {
         // arrange
-        fixture.detectChanges();
-
-        // act
+        testComponent.control.markAsTouched();
         testComponent.control.setErrors({
             minlength: {requiredLength: 8, actualLength: 5},
         });
+
+        // act
         fixture.detectChanges();
 
         // assert
