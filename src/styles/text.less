@@ -1,0 +1,117 @@
+.font-h1() {
+    font-weight: 500;
+
+    @media @mobile {
+        .font(20px, 24px);
+    }
+
+    @media @tablet-interval {
+        .font(24px, 28px);
+    }
+
+    @media @desktop-interval {
+        .font(28px, 32px);
+    }
+
+    @media @desktop-lg-min {
+        .font(32px, 36px);
+    }
+}
+
+.font-h2() {
+    font-weight: 500;
+
+    @media @mobile {
+        .font(18px, 20px);
+    }
+
+    @media @tablet-interval {
+        .font(20px, 22px);
+    }
+
+    @media @desktop-interval {
+        .font(22px, 24px);
+    }
+
+    @media @desktop-lg-min {
+        .font(24px, 28px);
+    }
+}
+
+.font-h3() {
+    font-weight: 500;
+
+    @media @mobile {
+        .font(16px, 18px);
+    }
+
+    @media @tablet-interval {
+        .font(18px, 20px);
+    }
+
+    @media @desktop-interval {
+        .font(20px, 22px);
+    }
+
+    @media @desktop-lg-min {
+        .font(22px, 26px);
+    }
+}
+
+.font-h4() {
+    font-weight: 500;
+
+    @media @mobile {
+        .font(16px, 18px);
+    }
+
+    @media @tablet-interval {
+        .font(18px, 20px);
+    }
+
+    @media @desktop-min {
+        .font(20px, 22px);
+    }
+}
+
+.font-h5() {
+    font-weight: 500;
+
+    @media @mobile {
+        .font(16px, 18px);
+    }
+
+    @media @tablet-min {
+        .font(18px, 20px);
+    }
+}
+
+.font-p1() {
+    @media @mobile {
+        .font(16px, 20px);
+    }
+
+    @media @tablet-min {
+        .font(18px, 24px);
+    }
+}
+
+.font-p3(@type: 1) {
+    @media @mobile {
+        .font(12px, 16px);
+    }
+
+    @media @tablet-min {
+        .font(13px, 16px);
+    }
+
+    & when (@type = 2) {
+        @media @mobile {
+            line-height: 20px;
+        }
+
+        @media @tablet-min {
+            line-height: 20px;
+        }
+    }
+}

@@ -1,0 +1,112 @@
+.mat-drawer-container {
+    height: 100%;
+}
+
+.mat-form-field {
+    width: 100%;
+
+    &.mat-form-field-invalid {
+        &.ng-untouched {
+            & /deep/ .mat-form-field-label {
+                color: fade(@color-black, 54%);
+            }
+
+            & /deep/ .mat-form-field-ripple {
+                background-color: inherit;
+            }
+        }
+    }
+}
+
+.mat-row {
+    &:hover {
+        background-color: @color-gray-extra-light;
+    }
+}
+
+.mat-radio-group {
+    display: flex;
+    flex-wrap: wrap;
+
+    @media @mobile {
+        margin: -10px;
+    }
+
+    @media @tablet-min {
+        margin: -15px;
+    }
+
+    & .mat-radio-button {
+        box-sizing: border-box;
+
+        @media @mobile {
+            width: 100%;
+            padding: 10px;
+        }
+
+        @media @tablet-min {
+            width: 50%;
+            padding: 15px;
+        }
+    }
+
+    & /deep/ .mat-radio-label {
+        position: relative;
+
+        & .mat-radio-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: auto;
+            height: auto;
+        }
+
+        & .mat-radio-label-content {
+            width: 100%;
+            padding: 8px 12px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+    }
+
+    & /deep/ .mat-radio-outer-circle {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: auto;
+        height: auto;
+        border-radius: @radius;
+        border-color: @color-border;
+    }
+
+    & /deep/ .mat-radio-inner-circle {
+        display: none;
+    }
+
+    & /deep/ .mat-radio-button {
+        & .mat-radio-ripple {
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            width: auto;
+            height: auto;
+            border-radius: @radius;
+        }
+
+        & .mat-ripple-element {
+            top: -5px !important;
+            left: -5px !important;
+            right: -5px !important;
+            bottom: -5px !important;
+            width: auto !important;
+            height: auto !important;
+            border-radius: @radius !important;
+        }
+    }
+}
