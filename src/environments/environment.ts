@@ -2,6 +2,8 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+// git update-index --assume-unchanged [<file> ...]
+// git update-index --no-assume-unchanged [<file> ...]
 export const environment = {
     production: false,
     firebase: {
