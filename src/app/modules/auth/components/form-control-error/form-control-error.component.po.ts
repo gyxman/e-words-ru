@@ -1,5 +1,5 @@
-import {PageObject} from '../../../testing/page-object';
 import {DebugElement} from '@angular/core';
+import {PageObject} from '../../../../testing/page-object';
 
 export class FormControlErrorComponentPo<T> extends PageObject<T> {
     get errorRequired(): DebugElement {
