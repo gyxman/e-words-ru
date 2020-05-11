@@ -8,6 +8,9 @@ import {EffectsModule} from '@ngrx/effects';
 import {environment} from '../environments/environment';
 import {AngularFireModule} from '@angular/fire';
 import {LoginModule} from './modules/auth/components/login/login.module';
+import * as firebase from 'firebase';
+
+firebase.initializeApp(environment.firebase);
 
 @NgModule({
     declarations: [AppComponent],
