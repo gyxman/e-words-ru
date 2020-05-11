@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {RouteEnum} from './enums/route.enum';
-import {LoginComponent} from './components/auth/login/login.component';
+import {LoginComponent} from './modules/auth/components/login/login.component';
 
 const routes: Routes = [
     {
