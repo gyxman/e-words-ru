@@ -19,7 +19,7 @@ describe('AuthService - сервис по работе с авторизацие
             ],
         });
 
-        testedService = TestBed.get(AuthService);
+        testedService = TestBed.inject(AuthService);
     });
 
     it('Если вызывается метод авторизации с помощью email-а и пароля, то отправляем запрос в firebase с переданными данными', () => {
