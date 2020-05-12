@@ -5,7 +5,11 @@ import {instance} from 'ts-mockito';
 
 describe('AuthService - сервис по работе с авторизацией в FireBase', () => {
     let testedService: AuthService;
-    let firebaseMock = require('firebase');
+    let firebaseMock: typeof firebase;
+
+    beforeEach(() => {
+        firebaseMock = require('firebase');
+    });
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -22,7 +26,7 @@ describe('AuthService - сервис по работе с авторизацие
         // arrange
         firebaseMock.auth = jest.fn().mockReturnValue({
             signInWithEmailAndPassword: jest.fn(),
-        });
+        }) as any;
 
         // act
         testedService.signInWithEmailAndPassword({
