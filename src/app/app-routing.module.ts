@@ -1,14 +1,13 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {RouteEnum} from './enums/route.enum';
-import {LoginComponent} from './modules/auth/components/login/login.component';
 
 const routes: Routes = [
     {
         path: RouteEnum.Auth,
-        children: [{path: RouteEnum.Login, component: LoginComponent}],
+        loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule),
     },
-    {path: '**', component: LoginComponent},
+    {path: '**', redirectTo: RouteEnum.Auth},
 ];
 
 @NgModule({

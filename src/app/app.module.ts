@@ -7,8 +7,8 @@ import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import {environment} from '../environments/environment';
 import {AngularFireModule} from '@angular/fire';
-import {LoginModule} from './modules/auth/components/login/login.module';
 import * as firebase from 'firebase';
+import {AuthModule} from './modules/auth/auth.module';
 
 firebase.initializeApp(environment.firebase);
 
@@ -21,7 +21,7 @@ firebase.initializeApp(environment.firebase);
         StoreModule.forRoot({}),
         EffectsModule.forRoot([]),
         AngularFireModule.initializeApp(environment.firebase),
-        LoginModule,
+        AuthModule,
     ],
     providers: [],
     bootstrap: [AppComponent],
