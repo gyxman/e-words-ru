@@ -1,10 +1,10 @@
-import {AuthService} from './auth.service';
+import {ApiService} from './api.service';
 import {TestBed} from '@angular/core/testing';
 import * as firebase from 'firebase';
 import {instance} from 'ts-mockito';
 
-describe('AuthService - сервис по работе с авторизацией в FireBase', () => {
-    let testedService: AuthService;
+describe('ApiService - сервис по работе с авторизацией в FireBase', () => {
+    let testedService: ApiService;
     let firebaseMock: typeof firebase;
 
     beforeEach(() => {
@@ -14,12 +14,12 @@ describe('AuthService - сервис по работе с авторизацие
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
-                AuthService,
+                ApiService,
                 {provide: firebase, useFactory: () => instance(firebaseMock)},
             ],
         });
 
-        testedService = TestBed.inject(AuthService);
+        testedService = TestBed.inject(ApiService);
     });
 
     it('Если вызывается метод авторизации с помощью email-а и пароля, то отправляем запрос в firebase с переданными данными', () => {
