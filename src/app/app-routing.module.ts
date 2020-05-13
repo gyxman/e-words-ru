@@ -7,7 +7,12 @@ const routes: Routes = [
         path: RouteEnum.Auth,
         loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule),
     },
-    {path: '**', redirectTo: RouteEnum.Auth},
+    {
+        path: RouteEnum.User,
+        loadChildren: () =>
+            import('./modules/layout/layout.module').then(m => m.LayoutModule),
+    },
+    {path: '**', redirectTo: RouteEnum.User},
 ];
 
 @NgModule({
