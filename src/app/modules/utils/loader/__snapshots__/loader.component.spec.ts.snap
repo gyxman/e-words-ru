@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoaderComponent - компонент отображения лоадера Если компонент загрузился, то все элементы отрисовались 1`] = `
+<div
+  id="root0"
+>
+  <app-loader>
+    <div
+      automation-id="content"
+      class="content content_with-overlay"
+    >
+      <div
+        class="some-content"
+      >
+        Some text
+      </div>
+    </div>
+    
+    <div
+      automation-id="loader"
+      class="loader"
+    >
+      
+      <div
+        automation-id="overlay"
+        class="overlay"
+      />
+      <mat-progress-spinner
+        automation-id="spinner"
+        class="spinner"
+        mode="indeterminate"
+      />
+    </div>
+  </app-loader>
+</div>
+`;

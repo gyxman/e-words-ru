@@ -1,0 +1,11 @@
+<div automation-id="content" class="content" [class.content_with-overlay]="showOverlay">
+    <ng-content> </ng-content>
+</div>
+<div *ngIf="showLoader" automation-id="loader" class="loader">
+    <div *ngIf="showOverlay" automation-id="overlay" class="overlay"></div>
+    <mat-progress-spinner
+        automation-id="spinner"
+        class="spinner"
+        mode="indeterminate"
+    ></mat-progress-spinner>
+</div>

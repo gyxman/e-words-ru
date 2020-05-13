@@ -1,4 +1,4 @@
-import {AuthFacadeService} from './auth.facade.service';
+import {AuthFacadeService} from './auth-facade.service';
 import {ApiService} from './api.service';
 import {TestBed} from '@angular/core/testing';
 import {instance, mock, when} from 'ts-mockito';

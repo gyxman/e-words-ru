@@ -8,6 +8,7 @@ import {EffectsModule} from '@ngrx/effects';
 import {environment} from '../environments/environment';
 import {AngularFireModule} from '@angular/fire';
 import {AuthModule} from './modules/auth/auth.module';
+import {LoaderModule} from './modules/utils/loader/loader.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -19,6 +20,7 @@ import {AuthModule} from './modules/auth/auth.module';
         EffectsModule.forRoot([]),
         AngularFireModule.initializeApp(environment.firebase),
         AuthModule,
+        LoaderModule,
     ],
     providers: [],
     bootstrap: [AppComponent],
