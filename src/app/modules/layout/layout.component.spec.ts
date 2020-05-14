@@ -1,6 +1,8 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {LayoutComponent} from './layout.component';
 import {RouterTestingModule} from '@angular/router/testing';
+import {MockComponent} from 'ng-mocks';
+import {HeaderComponent} from './components/header/header.component';
 
 describe('LayoutComponent - компонент авторизованной зоны', () => {
     let component: LayoutComponent;
@@ -8,7 +10,7 @@ describe('LayoutComponent - компонент авторизованной зо
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [LayoutComponent],
+            declarations: [LayoutComponent, MockComponent(HeaderComponent)],
             imports: [RouterTestingModule],
         }).compileComponents();
     }));
