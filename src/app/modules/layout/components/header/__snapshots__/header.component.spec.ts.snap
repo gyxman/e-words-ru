@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeaderComponent - компонент верхней части авторизованной зоны Если компонент загрузился, то все элементы отрисовались 1`] = `
+<div
+  id="root0"
+>
+  <div
+    class="info"
+  >
+    <button
+      aria-label="Открыть меню"
+      automation-id="toggle"
+      color="primary"
+      mat-icon-button=""
+    >
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Иконка открытия меню"
+        svgicon="toggle"
+      />
+    </button>
+    <a
+      automation-id="logo"
+      class="logo"
+      href="/"
+    >
+      Тренажер слов
+    </a>
+  </div>
+  <div
+    class="actions"
+  >
+    <button
+      aria-label="Выйти из приложения"
+      automation-id="exit"
+      color="primary"
+      mat-icon-button=""
+    >
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Иконка выхода из приложения"
+        svgicon="logout"
+      />
+    </button>
+  </div>
+</div>
+`;

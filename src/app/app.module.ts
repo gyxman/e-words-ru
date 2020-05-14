@@ -7,11 +7,13 @@ import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import {environment} from '../environments/environment';
 import {AngularFireModule} from '@angular/fire';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
     declarations: [AppComponent],
     imports: [
         BrowserModule,
+        HttpClientModule,
         AppRoutingModule,
         BrowserAnimationsModule,
         StoreModule.forRoot({}),

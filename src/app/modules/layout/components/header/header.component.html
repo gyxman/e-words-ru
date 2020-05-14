@@ -1,0 +1,29 @@
+<div class="info">
+    <button
+        automation-id="toggle"
+        mat-icon-button
+        color="primary"
+        aria-label="Открыть меню"
+    >
+        <mat-icon
+            svgIcon="toggle"
+            aria-hidden="false"
+            aria-label="Иконка открытия меню"
+        ></mat-icon>
+    </button>
+    <a class="logo" automation-id="logo" [routerLink]="['/']">Тренажер слов</a>
+</div>
+<div class="actions">
+    <button
+        automation-id="exit"
+        mat-icon-button
+        color="primary"
+        aria-label="Выйти из приложения"
+    >
+        <mat-icon
+            svgIcon="logout"
+            aria-hidden="false"
+            aria-label="Иконка выхода из приложения"
+        ></mat-icon>
+    </button>
+</div>
