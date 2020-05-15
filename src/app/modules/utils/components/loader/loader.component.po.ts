@@ -1,4 +1,4 @@
-import {PageObject} from '../../../testing/page-object';
+import {PageObject} from '../../../../testing/page-object';
 import {DebugElement} from '@angular/core';
 
 export class LoaderComponentPo<T> extends PageObject<T> {
