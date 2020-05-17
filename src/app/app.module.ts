@@ -8,6 +8,8 @@ import {EffectsModule} from '@ngrx/effects';
 import {environment} from '../environments/environment';
 import {AngularFireModule} from '@angular/fire';
 import {HttpClientModule} from '@angular/common/http';
+import {NotificationsModule} from './modules/utils/modules/notification/components/notifications/notifications.module';
+import {NotificationFacadeService} from './modules/utils/modules/notification/services/notification-facade.service';
 
 @NgModule({
     declarations: [AppComponent],
@@ -19,8 +21,9 @@ import {HttpClientModule} from '@angular/common/http';
         StoreModule.forRoot({}),
         EffectsModule.forRoot([]),
         AngularFireModule.initializeApp(environment.firebase),
+        NotificationsModule,
     ],
-    providers: [],
+    providers: [NotificationFacadeService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}
