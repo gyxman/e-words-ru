@@ -11,7 +11,6 @@ import {DomSanitizer} from '@angular/platform-browser';
     changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [
         trigger('expand', [
-            state('in', style({height: '*'})),
             transition(':leave', [
                 style({height: '*'}),
                 animate(
@@ -20,11 +19,8 @@ import {DomSanitizer} from '@angular/platform-browser';
                 ),
             ]),
             transition(':enter', [
-                style({height: 0, opacity: 0, transform: 'translateX(110%)'}),
-                animate(
-                    200,
-                    style({height: '*', opacity: 1, transform: 'translateX(0)'}),
-                ),
+                style({opacity: 0, transform: 'translateX(110%)'}),
+                animate(200, style({opacity: 1, transform: 'translateX(0)'})),
             ]),
         ]),
     ],
