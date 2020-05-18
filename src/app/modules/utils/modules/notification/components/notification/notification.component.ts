@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, HostBinding, Input} from '@angular/core';
 import {NotificationModel} from '../../models/notification';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {MatIconRegistry} from '@angular/material/icon';
@@ -28,9 +28,10 @@ import {DomSanitizer} from '@angular/platform-browser';
             ]),
         ]),
     ],
-    host: {'[@expand]': 'in'},
 })
 export class NotificationComponent {
+    @HostBinding('@expand') readonly expand;
+
     @Input() info: NotificationModel;
 
     constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
