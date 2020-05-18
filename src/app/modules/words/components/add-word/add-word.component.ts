@@ -41,7 +41,11 @@ export class AddWordComponent {
         this.synonymsControl.push(control);
     }
 
+    removeSynonym(index: number) {
+        this.synonymsControl.removeAt(index);
+    }
+
     onSubmit() {
-        console.log(this.synonymsControl.value);
+        console.log(this.form.value);
     }
 }

@@ -1,4 +1,4 @@
-<form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+<form automation-id="form" class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
     <h2 class="form-title">
         Добавить слово
     </h2>
@@ -7,6 +7,7 @@
             <mat-form-field class="form-field">
                 <mat-label>Слово на английском</mat-label>
                 <input
+                    automation-id="english-word"
                     matInput
                     placeholder="Введите слово на английском"
                     [formControl]="englishWordControl"
@@ -21,6 +22,7 @@
             <mat-form-field class="form-field">
                 <mat-label>Слово на русском</mat-label>
                 <input
+                    automation-id="russian-word"
                     matInput
                     placeholder="Введите слово на русском"
                     [formControl]="russianWordControl"
@@ -41,6 +43,7 @@
                     <input
                         matInput
                         placeholder="Введите синоним на русском"
+                        [attr.automation-id]="'synonym-' + i"
                         [formControl]="synonym"
                     />
                     <app-form-control-error
@@ -50,9 +53,13 @@
                 </mat-form-field>
 
                 <button
+                    class="delete-button"
                     mat-icon-button
+                    color="warn"
                     type="button"
                     aria-label="Кнопка удаления синонима"
+                    [attr.automation-id]="'delete-synonym-' + i"
+                    (click)="removeSynonym(i)"
                 >
                     <mat-icon
                         class="delete"
@@ -65,12 +72,18 @@
         </ng-container>
 
         <div class="form-row form-row_meta">
-            <button mat-stroked-button type="button" (click)="addSynonym()">
+            <button
+                automation-id="add-synonym-button"
+                mat-stroked-button
+                type="button"
+                (click)="addSynonym()"
+            >
                 Добавить синоним
             </button>
         </div>
         <div class="form-row form-row_actions">
             <button
+                automation-id="submit-button"
                 mat-raised-button
                 color="primary"
                 type="submit"
