@@ -1,2 +1,11 @@
-<p>{{ info?.text }}</p>
-<p>{{ info?.type }}</p>
+<div *ngIf="info" class="wrapper" [ngClass]="classes">
+    <div class="icon-wrapper">
+        <mat-icon
+            automation-id="icon"
+            class="icon"
+            aria-hidden="true"
+            [svgIcon]="info.type"
+        ></mat-icon>
+    </div>
+    <div class="info" [innerHTML]="info.text"></div>
+</div>

@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotificationComponent - компонент нотификации Если пользователь показывает нотификацию ошибки, то верстка корректна 1`] = `
+<div
+  id="root4"
+>
+  <app-notification
+    class="ng-trigger ng-trigger-expand ng-animating"
+    style=""
+  >
+    
+    <div
+      class="wrapper wrapper_error"
+      style=""
+    >
+      <div
+        class="icon-wrapper"
+      >
+        <mat-icon
+          aria-hidden="true"
+          automation-id="icon"
+          class="icon"
+        />
+      </div>
+      <div
+        class="info"
+      >
+        Нотификация ошибки
+      </div>
+    </div>
+  </app-notification>
+</div>
+`;
+
+exports[`NotificationComponent - компонент нотификации Если пользователь показывает нотификацию уведомления, то верстка корректна 1`] = `
+<div
+  id="root2"
+>
+  <app-notification
+    class="ng-trigger ng-trigger-expand ng-animating"
+    style=""
+  >
+    
+    <div
+      class="wrapper wrapper_warning"
+      style=""
+    >
+      <div
+        class="icon-wrapper"
+      >
+        <mat-icon
+          aria-hidden="true"
+          automation-id="icon"
+          class="icon"
+        />
+      </div>
+      <div
+        class="info"
+      >
+        Нотификация уведомления
+      </div>
+    </div>
+  </app-notification>
+</div>
+`;
+
+exports[`NotificationComponent - компонент нотификации Если пользователь показывает нотификацию успеха, то верстка корректна 1`] = `
+<div
+  id="root0"
+>
+  <app-notification
+    class="ng-trigger ng-trigger-expand ng-animating"
+    style=""
+  >
+    
+    <div
+      class="wrapper wrapper_success"
+      style=""
+    >
+      <div
+        class="icon-wrapper"
+      >
+        <mat-icon
+          aria-hidden="true"
+          automation-id="icon"
+          class="icon"
+        />
+      </div>
+      <div
+        class="info"
+      >
+        Нотификация успеха
+      </div>
+    </div>
+  </app-notification>
+</div>
+`;
