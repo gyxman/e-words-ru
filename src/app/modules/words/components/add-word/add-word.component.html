@@ -1,0 +1,83 @@
+<form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <h2 class="form-title">
+        Добавить слово
+    </h2>
+    <div class="form-content">
+        <div class="form-row">
+            <mat-form-field class="form-field">
+                <mat-label>Слово на английском</mat-label>
+                <input
+                    matInput
+                    placeholder="Введите слово на английском"
+                    [formControl]="englishWordControl"
+                />
+                <app-form-control-error
+                    class="form-error"
+                    [control]="englishWordControl"
+                ></app-form-control-error>
+            </mat-form-field>
+        </div>
+        <div class="form-row">
+            <mat-form-field class="form-field">
+                <mat-label>Слово на русском</mat-label>
+                <input
+                    matInput
+                    placeholder="Введите слово на русском"
+                    [formControl]="russianWordControl"
+                />
+                <app-form-control-error
+                    class="form-error"
+                    [control]="russianWordControl"
+                ></app-form-control-error>
+            </mat-form-field>
+        </div>
+        <ng-container *ngIf="synonymsControl.controls.length">
+            <div
+                *ngFor="let synonym of synonymsControl.controls; let i = index"
+                class="form-row form-row_with-button"
+            >
+                <mat-form-field class="form-field">
+                    <mat-label>Синоним на русском</mat-label>
+                    <input
+                        matInput
+                        placeholder="Введите синоним на русском"
+                        [formControl]="synonym"
+                    />
+                    <app-form-control-error
+                        class="form-error"
+                        [control]="synonym"
+                    ></app-form-control-error>
+                </mat-form-field>
+
+                <button
+                    mat-icon-button
+                    type="button"
+                    aria-label="Кнопка удаления синонима"
+                >
+                    <mat-icon
+                        class="delete"
+                        svgIcon="delete"
+                        aria-hidden="false"
+                        aria-label="Иконка удаления синонима"
+                    ></mat-icon>
+                </button>
+            </div>
+        </ng-container>
+
+        <div class="form-row form-row_meta">
+            <button mat-stroked-button type="button" (click)="addSynonym()">
+                Добавить синоним
+            </button>
+        </div>
+        <div class="form-row form-row_actions">
+            <button
+                mat-raised-button
+                color="primary"
+                type="submit"
+                [disabled]="form.invalid"
+            >
+                Добавить слово
+            </button>
+        </div>
+    </div>
+</form>
