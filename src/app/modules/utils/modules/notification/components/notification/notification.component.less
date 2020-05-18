@@ -1,3 +1,65 @@
+@import '../../../../../../../styles/index';
+
 :host {
     display: block;
+    margin: 8px;
+}
+
+.wrapper {
+    display: flex;
+    max-height: 60px;
+    box-shadow: 0 2px 8px 0 fade(@color-black, 24%);
+    overflow: hidden;
+
+    &_success {
+        & .icon-wrapper {
+            background-color: @color-green-light;
+        }
+    }
+
+    &_warning {
+        & .icon-wrapper {
+            background-color: @color-orange;
+        }
+    }
+
+    &_error {
+        & .icon-wrapper {
+            background-color: @color-red;
+        }
+    }
+}
+
+.icon-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    margin-right: 30px;
+    flex-shrink: 0;
+    color: @color-white;
+
+    &:before {
+        .clear();
+        position: absolute;
+        top: 50%;
+        right: -20px;
+        width: 50px;
+        height: 50px;
+        background-color: inherit;
+        transform: rotate(45deg) translateY(-50%);
+        transform-origin: top;
+    }
+}
+
+.icon {
+    position: relative;
+    z-index: 2;
+    width: 24px;
+    height: 24px;
+}
+
+.info {
+    .font-p2();
+    padding: 10px;
 }
