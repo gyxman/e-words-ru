@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatIconRegistry} from '@angular/material/icon';
 import {DomSanitizer} from '@angular/platform-browser';
+import {ManageWordFormService} from '../../services/manage-word-form.service';
 
 @Component({
     selector: 'app-add-word',
@@ -10,39 +10,28 @@ import {DomSanitizer} from '@angular/platform-browser';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddWordComponent {
-    form = new FormGroup({
-        englishWord: new FormControl(null, [Validators.required]),
-        russianWord: new FormControl(null, [Validators.required]),
-        synonyms: new FormArray([]),
-    });
+    form = this.formService.form;
+    englishWordControl = this.formService.englishWordControl;
+    russianWordControl = this.formService.russianWordControl;
+    synonymsControl = this.formService.synonymsControl;
 
-    constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+    constructor(
+        iconRegistry: MatIconRegistry,
+        sanitizer: DomSanitizer,
+        private formService: ManageWordFormService,
+    ) {
         iconRegistry.addSvgIcon(
             'delete',
             sanitizer.bypassSecurityTrustResourceUrl('assets/icons/icon-delete.svg'),
         );
     }
 
-    get englishWordControl(): FormControl {
-        return this.form.get('englishWord') as FormControl;
-    }
-
-    get russianWordControl(): FormControl {
-        return this.form.get('russianWord') as FormControl;
-    }
-
-    get synonymsControl(): FormArray {
-        return this.form.get('synonyms') as FormArray;
-    }
-
     addSynonym() {
-        const control = new FormControl(null, [Validators.required]);
-
-        this.synonymsControl.push(control);
+        this.formService.addSynonym();
     }
 
     removeSynonym(index: number) {
-        this.synonymsControl.removeAt(index);
+        this.formService.removeSynonym(index);
     }
 
     onSubmit() {

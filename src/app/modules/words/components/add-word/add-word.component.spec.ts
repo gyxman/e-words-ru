@@ -1,5 +1,4 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-
 import {AddWordComponent} from './add-word.component';
 import {AddWordComponentPo} from './add-word.component.po';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -8,6 +7,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {FormControlErrorModule} from '../../../auth/components/form-control-error/form-control-error.module';
 import {MatIconModule} from '@angular/material/icon';
+import {ManageWordFormService} from '../../services/manage-word-form.service';
 
 describe('AddWordComponent - форма добавления нового слова', () => {
     let component: AddWordComponent;
@@ -24,6 +24,7 @@ describe('AddWordComponent - форма добавления нового сло
                 MockModule(FormControlErrorModule),
                 MockModule(MatIconModule),
             ],
+            providers: [ManageWordFormService],
         }).compileComponents();
     }));
 
@@ -55,7 +56,8 @@ describe('AddWordComponent - форма добавления нового сло
         expect(pageObject.submitButton.attributes['ng-reflect-disabled']).toBe('true');
     });
 
-    it('Если пользователь открывает форму добавления слова, заполняет английское слово, заполняет русское слово, кнопка "Добавить слово" доступна', () => {
+    it(`Если пользователь открывает форму добавления слова, заполняет английское слово,
+        заполняет русское слово, кнопка "Добавить слово" доступна`, () => {
         // arrange
         fixture.detectChanges();
 
