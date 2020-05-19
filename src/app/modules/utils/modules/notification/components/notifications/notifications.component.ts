@@ -49,7 +49,7 @@ export class NotificationsComponent {
 
         setTimeout(() => {
             this.removeComponent(id);
-        }, notification.time | 3000);
+        }, notification.time || 3000);
     }
 
     private removeComponent(index: number) {
