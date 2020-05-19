@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotificationsComponent - компонент для показа нотификаций Если пришла информация о показе нотификации ошибки, то она отрисовалась корректно 1`] = `
+<div
+  id="root2"
+>
+  
+  
+  <template />
+  <app-notification
+    class="ng-trigger ng-trigger-expand ng-animating"
+    style=""
+  >
+    
+    <div
+      class="wrapper wrapper_error"
+      style=""
+    >
+      <div
+        class="icon-wrapper"
+      >
+        <mat-icon
+          aria-hidden="true"
+          automation-id="icon"
+          class="icon"
+        />
+      </div>
+      <div
+        class="info"
+      >
+        Ошибка
+      </div>
+    </div>
+  </app-notification>
+</div>
+`;
+
+exports[`NotificationsComponent - компонент для показа нотификаций Если пришла информация о показе нотификации уведомления, то она отрисовалась корректно 1`] = `
+<div
+  id="root1"
+>
+  
+  
+  <template />
+  <app-notification
+    class="ng-trigger ng-trigger-expand ng-animating"
+    style=""
+  >
+    
+    <div
+      class="wrapper wrapper_warning"
+      style=""
+    >
+      <div
+        class="icon-wrapper"
+      >
+        <mat-icon
+          aria-hidden="true"
+          automation-id="icon"
+          class="icon"
+        />
+      </div>
+      <div
+        class="info"
+      >
+        Внимание
+      </div>
+    </div>
+  </app-notification>
+</div>
+`;
+
+exports[`NotificationsComponent - компонент для показа нотификаций Если пришла информация о показе нотификации успеха, то она отрисовалась корректно 1`] = `
+<div
+  id="root0"
+>
+  
+  
+  <template />
+  <app-notification
+    class="ng-trigger ng-trigger-expand ng-animating"
+    style=""
+  >
+    
+    <div
+      class="wrapper wrapper_success"
+      style=""
+    >
+      <div
+        class="icon-wrapper"
+      >
+        <mat-icon
+          aria-hidden="true"
+          automation-id="icon"
+          class="icon"
+        />
+      </div>
+      <div
+        class="info"
+      >
+        Уведомление
+      </div>
+    </div>
+  </app-notification>
+</div>
+`;

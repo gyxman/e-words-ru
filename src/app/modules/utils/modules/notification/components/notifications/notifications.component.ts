@@ -34,11 +34,7 @@ export class NotificationsComponent {
         private resolver: ComponentFactoryResolver,
     ) {}
 
-    private createComponent(notification: NotificationModel | null) {
-        if (!notification) {
-            return;
-        }
-
+    private createComponent(notification: NotificationModel) {
         const factory = this.resolver.resolveComponentFactory(NotificationComponent);
         const id = Date.now();
 
