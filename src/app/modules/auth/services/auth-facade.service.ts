@@ -1,15 +1,14 @@
 import {Injectable} from '@angular/core';
-import {ApiService} from './api.service';
-import * as firebase from 'firebase';
-import {SignInWithEmailAndPasswordDto} from '../dtos/sign-in-with-email-and-password.dto';
+import {Store} from '@ngrx/store';
+import {AuthState} from '../store/auth.state';
+import {SignInWithEmailAndPassword} from '../models/sign-in-with-email-and-password';
+import {authActions} from '../store/auth.actions';
 
 @Injectable()
 export class AuthFacadeService {
-    constructor(private apiService: ApiService) {}
+    constructor(private store$: Store<AuthState>) {}
 
-    loginWithEmail(
-        data: SignInWithEmailAndPasswordDto,
-    ): Promise<firebase.auth.UserCredential> {
-        return this.apiService.signInWithEmailAndPassword(data);
+    signInWithEmail(data: SignInWithEmailAndPassword) {
+        this.store$.dispatch(authActions.signInWithEmailAndPasswordStart({data}));
     }
 }

@@ -1,43 +1,38 @@
 import {AuthFacadeService} from './auth-facade.service';
-import {ApiService} from './api.service';
 import {TestBed} from '@angular/core/testing';
-import {instance, mock, when} from 'ts-mockito';
 import {SignInWithEmailAndPasswordDto} from '../dtos/sign-in-with-email-and-password.dto';
+import {MockStore, provideMockStore} from '@ngrx/store/testing';
+import {AuthState} from '../store/auth.state';
+import {authActions} from '../store/auth.actions';
 
 describe('AuthFacadeService - сервис по работе с авторизационной группой', () => {
     let testedService: AuthFacadeService;
-    let apiServiceMock: ApiService;
-
-    beforeEach(() => {
-        apiServiceMock = mock(ApiService);
-    });
+    let storeMock: MockStore<AuthState>;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [
-                AuthFacadeService,
-                {provide: ApiService, useFactory: () => instance(apiServiceMock)},
-            ],
+            providers: [AuthFacadeService, provideMockStore()],
         });
 
         testedService = TestBed.inject(AuthFacadeService);
+        storeMock = TestBed.inject(MockStore);
     });
 
-    it('Если пользователь начинает авторизацию через email и пароль, то вызываем соответствующий метод в сервисе по работе с авторизацией', () => {
+    it('Если пользователь начинает авторизацию через email и пароль, то диспатчим экшен о начале авторизации', () => {
         // arrange
-        jest.spyOn(apiServiceMock, 'signInWithEmailAndPassword');
+        jest.spyOn(storeMock, 'dispatch');
 
-        const userData: SignInWithEmailAndPasswordDto = {
+        const data: SignInWithEmailAndPasswordDto = {
             email: 'test@mail.ru',
             password: 'easyPassword',
         };
 
-        when(apiServiceMock.signInWithEmailAndPassword(userData)).thenReturn(true as any);
-
         // act
-        testedService.loginWithEmail(userData);
+        testedService.signInWithEmail(data);
 
         // assert
-        expect(apiServiceMock.signInWithEmailAndPassword).toHaveBeenCalledWith(userData);
+        expect(storeMock.dispatch).toHaveBeenCalledWith(
+            authActions.signInWithEmailAndPasswordStart({data}),
+        );
     });
 });

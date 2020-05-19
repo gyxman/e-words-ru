@@ -1,13 +1,21 @@
-import {createAction} from '@ngrx/store';
+import {createAction, props} from '@ngrx/store';
+import {SignInWithEmailAndPassword} from '../models/sign-in-with-email-and-password';
 
-const loginStart = createAction('[auth] Начать авторизацию в приложении');
+const signInWithEmailAndPasswordStart = createAction(
+    '[auth] Начать авторизацию в приложении с помощью логина и пароля',
+    props<{data: SignInWithEmailAndPassword}>(),
+);
 
-const loginSuccess = createAction('[auth] Успешная авторизация в приложении');
+const signInWithEmailAndPasswordSuccess = createAction(
+    '[auth] Успешная авторизация в приложении с помощью логина и пароля',
+);
 
-const loginError = createAction('[auth] Ошибка при авторизации в приложении');
+const signInWithEmailAndPasswordError = createAction(
+    '[auth] Ошибка при авторизации в приложении с помощью логина и пароля',
+);
 
 export const authActions = {
-    loginStart,
-    loginSuccess,
-    loginError,
+    signInWithEmailAndPasswordStart,
+    signInWithEmailAndPasswordSuccess,
+    signInWithEmailAndPasswordError,
 };

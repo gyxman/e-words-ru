@@ -9,15 +9,19 @@ const initialState: AuthState = {
 const reducer = createReducer(
     initialState,
 
-    on(authActions.loginStart, state => ({
+    on(authActions.signInWithEmailAndPasswordStart, state => ({
         ...state,
         isLoading: true,
     })),
 
-    on(authActions.loginSuccess, authActions.loginError, state => ({
-        ...state,
-        isLoading: false,
-    })),
+    on(
+        authActions.signInWithEmailAndPasswordSuccess,
+        authActions.signInWithEmailAndPasswordError,
+        state => ({
+            ...state,
+            isLoading: false,
+        }),
+    ),
 );
 
 export function authReducer(state: AuthState | undefined, action: Action) {
