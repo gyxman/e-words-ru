@@ -16,7 +16,7 @@ const signInWithEmailAndPasswordError = createAction(
 );
 
 const showNotification = createAction(
-    '[auth] Показать нотиификацию',
+    '[auth] Показать нотификацию',
     props<{data: NotificationModel}>(),
 );
 
