@@ -14,6 +14,8 @@ export class LoginComponent {
         password: new FormControl(null, [Validators.minLength(8), Validators.required]),
     });
 
+    readonly showLoader$ = this.authFacadeService.showLoader$;
+
     constructor(private readonly authFacadeService: AuthFacadeService) {}
 
     get emailControl(): FormControl {

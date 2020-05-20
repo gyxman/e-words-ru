@@ -1,27 +1,36 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {LoginComponent} from './login.component';
-import {MockModule} from 'ng-mocks';
+import {MockComponent, MockModule} from 'ng-mocks';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {FormControlErrorModule} from '../form-control-error/form-control-error.module';
 import {AuthFacadeService} from '../../services/auth-facade.service';
-import {deepEqual, instance, mock, verify} from 'ts-mockito';
+import {deepEqual, instance, mock, verify, when} from 'ts-mockito';
 import {LoginComponentPo} from './login.component.po';
+import {BehaviorSubject, of} from 'rxjs';
+import {LoaderComponent} from '../../../utils/components/loader/loader.component';
 
 describe('LoginComponent - компонент входа в приложение', () => {
     let component: LoginComponent;
     let fixture: ComponentFixture<LoginComponent>;
     let pageObject: LoginComponentPo<LoginComponent>;
     let authFacadeServiceMock: AuthFacadeService;
+    let showLoader$: BehaviorSubject<boolean>;
 
     beforeEach(() => {
         authFacadeServiceMock = mock(AuthFacadeService);
+
+        showLoader$ = new BehaviorSubject(false);
+    });
+
+    beforeEach(() => {
+        when(authFacadeServiceMock.showLoader$).thenReturn(showLoader$);
     });
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [LoginComponent],
+            declarations: [LoginComponent, MockComponent(LoaderComponent)],
             imports: [
                 ReactiveFormsModule,
                 MockModule(MatInputModule),
@@ -49,6 +58,28 @@ describe('LoginComponent - компонент входа в приложение
 
         // assert
         expect(fixture.nativeElement).toMatchSnapshot();
+    });
+
+    it('Если пришла информация о показе лоадера, то он отображается', () => {
+        // arrange
+        showLoader$.next(true);
+
+        // act
+        fixture.detectChanges();
+
+        // assert
+        expect(pageObject.loader.showLoader).toBe(true);
+    });
+
+    it('Если информация о показе лоадера не пришла, то он не отображается', () => {
+        // arrange
+        showLoader$.next(false);
+
+        // act
+        fixture.detectChanges();
+
+        // assert
+        expect(pageObject.loader.showLoader).toBe(false);
     });
 
     it('Если пользователь открывает страниицу логина, то кнопка "Войти" недоступна', () => {
