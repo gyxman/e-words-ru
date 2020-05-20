@@ -9,6 +9,7 @@ const signInWithEmailAndPasswordStart = createAction(
 
 const signInWithEmailAndPasswordSuccess = createAction(
     '[auth] Успешная авторизация в приложении с помощью логина и пароля',
+    props<{refreshToken: string}>(),
 );
 
 const signInWithEmailAndPasswordError = createAction(

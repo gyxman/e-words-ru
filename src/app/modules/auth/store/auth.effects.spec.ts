@@ -13,6 +13,7 @@ import {authActions} from './auth.actions';
 import * as firebase from 'firebase';
 import {NotificationFacadeService} from '../../utils/modules/notification/services/notification-facade.service';
 import {NotificationModel} from '../../utils/modules/notification/models/notification';
+import {AuthFacadeService} from '../services/auth-facade.service';
 
 describe('AuthEffects - эффекты по работе с авторизационной группой', () => {
     let testedEffects: AuthEffects;
@@ -20,10 +21,12 @@ describe('AuthEffects - эффекты по работе с авторизаци
     let actionsMock$: Observable<Action>;
     let storeMock: MockStore<AuthState>;
     let apiServiceMock: ApiService;
+    let authFacadeServiceMock: AuthFacadeService;
     let notificationFacadeServiceMock: NotificationFacadeService;
 
     beforeEach(() => {
         apiServiceMock = mock(ApiService);
+        authFacadeServiceMock = mock(AuthFacadeService);
         notificationFacadeServiceMock = mock(NotificationFacadeService);
     });
 
@@ -36,6 +39,10 @@ describe('AuthEffects - эффекты по работе с авторизаци
                 {
                     provide: ApiService,
                     useFactory: () => instance(apiServiceMock),
+                },
+                {
+                    provide: AuthFacadeService,
+                    useFactory: () => instance(authFacadeServiceMock),
                 },
                 {
                     provide: NotificationFacadeService,
@@ -71,12 +78,14 @@ describe('AuthEffects - эффекты по работе с авторизаци
             });
 
             when(apiServiceMock.signInWithEmailAndPassword(data)).thenReturn(
-                of({}) as Observable<firebase.auth.UserCredential>,
+                of({user: {refreshToken: 'token'}}) as Observable<
+                    firebase.auth.UserCredential
+                >,
             );
 
             // act & assert
             const expected$ = hot('x', {
-                x: authActions.signInWithEmailAndPasswordSuccess(),
+                x: authActions.signInWithEmailAndPasswordSuccess({refreshToken: 'token'}),
             });
 
             expect(testedEffects.signInWithEmailAndPasswordStart$).toBeObservable(
@@ -180,6 +189,29 @@ describe('AuthEffects - эффекты по работе с авторизаци
             expect(testedEffects.signInWithEmailAndPasswordStart$).toBeObservable(
                 expected$,
             );
+        });
+    });
+
+    describe('signInWithEmailAndPasswordSuccess$ - эффект по установке пользователю сессии', () => {
+        it('Эффект по установке пользователю сессии не диспатчит экшен, переподписывается при ошибке', () => {
+            // assert
+            expect(metadata.signInWithEmailAndPasswordSuccess$).toEqual({
+                dispatch: false,
+                useEffectsErrorHandler: true,
+            });
+        });
+
+        it(`Если пользователь успешно авторизовался, вызываем метод по установке сессии и передаем токен`, () => {
+            // arrange
+            actionsMock$ = of(
+                authActions.signInWithEmailAndPasswordSuccess({refreshToken: 'token'}),
+            );
+
+            // act
+            testedEffects.signInWithEmailAndPasswordSuccess$.subscribe();
+
+            // assert
+            verify(authFacadeServiceMock.setUserSession('token')).once();
         });
     });
 

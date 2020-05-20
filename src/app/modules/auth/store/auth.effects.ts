@@ -8,6 +8,7 @@ import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {NotificationFacadeService} from '../../utils/modules/notification/services/notification-facade.service';
 import {AuthErrorEnum} from '../enums/auth-error.enum';
+import {AuthFacadeService} from '../services/auth-facade.service';
 
 @Injectable()
 export class AuthEffects {
@@ -16,7 +17,9 @@ export class AuthEffects {
             ofType(authActions.signInWithEmailAndPasswordStart),
             switchMap(({data}) =>
                 this.apiService.signInWithEmailAndPassword(data).pipe(
-                    map(() => authActions.signInWithEmailAndPasswordSuccess()),
+                    map(({user: {refreshToken}}) =>
+                        authActions.signInWithEmailAndPasswordSuccess({refreshToken}),
+                    ),
                     catchError(({code}) =>
                         of(
                             authActions.signInWithEmailAndPasswordError(),
@@ -35,6 +38,17 @@ export class AuthEffects {
         ),
     );
 
+    signInWithEmailAndPasswordSuccess$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(authActions.signInWithEmailAndPasswordSuccess),
+                map(({refreshToken}) =>
+                    this.authFacadeService.setUserSession(refreshToken),
+                ),
+            ),
+        {dispatch: false},
+    );
+
     showNotification$ = createEffect(
         () =>
             this.actions$.pipe(
@@ -48,6 +62,7 @@ export class AuthEffects {
         private readonly actions$: Actions,
         private readonly store$: Store<AuthState>,
         private readonly apiService: ApiService,
+        private readonly authFacadeService: AuthFacadeService,
         private readonly notificationService: NotificationFacadeService,
     ) {}
 }

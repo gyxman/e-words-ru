@@ -32,7 +32,10 @@ describe('authReducer - редьюсер авторизационной груп
 
         // act & assert
         expect(
-            authReducer(undefined, authActions.signInWithEmailAndPasswordSuccess()),
+            authReducer(
+                undefined,
+                authActions.signInWithEmailAndPasswordSuccess({refreshToken: 'token'}),
+            ),
         ).toEqual({
             ...initialState,
             isLoading: false,

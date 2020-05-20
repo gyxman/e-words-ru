@@ -5,13 +5,35 @@ import {SignInWithEmailAndPassword} from '../models/sign-in-with-email-and-passw
 import {authActions} from '../store/auth.actions';
 import {fromAuth} from '../store/auth.selectors';
 
+const AUTH_TOKEN = 'e-words-user-token';
+
 @Injectable()
 export class AuthFacadeService {
+    showLoader$ = this.store$.select(fromAuth.isLoading);
+
     constructor(private store$: Store<AuthState>) {}
 
-    showLoader$ = this.store$.select(fromAuth.isLoading);
+    get isAuthenticated(): boolean {
+        return !!localStorage.getItem(AUTH_TOKEN);
+    }
 
     signInWithEmail(data: SignInWithEmailAndPassword) {
         this.store$.dispatch(authActions.signInWithEmailAndPasswordStart({data}));
+    }
+
+    signOut() {
+        this.updateToken(null);
+    }
+
+    setUserSession(token: string) {
+        this.updateToken(token);
+    }
+
+    private updateToken(token: string | null) {
+        if (token) {
+            localStorage.setItem(AUTH_TOKEN, token);
+        } else {
+            localStorage.clear();
+        }
     }
 }

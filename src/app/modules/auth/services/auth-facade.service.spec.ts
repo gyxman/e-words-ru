@@ -46,21 +46,61 @@ describe('AuthFacadeService - сервис по работе с авториза
         });
     });
 
-    it('Если пользователь начинает авторизацию через email и пароль, то диспатчим экшен о начале авторизации', () => {
-        // arrange
-        jest.spyOn(storeMock, 'dispatch');
+    describe('isAuthenticated - метод проверки, что пользователь авторизован', () => {
+        it('Если пользователь не авторизован, то возвращаем отрицательный результат', () => {
+            // assert
+            expect(testedService.isAuthenticated).toBe(false);
+        });
 
-        const data: SignInWithEmailAndPasswordDto = {
-            email: 'test@mail.ru',
-            password: 'easyPassword',
-        };
+        it('Если пользователь авторизован, то возвращаем положительный результат', () => {
+            // arrange
+            localStorage.setItem('e-words-user-token', 'token');
 
-        // act
-        testedService.signInWithEmail(data);
+            // act && assert
+            expect(testedService.isAuthenticated).toBe(true);
+        });
+    });
 
-        // assert
-        expect(storeMock.dispatch).toHaveBeenCalledWith(
-            authActions.signInWithEmailAndPasswordStart({data}),
-        );
+    describe('signInWithEmail - авторизация с помощью e-mail и пароля', () => {
+        it('Если пользователь начинает авторизацию через email и пароль, то диспатчим экшен о начале авторизации', () => {
+            // arrange
+            jest.spyOn(storeMock, 'dispatch');
+
+            const data: SignInWithEmailAndPasswordDto = {
+                email: 'test@mail.ru',
+                password: 'easyPassword',
+            };
+
+            // act
+            testedService.signInWithEmail(data);
+
+            // assert
+            expect(storeMock.dispatch).toHaveBeenCalledWith(
+                authActions.signInWithEmailAndPasswordStart({data}),
+            );
+        });
+    });
+
+    describe('signOut - метод выхода из приложения', () => {
+        it('Если пользователь хочет выйти из приложения, сбрасываем его сессию и очищаем localStorage', () => {
+            // arrange
+            localStorage.setItem('e-words-user-token', 'token');
+
+            // act
+            testedService.signOut();
+
+            // assert
+            expect(localStorage.getItem('e-words-user-token')).toBeNull();
+        });
+    });
+
+    describe('setUserSession - метод установки сессии пользователя', () => {
+        it('Если пользователь успешно авторизовался в приложении, установим сессию', () => {
+            // act
+            testedService.setUserSession('token');
+
+            // assert
+            expect(localStorage.getItem('e-words-user-token')).toBe('token');
+        });
     });
 });
