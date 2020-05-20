@@ -101,7 +101,7 @@ describe('AuthEffects - эффекты по работе с авторизаци
             );
 
             // act & assert
-            const expected$ = hot('(xy|)', {
+            const expected$ = hot('(xy)', {
                 x: authActions.signInWithEmailAndPasswordError(),
                 y: authActions.showNotification({
                     data: {
@@ -134,7 +134,7 @@ describe('AuthEffects - эффекты по работе с авторизаци
             );
 
             // act & assert
-            const expected$ = hot('(xy|)', {
+            const expected$ = hot('(xy)', {
                 x: authActions.signInWithEmailAndPasswordError(),
                 y: authActions.showNotification({
                     data: {
@@ -167,7 +167,7 @@ describe('AuthEffects - эффекты по работе с авторизаци
             );
 
             // act & assert
-            const expected$ = hot('(xy|)', {
+            const expected$ = hot('(xy)', {
                 x: authActions.signInWithEmailAndPasswordError(),
                 y: authActions.showNotification({
                     data: {

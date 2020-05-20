@@ -4,7 +4,7 @@ import {Store} from '@ngrx/store';
 import {AuthState} from './auth.state';
 import {ApiService} from '../services/api.service';
 import {authActions} from './auth.actions';
-import {catchError, map, switchMap} from 'rxjs/operators';
+import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {NotificationFacadeService} from '../../utils/modules/notification/services/notification-facade.service';
 import {AuthErrorEnum} from '../enums/auth-error.enum';
@@ -14,21 +14,22 @@ export class AuthEffects {
     signInWithEmailAndPasswordStart$ = createEffect(() =>
         this.actions$.pipe(
             ofType(authActions.signInWithEmailAndPasswordStart),
-            switchMap(({data}) => this.apiService.signInWithEmailAndPassword(data)),
-            map(() => {
-                return authActions.signInWithEmailAndPasswordSuccess();
-            }),
-            catchError(({code}) =>
-                of(
-                    authActions.signInWithEmailAndPasswordError(),
-                    authActions.showNotification({
-                        data: {
-                            text: AuthErrorEnum[code]
-                                ? AuthErrorEnum[code]
-                                : 'Неизвестная ошибка, попробуйте позже',
-                            type: 'error',
-                        },
-                    }),
+            switchMap(({data}) =>
+                this.apiService.signInWithEmailAndPassword(data).pipe(
+                    map(() => authActions.signInWithEmailAndPasswordSuccess()),
+                    catchError(({code}) =>
+                        of(
+                            authActions.signInWithEmailAndPasswordError(),
+                            authActions.showNotification({
+                                data: {
+                                    text: AuthErrorEnum[code]
+                                        ? AuthErrorEnum[code]
+                                        : 'Неизвестная ошибка, попробуйте позже',
+                                    type: 'error',
+                                },
+                            }),
+                        ),
+                    ),
                 ),
             ),
         ),
