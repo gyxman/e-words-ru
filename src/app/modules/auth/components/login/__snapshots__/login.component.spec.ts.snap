@@ -6,7 +6,8 @@ exports[`LoginComponent - компонент входа в приложение 
 >
   <form
     automation-id="form"
-    class="form"
+    class="form ng-untouched ng-pristine ng-invalid"
+    novalidate=""
   >
     <h2
       class="form-title"
@@ -27,6 +28,7 @@ exports[`LoginComponent - компонент входа в приложение 
           </mat-label>
           <input
             automation-id="email-input"
+            class="ng-untouched ng-pristine ng-invalid"
             matinput=""
             placeholder="Введите e-mail"
           />
@@ -46,6 +48,7 @@ exports[`LoginComponent - компонент входа в приложение 
           </mat-label>
           <input
             automation-id="password-input"
+            class="ng-untouched ng-pristine ng-invalid"
             matinput=""
             placeholder="Введите пароль"
             type="password"
