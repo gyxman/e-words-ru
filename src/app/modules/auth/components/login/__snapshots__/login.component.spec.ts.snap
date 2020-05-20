@@ -4,74 +4,78 @@ exports[`LoginComponent - компонент входа в приложение 
 <div
   id="root0"
 >
-  <form
-    automation-id="form"
-    class="form ng-untouched ng-pristine ng-invalid"
-    novalidate=""
+  <app-loader
+    automation-id="loader"
   >
-    <h2
-      class="form-title"
+    <form
+      automation-id="form"
+      class="form ng-untouched ng-pristine ng-invalid"
+      novalidate=""
     >
-       Войти в тренажер 
-    </h2>
-    <div
-      class="form-content"
-    >
-      <div
-        class="form-row"
+      <h2
+        class="form-title"
       >
-        <mat-form-field
-          class="form-field"
-        >
-          <mat-label>
-            E-mail
-          </mat-label>
-          <input
-            automation-id="email-input"
-            class="ng-untouched ng-pristine ng-invalid"
-            matinput=""
-            placeholder="Введите e-mail"
-          />
-          <app-form-control-error
-            class="form-error"
-          />
-        </mat-form-field>
-      </div>
+         Войти в тренажер 
+      </h2>
       <div
-        class="form-row"
+        class="form-content"
       >
-        <mat-form-field
-          class="form-field"
+        <div
+          class="form-row"
         >
-          <mat-label>
-            Пароль
-          </mat-label>
-          <input
-            automation-id="password-input"
-            class="ng-untouched ng-pristine ng-invalid"
-            matinput=""
-            placeholder="Введите пароль"
-            type="password"
-          />
-          <app-form-control-error
-            class="form-error"
-          />
-        </mat-form-field>
-      </div>
-      <div
-        class="form-row form-row_actions"
-      >
-        <button
-          automation-id="submit-button"
-          class="button"
-          color="primary"
-          mat-raised-button=""
-          type="submit"
+          <mat-form-field
+            class="form-field"
+          >
+            <mat-label>
+              E-mail
+            </mat-label>
+            <input
+              automation-id="email-input"
+              class="ng-untouched ng-pristine ng-invalid"
+              matinput=""
+              placeholder="Введите e-mail"
+            />
+            <app-form-control-error
+              class="form-error"
+            />
+          </mat-form-field>
+        </div>
+        <div
+          class="form-row"
         >
-           Войти 
-        </button>
+          <mat-form-field
+            class="form-field"
+          >
+            <mat-label>
+              Пароль
+            </mat-label>
+            <input
+              automation-id="password-input"
+              class="ng-untouched ng-pristine ng-invalid"
+              matinput=""
+              placeholder="Введите пароль"
+              type="password"
+            />
+            <app-form-control-error
+              class="form-error"
+            />
+          </mat-form-field>
+        </div>
+        <div
+          class="form-row form-row_actions"
+        >
+          <button
+            automation-id="submit-button"
+            class="button"
+            color="primary"
+            mat-raised-button=""
+            type="submit"
+          >
+             Войти 
+          </button>
+        </div>
       </div>
-    </div>
-  </form>
+    </form>
+  </app-loader>
 </div>
 `;
