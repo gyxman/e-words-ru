@@ -10,6 +10,9 @@ import {AngularFireModule} from '@angular/fire';
 import {HttpClientModule} from '@angular/common/http';
 import {NotificationsModule} from './modules/utils/modules/notification/components/notifications/notifications.module';
 import {NotificationFacadeService} from './modules/utils/modules/notification/services/notification-facade.service';
+import * as firebase from 'firebase';
+
+firebase.initializeApp(environment.firebase);
 
 @NgModule({
     declarations: [AppComponent],
@@ -18,9 +21,9 @@ import {NotificationFacadeService} from './modules/utils/modules/notification/se
         HttpClientModule,
         AppRoutingModule,
         BrowserAnimationsModule,
+        AngularFireModule,
         StoreModule.forRoot({}),
         EffectsModule.forRoot([]),
-        AngularFireModule.initializeApp(environment.firebase),
         NotificationsModule,
     ],
     providers: [NotificationFacadeService],

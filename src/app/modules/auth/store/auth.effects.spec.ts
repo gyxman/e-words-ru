@@ -7,10 +7,12 @@ import {TestBed} from '@angular/core/testing';
 import {provideMockActions} from '@ngrx/effects/testing';
 import {EffectsMetadata, getEffectsMetadata} from '@ngrx/effects';
 import {ApiService} from '../services/api.service';
-import {instance, mock, when} from 'ts-mockito';
+import {deepEqual, instance, mock, verify, when} from 'ts-mockito';
 import {hot} from 'jest-marbles';
 import {authActions} from './auth.actions';
 import * as firebase from 'firebase';
+import {NotificationFacadeService} from '../../utils/modules/notification/services/notification-facade.service';
+import {NotificationModel} from '../../utils/modules/notification/models/notification';
 
 describe('AuthEffects - эффекты по работе с авторизационной группой', () => {
     let testedEffects: AuthEffects;
@@ -18,9 +20,11 @@ describe('AuthEffects - эффекты по работе с авторизаци
     let actionsMock$: Observable<Action>;
     let storeMock: MockStore<AuthState>;
     let apiServiceMock: ApiService;
+    let notificationFacadeServiceMock: NotificationFacadeService;
 
     beforeEach(() => {
         apiServiceMock = mock(ApiService);
+        notificationFacadeServiceMock = mock(NotificationFacadeService);
     });
 
     beforeEach(() => {
@@ -32,6 +36,10 @@ describe('AuthEffects - эффекты по работе с авторизаци
                 {
                     provide: ApiService,
                     useFactory: () => instance(apiServiceMock),
+                },
+                {
+                    provide: NotificationFacadeService,
+                    useFactory: () => instance(notificationFacadeServiceMock),
                 },
             ],
         });
@@ -50,7 +58,8 @@ describe('AuthEffects - эффекты по работе с авторизаци
             });
         });
 
-        it('Если пользователь начинает авторизацию в приложении с помощью логина и пароля и авторизация прошла успешна, то диспатчим экшен об успехе', () => {
+        it(`Если пользователь начинает авторизацию в приложении с помощью логина и пароля и авторизация прошла успешна,
+            то диспатчим экшен об успехе`, () => {
             // arrange
             const data = {
                 email: 'testEmail@test.ru',
@@ -75,7 +84,8 @@ describe('AuthEffects - эффекты по работе с авторизаци
             );
         });
 
-        it('Если пользователь начинает авторизацию в приложении с помощью логина и пароля и авторизация возвращает ошибку, то диспатчим экшен об ошибке', () => {
+        it(`Если пользователь начинает авторизацию в приложении с помощью логина и пароля и авторизация возвращает неизвестную ошибку,
+            то диспатчим экшен об ошибке и показе нотификации`, () => {
             // arrange
             const data = {
                 email: 'testEmail@test.ru',
@@ -91,13 +101,80 @@ describe('AuthEffects - эффекты по работе с авторизаци
             );
 
             // act & assert
-            const expected$ = hot('(x|)', {
+            const expected$ = hot('(xy|)', {
                 x: authActions.signInWithEmailAndPasswordError(),
+                y: authActions.showNotification({
+                    data: {
+                        text: 'Неизвестная ошибка, попробуйте позже',
+                        type: 'error',
+                    },
+                }),
             });
 
             expect(testedEffects.signInWithEmailAndPasswordStart$).toBeObservable(
                 expected$,
             );
+        });
+
+        it(`Если пользователь начинает авторизацию в приложении с помощью логина и пароля и
+            авторизация возвращает ошибку неверного логина или пароля,
+            то диспатчим экшен об ошибке и показе нотификации`, () => {
+            // arrange
+            const data = {
+                email: 'testEmail@test.ru',
+                password: 'testPassword',
+            };
+
+            actionsMock$ = hot('x', {
+                x: authActions.signInWithEmailAndPasswordStart({data}),
+            });
+
+            when(apiServiceMock.signInWithEmailAndPassword(data)).thenReturn(
+                throwError({code: 'auth/wrong-password'}),
+            );
+
+            // act & assert
+            const expected$ = hot('(xy|)', {
+                x: authActions.signInWithEmailAndPasswordError(),
+                y: authActions.showNotification({
+                    data: {
+                        text: 'Неверный e-mail или пароль',
+                        type: 'error',
+                    },
+                }),
+            });
+
+            expect(testedEffects.signInWithEmailAndPasswordStart$).toBeObservable(
+                expected$,
+            );
+        });
+    });
+
+    describe('showNotification$ - эффект по показу нотификаций', () => {
+        it('Эффект по показу нотификаций не диспатчит экшен, переподписывается при ошибке', () => {
+            // assert
+            expect(metadata.showNotification$).toEqual({
+                dispatch: false,
+                useEffectsErrorHandler: true,
+            });
+        });
+
+        it(`Если приходит экшен на показ нотификаций, вызываем метод показа нотификаций и передаем данные`, () => {
+            // arrange
+            const data = {
+                text: 'Неверный e-mail или пароль',
+                type: 'error',
+            } as NotificationModel;
+
+            actionsMock$ = of(authActions.showNotification({data}));
+
+            // act
+            testedEffects.showNotification$.subscribe();
+
+            // assert
+            verify(
+                notificationFacadeServiceMock.showNotification(deepEqual(data)),
+            ).once();
         });
     });
 });
