@@ -148,6 +148,39 @@ describe('AuthEffects - эффекты по работе с авторизаци
                 expected$,
             );
         });
+
+        it(`Если пользователь начинает авторизацию в приложении с помощью логина и пароля и
+            авторизация возвращает ошибку пользователь не найден,
+            то диспатчим экшен об ошибке и показе нотификации`, () => {
+            // arrange
+            const data = {
+                email: 'testEmail@test.ru',
+                password: 'testPassword',
+            };
+
+            actionsMock$ = hot('x', {
+                x: authActions.signInWithEmailAndPasswordStart({data}),
+            });
+
+            when(apiServiceMock.signInWithEmailAndPassword(data)).thenReturn(
+                throwError({code: 'auth/user-not-found'}),
+            );
+
+            // act & assert
+            const expected$ = hot('(xy|)', {
+                x: authActions.signInWithEmailAndPasswordError(),
+                y: authActions.showNotification({
+                    data: {
+                        text: 'Пользователь не найден',
+                        type: 'error',
+                    },
+                }),
+            });
+
+            expect(testedEffects.signInWithEmailAndPasswordStart$).toBeObservable(
+                expected$,
+            );
+        });
     });
 
     describe('showNotification$ - эффект по показу нотификаций', () => {
