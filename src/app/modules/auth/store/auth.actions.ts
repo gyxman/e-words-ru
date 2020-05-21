@@ -1,6 +1,7 @@
 import {createAction, props} from '@ngrx/store';
 import {SignInWithEmailAndPassword} from '../models/sign-in-with-email-and-password';
 import {NotificationModel} from '../../utils/modules/notification/models/notification';
+import {LocalstorageUserInfo} from '../models/localstorage-user-info';
 
 const signInWithEmailAndPasswordStart = createAction(
     '[auth] Начать авторизацию в приложении с помощью логина и пароля',
@@ -9,7 +10,7 @@ const signInWithEmailAndPasswordStart = createAction(
 
 const signInWithEmailAndPasswordSuccess = createAction(
     '[auth] Успешная авторизация в приложении с помощью логина и пароля',
-    props<{refreshToken: string}>(),
+    props<{data: LocalstorageUserInfo}>(),
 );
 
 const signInWithEmailAndPasswordError = createAction(

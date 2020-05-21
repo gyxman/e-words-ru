@@ -78,14 +78,16 @@ describe('AuthEffects - эффекты по работе с авторизаци
             });
 
             when(apiServiceMock.signInWithEmailAndPassword(data)).thenReturn(
-                of({user: {refreshToken: 'token'}}) as Observable<
+                of({user: {refreshToken: 'token', uid: 'id'}}) as Observable<
                     firebase.auth.UserCredential
                 >,
             );
 
             // act & assert
             const expected$ = hot('x', {
-                x: authActions.signInWithEmailAndPasswordSuccess({refreshToken: 'token'}),
+                x: authActions.signInWithEmailAndPasswordSuccess({
+                    data: {token: 'token', id: 'id'},
+                }),
             });
 
             expect(testedEffects.signInWithEmailAndPasswordStart$).toBeObservable(
@@ -203,15 +205,19 @@ describe('AuthEffects - эффекты по работе с авторизаци
 
         it(`Если пользователь успешно авторизовался, вызываем метод по установке сессии и передаем токен`, () => {
             // arrange
+            const data = {token: 'token', id: 'id'};
+
             actionsMock$ = of(
-                authActions.signInWithEmailAndPasswordSuccess({refreshToken: 'token'}),
+                authActions.signInWithEmailAndPasswordSuccess({
+                    data,
+                }),
             );
 
             // act
             testedEffects.signInWithEmailAndPasswordSuccess$.subscribe();
 
             // assert
-            verify(authFacadeServiceMock.setUserSession('token')).once();
+            verify(authFacadeServiceMock.setUserInfo(deepEqual(data))).once();
         });
     });
 

@@ -6,6 +6,8 @@ import {AuthState} from '../store/auth.state';
 import {authActions} from '../store/auth.actions';
 import {fromAuth} from '../store/auth.selectors';
 import {cold} from 'jest-marbles';
+import {LocalstorageUserInfo} from '../models/localstorage-user-info';
+import {AUTH_ID, AUTH_TOKEN} from '../consts/auth.consts';
 
 describe('AuthFacadeService - сервис по работе с авторизационной группой', () => {
     let testedService: AuthFacadeService;
@@ -56,10 +58,25 @@ describe('AuthFacadeService - сервис по работе с авториза
 
         it('Если пользователь авторизован, то возвращаем положительный результат', () => {
             // arrange
-            localStorage.setItem('e-words-user-token', 'token');
+            localStorage.setItem(AUTH_TOKEN, 'token');
 
             // act && assert
             expect(testedService.isAuthenticated).toBeObservable(cold('(x|)', {x: true}));
+        });
+    });
+
+    describe('userId - метод получения id пользователя', () => {
+        it('Если пользователь не авторизован, то возвращаем undefined', () => {
+            // assert
+            expect(testedService.userId).toBeObservable(cold('(x|)', {x: null}));
+        });
+
+        it('Если пользователь авторизован, то возвращаем id пользователя', () => {
+            // arrange
+            localStorage.setItem(AUTH_ID, 'id');
+
+            // act && assert
+            expect(testedService.userId).toBeObservable(cold('(x|)', {x: 'id'}));
         });
     });
 
@@ -84,25 +101,50 @@ describe('AuthFacadeService - сервис по работе с авториза
     });
 
     describe('signOut - метод выхода из приложения', () => {
-        it('Если пользователь хочет выйти из приложения, сбрасываем его сессию и очищаем localStorage', () => {
+        it('Если пользователь хочет выйти из приложения, очищаем токен из localStorage', () => {
             // arrange
-            localStorage.setItem('e-words-user-token', 'token');
+            localStorage.setItem(AUTH_TOKEN, 'token');
 
             // act
             testedService.signOut();
 
             // assert
-            expect(localStorage.getItem('e-words-user-token')).toBeNull();
+            expect(localStorage.getItem(AUTH_TOKEN)).toBeNull();
+        });
+
+        it('Если пользователь хочет выйти из приложения, очищаем id пользователя из localStorage', () => {
+            // arrange
+            localStorage.setItem(AUTH_ID, 'id');
+
+            // act
+            testedService.signOut();
+
+            // assert
+            expect(localStorage.getItem(AUTH_ID)).toBeNull();
         });
     });
 
-    describe('setUserSession - метод установки сессии пользователя', () => {
-        it('Если пользователь успешно авторизовался в приложении, установим сессию', () => {
+    describe('setUserSession - метод установки данных пользователя в localStorage', () => {
+        it('Если пользователь успешно авторизовался в приложении, установим токен', () => {
+            // arrange
+            const data: LocalstorageUserInfo = {token: 'token', id: 'id'};
+
             // act
-            testedService.setUserSession('token');
+            testedService.setUserInfo(data);
 
             // assert
             expect(localStorage.getItem('e-words-user-token')).toBe('token');
+        });
+
+        it('Если пользователь успешно авторизовался в приложении, установим id пользователя', () => {
+            // arrange
+            const data: LocalstorageUserInfo = {token: 'token', id: 'id'};
+
+            // act
+            testedService.setUserInfo(data);
+
+            // assert
+            expect(localStorage.getItem('e-words-user-id')).toBe('id');
         });
     });
 });

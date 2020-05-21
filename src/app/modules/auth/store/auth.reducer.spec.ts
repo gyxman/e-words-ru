@@ -34,7 +34,9 @@ describe('authReducer - редьюсер авторизационной груп
         expect(
             authReducer(
                 undefined,
-                authActions.signInWithEmailAndPasswordSuccess({refreshToken: 'token'}),
+                authActions.signInWithEmailAndPasswordSuccess({
+                    data: {token: 'token', id: 'id'},
+                }),
             ),
         ).toEqual({
             ...initialState,

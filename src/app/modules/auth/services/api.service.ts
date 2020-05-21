@@ -10,8 +10,6 @@ export class ApiService {
         email,
         password,
     }: SignInWithEmailAndPasswordDto): Observable<firebase.auth.UserCredential> {
-        console.log(email, password);
-
         return fromPromise(firebase.auth().signInWithEmailAndPassword(email, password));
     }
 }

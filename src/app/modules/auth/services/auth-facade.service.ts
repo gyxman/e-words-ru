@@ -5,8 +5,8 @@ import {SignInWithEmailAndPassword} from '../models/sign-in-with-email-and-passw
 import {authActions} from '../store/auth.actions';
 import {fromAuth} from '../store/auth.selectors';
 import {Observable, of} from 'rxjs';
-
-const AUTH_TOKEN = 'e-words-user-token';
+import {LocalstorageUserInfo} from '../models/localstorage-user-info';
+import {AUTH_ID, AUTH_TOKEN} from '../consts/auth.consts';
 
 @Injectable()
 export class AuthFacadeService {
@@ -18,23 +18,37 @@ export class AuthFacadeService {
         return of(!!localStorage.getItem(AUTH_TOKEN));
     }
 
+    get userId(): Observable<string | null> {
+        return of(localStorage.getItem(AUTH_ID));
+    }
+
     signInWithEmail(data: SignInWithEmailAndPassword) {
         this.store$.dispatch(authActions.signInWithEmailAndPasswordStart({data}));
     }
 
     signOut() {
         this.updateToken(null);
+        this.updateUserId(null);
     }
 
-    setUserSession(token: string) {
+    setUserInfo({token, id}: LocalstorageUserInfo) {
         this.updateToken(token);
+        this.updateUserId(id);
     }
 
     private updateToken(token: string | null) {
         if (token) {
             localStorage.setItem(AUTH_TOKEN, token);
         } else {
-            localStorage.clear();
+            localStorage.removeItem(AUTH_TOKEN);
+        }
+    }
+
+    private updateUserId(id: string | null) {
+        if (id) {
+            localStorage.setItem(AUTH_ID, id);
+        } else {
+            localStorage.removeItem(AUTH_ID);
         }
     }
 }
