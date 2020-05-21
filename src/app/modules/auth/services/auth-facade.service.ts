@@ -4,6 +4,7 @@ import {AuthState} from '../store/auth.state';
 import {SignInWithEmailAndPassword} from '../models/sign-in-with-email-and-password';
 import {authActions} from '../store/auth.actions';
 import {fromAuth} from '../store/auth.selectors';
+import {Observable, of} from 'rxjs';
 
 const AUTH_TOKEN = 'e-words-user-token';
 
@@ -13,8 +14,8 @@ export class AuthFacadeService {
 
     constructor(private store$: Store<AuthState>) {}
 
-    get isAuthenticated(): boolean {
-        return !!localStorage.getItem(AUTH_TOKEN);
+    get isAuthenticated(): Observable<boolean> {
+        return of(!!localStorage.getItem(AUTH_TOKEN));
     }
 
     signInWithEmail(data: SignInWithEmailAndPassword) {

@@ -49,7 +49,9 @@ describe('AuthFacadeService - сервис по работе с авториза
     describe('isAuthenticated - метод проверки, что пользователь авторизован', () => {
         it('Если пользователь не авторизован, то возвращаем отрицательный результат', () => {
             // assert
-            expect(testedService.isAuthenticated).toBe(false);
+            expect(testedService.isAuthenticated).toBeObservable(
+                cold('(x|)', {x: false}),
+            );
         });
 
         it('Если пользователь авторизован, то возвращаем положительный результат', () => {
@@ -57,7 +59,7 @@ describe('AuthFacadeService - сервис по работе с авториза
             localStorage.setItem('e-words-user-token', 'token');
 
             // act && assert
-            expect(testedService.isAuthenticated).toBe(true);
+            expect(testedService.isAuthenticated).toBeObservable(cold('(x|)', {x: true}));
         });
     });
 
