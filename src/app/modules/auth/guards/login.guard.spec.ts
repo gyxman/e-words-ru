@@ -1,13 +1,13 @@
-import {AuthGuard} from './auth.guard';
 import {AuthFacadeService} from '../services/auth-facade.service';
 import {Router, UrlTree} from '@angular/router';
 import {deepEqual, instance, mock, when} from 'ts-mockito';
 import {TestBed} from '@angular/core/testing';
 import {BehaviorSubject} from 'rxjs';
 import {cold} from 'jest-marbles';
+import {LoginGuard} from './login.guard';
 
-describe('AuthGuard - гард, проверяющий можно ли пользователю отображать защищенную зону', () => {
-    let testedGuard: AuthGuard;
+describe('LoginGuard - гард, проверяющий можно ли пользователю отображать авторизационную группу', () => {
+    let testedGuard: LoginGuard;
     let authFacadeServiceMock: AuthFacadeService;
     let routerMock: Router;
     let isAuthenticated$: BehaviorSubject<boolean>;
@@ -26,7 +26,7 @@ describe('AuthGuard - гард, проверяющий можно ли поль�
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
-                AuthGuard,
+                LoginGuard,
                 {
                     provide: AuthFacadeService,
                     useFactory: () => instance(authFacadeServiceMock),
@@ -38,31 +38,24 @@ describe('AuthGuard - гард, проверяющий можно ли поль�
             ],
         });
 
-        testedGuard = TestBed.inject(AuthGuard);
+        testedGuard = TestBed.inject(LoginGuard);
     });
 
-    it('Если пользователь авторизован в приложении, то возвращаем положительный результат', () => {
+    it('Если пользователь авторизован в приложении, то направляем пользователя на страниицу в авторизованной зоне', () => {
         // arrange
         isAuthenticated$.next(true);
 
-        // act & assert
-        expect(testedGuard.canActivate()).toBeObservable(cold('(x|)', {x: true}));
-    });
-
-    it('Если пользователь не авторизован в приложении, то направляем пользователя на страниицу логина', () => {
-        // arrange
-        isAuthenticated$.next(false);
-
-        when(
-            routerMock.createUrlTree(
-                deepEqual(['login']),
-                deepEqual({
-                    queryParams: deepEqual({loginAgain: true}),
-                }),
-            ),
-        ).thenReturn({} as UrlTree);
+        when(routerMock.createUrlTree(deepEqual(['user']))).thenReturn({} as UrlTree);
 
         // act & assert
         expect(testedGuard.canActivate()).toBeObservable(cold('(x|)', {x: {}}));
+    });
+
+    it('Если пользователь не авторизован в приложении, то возвращаем положительный результат', () => {
+        // arrange
+        isAuthenticated$.next(false);
+
+        // act & assert
+        expect(testedGuard.canActivate()).toBeObservable(cold('(x|)', {x: true}));
     });
 });
