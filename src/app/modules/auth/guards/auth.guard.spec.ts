@@ -3,7 +3,7 @@ import {AuthFacadeService} from '../services/auth-facade.service';
 import {Router, UrlTree} from '@angular/router';
 import {deepEqual, instance, mock, when} from 'ts-mockito';
 import {TestBed} from '@angular/core/testing';
-import {BehaviorSubject, Subject} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import {cold} from 'jest-marbles';
 
 describe('AuthGuard - гард, проверяющий авторизован ли пользователь в приложении', () => {
