@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {MatIconRegistry} from '@angular/material/icon';
 import {DomSanitizer} from '@angular/platform-browser';
 import {AuthFacadeService} from '../../../auth/services/auth-facade.service';
@@ -11,6 +11,8 @@ import {AuthRouteEnum} from '../../../auth/enums/auth-route.enum';
     styleUrls: ['./header.component.less'],
 })
 export class HeaderComponent {
+    @Output() openSidebar = new EventEmitter();
+
     constructor(
         iconRegistry: MatIconRegistry,
         sanitizer: DomSanitizer,
@@ -30,5 +32,9 @@ export class HeaderComponent {
     signOut() {
         this.authFacadeService.signOut();
         this.router.navigate([AuthRouteEnum.Login]);
+    }
+
+    openMenu() {
+        this.openSidebar.emit();
     }
 }

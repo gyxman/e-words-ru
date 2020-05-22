@@ -8,11 +8,19 @@ import {AuthFacadeService} from '../../../auth/services/auth-facade.service';
 import {deepEqual, instance, mock, verify} from 'ts-mockito';
 import {Router, RouterLink} from '@angular/router';
 import {AuthRouteEnum} from '../../../auth/enums/auth-route.enum';
+import {Component} from '@angular/core';
+
+@Component({
+    template: '<app-header (openSidebar)="openSidebar()"></app-header>',
+})
+class TestComponent {
+    openSidebar() {}
+}
 
 describe('HeaderComponent - компонент верхней части авторизованной зоны', () => {
-    let component: HeaderComponent;
-    let fixture: ComponentFixture<HeaderComponent>;
-    let pageObject: HeaderComponentPo<HeaderComponent>;
+    let testComponent: TestComponent;
+    let fixture: ComponentFixture<TestComponent>;
+    let pageObject: HeaderComponentPo<TestComponent>;
     let authFacadeServiceMock: AuthFacadeService;
     let routerMock: Router;
 
@@ -23,7 +31,7 @@ describe('HeaderComponent - компонент верхней части авт�
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [HeaderComponent, MockDirective(RouterLink)],
+            declarations: [TestComponent, HeaderComponent, MockDirective(RouterLink)],
             imports: [MockModule(MatButtonModule), MockModule(MatIconModule)],
             providers: [
                 {
@@ -39,8 +47,8 @@ describe('HeaderComponent - компонент верхней части авт�
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(HeaderComponent);
-        component = fixture.componentInstance;
+        fixture = TestBed.createComponent(TestComponent);
+        testComponent = fixture.componentInstance;
         pageObject = new HeaderComponentPo(fixture);
     });
 
@@ -50,6 +58,19 @@ describe('HeaderComponent - компонент верхней части авт�
 
         // assert
         expect(fixture.nativeElement).toMatchSnapshot();
+    });
+
+    it('Если пользователь нажимает на кнопку "Открыть меню", то происходит эммит', () => {
+        // arrange
+        jest.spyOn(testComponent, 'openSidebar');
+
+        fixture.detectChanges();
+
+        // act
+        pageObject.click(pageObject.openMenu);
+
+        // assert
+        expect(testComponent.openSidebar).toHaveBeenCalledTimes(1);
     });
 
     it('Если пользователь нажимает на кнопку выхода из приложения, вызывается метод выхода', () => {

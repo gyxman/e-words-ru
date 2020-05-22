@@ -2,8 +2,8 @@ import {PageObject} from '../../../../testing/page-object';
 import {DebugElement} from '@angular/core';
 
 export class HeaderComponentPo<T> extends PageObject<T> {
-    get toggle(): DebugElement {
-        return this.getByAutomationId('toggle');
+    get openMenu(): DebugElement {
+        return this.getByAutomationId('open-menu');
     }
 
     get logo(): DebugElement {

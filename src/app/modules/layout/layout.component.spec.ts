@@ -3,6 +3,9 @@ import {LayoutComponent} from './layout.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {MockComponent} from 'ng-mocks';
 import {HeaderComponent} from './components/header/header.component';
+import {SidebarComponent} from './components/sidebar/sidebar.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 describe('LayoutComponent - компонент авторизованной зоны', () => {
     let component: LayoutComponent;
@@ -10,8 +13,12 @@ describe('LayoutComponent - компонент авторизованной зо
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [LayoutComponent, MockComponent(HeaderComponent)],
-            imports: [RouterTestingModule],
+            declarations: [
+                LayoutComponent,
+                MockComponent(HeaderComponent),
+                MockComponent(SidebarComponent),
+            ],
+            imports: [RouterTestingModule, MatSidenavModule, NoopAnimationsModule],
         }).compileComponents();
     }));
 

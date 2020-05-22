@@ -1,4 +1,5 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ViewChild} from '@angular/core';
+import {MatSidenav} from '@angular/material/sidenav';
 
 @Component({
     selector: 'app-layout',
@@ -6,4 +7,6 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
     styleUrls: ['./layout.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LayoutComponent {}
+export class LayoutComponent {
+    @ViewChild('sidebar') sidebar: MatSidenav;
+}
