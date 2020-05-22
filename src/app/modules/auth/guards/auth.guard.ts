@@ -1,24 +1,27 @@
 import {Injectable} from '@angular/core';
-import {CanActivate, Router, UrlTree} from '@angular/router';
-import {Observable} from 'rxjs';
+import {CanLoad, Router} from '@angular/router';
 import {AuthFacadeService} from '../services/auth-facade.service';
 import {AuthRouteEnum} from '../enums/auth-route.enum';
-import {map, take} from 'rxjs/operators';
 
-@Injectable()
-export class AuthGuard implements CanActivate {
+@Injectable({providedIn: 'root'})
+export class AuthGuard implements CanLoad {
     constructor(private authFacadeService: AuthFacadeService, private router: Router) {}
 
-    canActivate(): Observable<boolean | UrlTree> {
-        return this.authFacadeService.isAuthenticated.pipe(
-            take(1),
-            map(isAuthenticated =>
-                isAuthenticated
-                    ? true
-                    : this.router.createUrlTree([AuthRouteEnum.Login], {
-                          queryParams: {loginAgain: true},
-                      }),
-            ),
-        );
+    canLoad(): boolean {
+        return this.checkAuth();
+    }
+
+    private checkAuth(): boolean {
+        const isAuth = this.authFacadeService.isAuthenticated;
+
+        if (!isAuth) {
+            this.router.navigate([AuthRouteEnum.Login], {
+                queryParams: {loginAgain: true},
+            });
+
+            return false;
+        }
+
+        return true;
     }
 }

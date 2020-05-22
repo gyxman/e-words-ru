@@ -1,29 +1,21 @@
 import {AuthFacadeService} from '../services/auth-facade.service';
-import {Router, UrlTree} from '@angular/router';
-import {deepEqual, instance, mock, when} from 'ts-mockito';
+import {Router} from '@angular/router';
+import {deepEqual, instance, mock, verify, when} from 'ts-mockito';
 import {TestBed} from '@angular/core/testing';
-import {BehaviorSubject} from 'rxjs';
-import {cold} from 'jest-marbles';
 import {LoginGuard} from './login.guard';
+import {RouteEnum} from '../../../enums/route.enum';
 
 describe('LoginGuard - гард, проверяющий можно ли пользователю отображать авторизационную группу', () => {
     let testedGuard: LoginGuard;
     let authFacadeServiceMock: AuthFacadeService;
     let routerMock: Router;
-    let isAuthenticated$: BehaviorSubject<boolean>;
 
     beforeEach(() => {
         authFacadeServiceMock = mock(AuthFacadeService);
         routerMock = mock(Router);
-
-        isAuthenticated$ = new BehaviorSubject(false);
     });
 
-    beforeEach(() => {
-        when(authFacadeServiceMock.isAuthenticated).thenReturn(isAuthenticated$);
-    });
-
-    beforeEach(() => {
+    function compileGuard() {
         TestBed.configureTestingModule({
             providers: [
                 LoginGuard,
@@ -39,23 +31,38 @@ describe('LoginGuard - гард, проверяющий можно ли поль
         });
 
         testedGuard = TestBed.inject(LoginGuard);
+    }
+
+    it('Если пользователь авторизован в приложении, то возвращаем отрицательный результат', () => {
+        // arrange
+        when(authFacadeServiceMock.isAuthenticated).thenReturn(true);
+
+        compileGuard();
+
+        // act & assert
+        expect(testedGuard.canLoad()).toBe(false);
     });
 
     it('Если пользователь авторизован в приложении, то направляем пользователя на страниицу в авторизованной зоне', () => {
         // arrange
-        isAuthenticated$.next(true);
+        when(authFacadeServiceMock.isAuthenticated).thenReturn(true);
 
-        when(routerMock.createUrlTree(deepEqual(['user']))).thenReturn({} as UrlTree);
+        compileGuard();
 
-        // act & assert
-        expect(testedGuard.canActivate()).toBeObservable(cold('(x|)', {x: {}}));
+        // act
+        testedGuard.canLoad();
+
+        // assert
+        verify(routerMock.navigate(deepEqual([RouteEnum.User]))).once();
     });
 
-    it('Если пользователь не авторизован в приложении, то возвращаем положительный результат', () => {
+    it('Если пользователь авторизован в приложении, то возвращаем положительный результат', () => {
         // arrange
-        isAuthenticated$.next(false);
+        when(authFacadeServiceMock.isAuthenticated).thenReturn(false);
+
+        compileGuard();
 
         // act & assert
-        expect(testedGuard.canActivate()).toBeObservable(cold('(x|)', {x: true}));
+        expect(testedGuard.canLoad()).toBe(true);
     });
 });

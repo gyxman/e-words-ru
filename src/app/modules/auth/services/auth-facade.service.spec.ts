@@ -22,6 +22,10 @@ describe('AuthFacadeService - сервис по работе с авториза
         storeMock = TestBed.inject(MockStore);
     });
 
+    afterEach(() => {
+        localStorage.clear();
+    });
+
     describe('showLoader$ - информация о показе лоадера', () => {
         it('Если в сторе информация о показе лоадера отрицательная, то она возвращается', () => {
             // arrange
@@ -48,10 +52,25 @@ describe('AuthFacadeService - сервис по работе с авториза
         });
     });
 
-    describe('isAuthenticated - метод проверки, что пользователь авторизован', () => {
+    describe('isAuthenticated - синхронный метод проверки, что пользователь авторизован', () => {
         it('Если пользователь не авторизован, то возвращаем отрицательный результат', () => {
             // assert
-            expect(testedService.isAuthenticated).toBeObservable(
+            expect(testedService.isAuthenticated).toBe(false);
+        });
+
+        it('Если пользователь авторизован, то возвращаем положительный результат', () => {
+            // arrange
+            localStorage.setItem(AUTH_TOKEN, 'token');
+
+            // act && assert
+            expect(testedService.isAuthenticated).toBe(true);
+        });
+    });
+
+    describe('isAuthenticatedAsync - асинхронный метод проверки, что пользователь авторизован', () => {
+        it('Если пользователь не авторизован, то возвращаем отрицательный результат', () => {
+            // assert
+            expect(testedService.isAuthenticatedAsync).toBeObservable(
                 cold('(x|)', {x: false}),
             );
         });
@@ -61,7 +80,9 @@ describe('AuthFacadeService - сервис по работе с авториза
             localStorage.setItem(AUTH_TOKEN, 'token');
 
             // act && assert
-            expect(testedService.isAuthenticated).toBeObservable(cold('(x|)', {x: true}));
+            expect(testedService.isAuthenticatedAsync).toBeObservable(
+                cold('(x|)', {x: true}),
+            );
         });
     });
 

@@ -8,14 +8,18 @@ import {Observable, of} from 'rxjs';
 import {LocalstorageUserInfo} from '../models/localstorage-user-info';
 import {AUTH_ID, AUTH_TOKEN} from '../consts/auth.consts';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class AuthFacadeService {
     showLoader$ = this.store$.select(fromAuth.isLoading);
 
     constructor(private store$: Store<AuthState>) {}
 
-    get isAuthenticated(): Observable<boolean> {
-        return of(!!localStorage.getItem(AUTH_TOKEN));
+    get isAuthenticated(): boolean {
+        return !!localStorage.getItem(AUTH_TOKEN);
+    }
+
+    get isAuthenticatedAsync(): Observable<boolean> {
+        return of(this.isAuthenticated);
     }
 
     get userId(): Observable<string | null> {
