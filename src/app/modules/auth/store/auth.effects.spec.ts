@@ -14,6 +14,8 @@ import * as firebase from 'firebase';
 import {NotificationFacadeService} from '../../utils/modules/notification/services/notification-facade.service';
 import {NotificationModel} from '../../utils/modules/notification/models/notification';
 import {AuthFacadeService} from '../services/auth-facade.service';
+import {Router} from '@angular/router';
+import {RouteEnum} from '../../../enums/route.enum';
 
 describe('AuthEffects - эффекты по работе с авторизационной группой', () => {
     let testedEffects: AuthEffects;
@@ -23,11 +25,13 @@ describe('AuthEffects - эффекты по работе с авторизаци
     let apiServiceMock: ApiService;
     let authFacadeServiceMock: AuthFacadeService;
     let notificationFacadeServiceMock: NotificationFacadeService;
+    let routerMock: Router;
 
     beforeEach(() => {
         apiServiceMock = mock(ApiService);
         authFacadeServiceMock = mock(AuthFacadeService);
         notificationFacadeServiceMock = mock(NotificationFacadeService);
+        routerMock = mock(Router);
     });
 
     beforeEach(() => {
@@ -47,6 +51,10 @@ describe('AuthEffects - эффекты по работе с авторизаци
                 {
                     provide: NotificationFacadeService,
                     useFactory: () => instance(notificationFacadeServiceMock),
+                },
+                {
+                    provide: Router,
+                    useFactory: () => instance(routerMock),
                 },
             ],
         });
@@ -218,6 +226,23 @@ describe('AuthEffects - эффекты по работе с авторизаци
 
             // assert
             verify(authFacadeServiceMock.setUserInfo(deepEqual(data))).once();
+        });
+
+        it(`Если пользователь успешно авторизовался, навигируем его в авторизованную зону приложения`, () => {
+            // arrange
+            const data = {token: 'token', id: 'id'};
+
+            actionsMock$ = of(
+                authActions.signInWithEmailAndPasswordSuccess({
+                    data,
+                }),
+            );
+
+            // act
+            testedEffects.signInWithEmailAndPasswordSuccess$.subscribe();
+
+            // assert
+            verify(routerMock.navigate(deepEqual([RouteEnum.User]))).once();
         });
     });
 

@@ -1,6 +1,9 @@
 import {Component} from '@angular/core';
 import {MatIconRegistry} from '@angular/material/icon';
 import {DomSanitizer} from '@angular/platform-browser';
+import {AuthFacadeService} from '../../../auth/services/auth-facade.service';
+import {Router} from '@angular/router';
+import {AuthRouteEnum} from '../../../auth/enums/auth-route.enum';
 
 @Component({
     selector: 'app-header',
@@ -8,7 +11,12 @@ import {DomSanitizer} from '@angular/platform-browser';
     styleUrls: ['./header.component.less'],
 })
 export class HeaderComponent {
-    constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+    constructor(
+        iconRegistry: MatIconRegistry,
+        sanitizer: DomSanitizer,
+        private authFacadeService: AuthFacadeService,
+        private router: Router,
+    ) {
         iconRegistry.addSvgIcon(
             'logout',
             sanitizer.bypassSecurityTrustResourceUrl('assets/icons/icon-logout.svg'),
@@ -17,5 +25,10 @@ export class HeaderComponent {
             'toggle',
             sanitizer.bypassSecurityTrustResourceUrl('assets/icons/icon-toggle.svg'),
         );
+    }
+
+    signOut() {
+        this.authFacadeService.signOut();
+        this.router.navigate([AuthRouteEnum.Login]);
     }
 }

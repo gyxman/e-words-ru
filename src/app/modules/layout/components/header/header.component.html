@@ -11,7 +11,7 @@
             aria-label="Иконка открытия меню"
         ></mat-icon>
     </button>
-    <a class="logo" automation-id="logo" [routerLink]="['/']">Тренажер слов</a>
+    <a class="logo" automation-id="logo" routerLink="/">Тренажер слов</a>
 </div>
 <div class="actions">
     <button
@@ -19,6 +19,7 @@
         mat-icon-button
         color="primary"
         aria-label="Выйти из приложения"
+        (click)="signOut()"
     >
         <mat-icon
             svgIcon="logout"

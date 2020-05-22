@@ -22,7 +22,7 @@ exports[`HeaderComponent - компонент верхней части авто
     <a
       automation-id="logo"
       class="logo"
-      href="/"
+      routerlink="/"
     >
       Тренажер слов
     </a>

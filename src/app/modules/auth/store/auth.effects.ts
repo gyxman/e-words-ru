@@ -9,6 +9,8 @@ import {of} from 'rxjs';
 import {NotificationFacadeService} from '../../utils/modules/notification/services/notification-facade.service';
 import {AuthErrorEnum} from '../enums/auth-error.enum';
 import {AuthFacadeService} from '../services/auth-facade.service';
+import {Router} from '@angular/router';
+import {RouteEnum} from '../../../enums/route.enum';
 
 @Injectable()
 export class AuthEffects {
@@ -44,7 +46,10 @@ export class AuthEffects {
         () =>
             this.actions$.pipe(
                 ofType(authActions.signInWithEmailAndPasswordSuccess),
-                map(({data}) => this.authFacadeService.setUserInfo(data)),
+                map(({data}) => {
+                    this.authFacadeService.setUserInfo(data);
+                    this.router.navigate([RouteEnum.User]);
+                }),
             ),
         {dispatch: false},
     );
@@ -64,5 +69,6 @@ export class AuthEffects {
         private readonly apiService: ApiService,
         private readonly authFacadeService: AuthFacadeService,
         private readonly notificationService: NotificationFacadeService,
+        private readonly router: Router,
     ) {}
 }
