@@ -1,0 +1,11 @@
+<ng-container *ngIf="formattedTime$ | async as time">
+    <mat-icon
+        automation-id="icon"
+        class="icon"
+        aria-hidden="true"
+        svgIcon="timer"
+    ></mat-icon>
+    <div automation-id="time" class="time" [class.time_attention]="attention">
+        {{ time }}
+    </div>
+</ng-container>

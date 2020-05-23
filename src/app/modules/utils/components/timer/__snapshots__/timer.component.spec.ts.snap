@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TimerComponent - компонент таймера обратного отсчета Если таймер загрузился, то все элементы отрисовались 1`] = `
+<div
+  id="root0"
+>
+  <app-timer>
+    
+    
+    <mat-icon
+      aria-hidden="true"
+      automation-id="icon"
+      class="icon"
+      svgicon="timer"
+    />
+    <div
+      automation-id="time"
+      class="time"
+    >
+       16:40 
+    </div>
+  </app-timer>
+</div>
+`;
