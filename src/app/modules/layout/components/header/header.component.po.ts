@@ -6,10 +6,6 @@ export class HeaderComponentPo<T> extends PageObject<T> {
         return this.getByAutomationId('open-menu');
     }
 
-    get logo(): DebugElement {
-        return this.getByAutomationId('logo');
-    }
-
     get exit(): DebugElement {
         return this.getByAutomationId('exit');
     }
