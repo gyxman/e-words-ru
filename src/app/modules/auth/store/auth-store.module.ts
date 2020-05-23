@@ -4,7 +4,7 @@ import {AUTH_STATE} from './auth.consts';
 import {authReducer} from './auth.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {AuthEffects} from './auth.effects';
-import {ApiService} from '../services/api.service';
+import {ApiService} from '../../../services/api.service';
 
 @NgModule({
     imports: [
