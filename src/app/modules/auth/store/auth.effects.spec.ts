@@ -6,7 +6,7 @@ import {AuthState} from './auth.state';
 import {TestBed} from '@angular/core/testing';
 import {provideMockActions} from '@ngrx/effects/testing';
 import {EffectsMetadata, getEffectsMetadata} from '@ngrx/effects';
-import {ApiService} from '../services/api.service';
+import {ApiService} from '../../../services/api.service';
 import {deepEqual, instance, mock, verify, when} from 'ts-mockito';
 import {hot} from 'jest-marbles';
 import {authActions} from './auth.actions';
