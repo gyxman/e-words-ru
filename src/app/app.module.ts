@@ -12,6 +12,7 @@ import {NotificationsModule} from './modules/utils/modules/notification/componen
 import {NotificationFacadeService} from './modules/utils/modules/notification/services/notification-facade.service';
 import * as firebase from 'firebase';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {ApiService} from './services/api.service';
 
 firebase.initializeApp(environment.firebase);
 
@@ -28,7 +29,7 @@ firebase.initializeApp(environment.firebase);
         EffectsModule.forRoot([]),
         NotificationsModule,
     ],
-    providers: [NotificationFacadeService],
+    providers: [NotificationFacadeService, ApiService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}
