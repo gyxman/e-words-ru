@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {LayoutComponent} from './layout.component';
 import {LayoutRouteEnum} from './enums/layout-route.enum';
 import {AddWordComponent} from '../words/components/add-word/add-word.component';
+import {DashboardComponent} from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
     {
@@ -10,13 +11,17 @@ const routes: Routes = [
         component: LayoutComponent,
         children: [
             {
+                path: LayoutRouteEnum.Dashboard,
+                component: DashboardComponent,
+            },
+            {
                 path: LayoutRouteEnum.AddWord,
                 component: AddWordComponent,
             },
-            {path: '', redirectTo: LayoutRouteEnum.AddWord, pathMatch: 'full'},
+            {path: '', redirectTo: LayoutRouteEnum.Dashboard, pathMatch: 'full'},
+            {path: '**', redirectTo: ''},
         ],
     },
-    {path: '**', redirectTo: ''},
 ];
 
 @NgModule({

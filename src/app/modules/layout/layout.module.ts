@@ -9,6 +9,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {SidebarModule} from './components/sidebar/sidebar.module';
 import {WordsStoreModule} from '../words/store/words-store.module';
 import {WordsFacadeService} from '../words/services/words-facade.service';
+import {DashboardModule} from './components/dashboard/dashboard.module';
 
 @NgModule({
     imports: [
@@ -20,6 +21,7 @@ import {WordsFacadeService} from '../words/services/words-facade.service';
         SidebarModule,
         MatSidenavModule,
         WordsStoreModule,
+        DashboardModule,
     ],
     declarations: [LayoutComponent],
     exports: [LayoutComponent],

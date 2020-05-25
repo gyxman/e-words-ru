@@ -10,11 +10,8 @@ import {AngularFireModule} from '@angular/fire';
 import {HttpClientModule} from '@angular/common/http';
 import {NotificationsModule} from './modules/utils/modules/notification/components/notifications/notifications.module';
 import {NotificationFacadeService} from './modules/utils/modules/notification/services/notification-facade.service';
-import * as firebase from 'firebase';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {ApiService} from './services/api.service';
-
-firebase.initializeApp(environment.firebase);
 
 @NgModule({
     declarations: [AppComponent],
@@ -23,7 +20,7 @@ firebase.initializeApp(environment.firebase);
         HttpClientModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        AngularFireModule,
+        AngularFireModule.initializeApp(environment.firebase),
         StoreModule.forRoot({}),
         !environment.production ? StoreDevtoolsModule.instrument() : [],
         EffectsModule.forRoot([]),
