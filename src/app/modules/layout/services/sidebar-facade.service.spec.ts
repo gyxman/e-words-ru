@@ -2,6 +2,7 @@ import {SidebarFacadeService} from './sidebar-facade.service';
 import {TestBed} from '@angular/core/testing';
 import {LayoutRouteEnum} from '../enums/layout-route.enum';
 import {SidebarMenuItem} from '../models/sidebar-menu-item';
+import {cold} from 'jest-marbles';
 
 describe('SidebarFacadeService - сервис по управлению левой панелью', () => {
     let testedService: SidebarFacadeService;
@@ -25,7 +26,7 @@ describe('SidebarFacadeService - сервис по управлению лево
                 },
             ];
 
-            expect(testedService.allMenu).toEqual(result);
+            expect(testedService.allMenu$).toBeObservable(cold('(x|)', {x: result}));
         });
     });
 });

@@ -1,5 +1,8 @@
 <ul class="list">
-    <li *ngFor="let item of allMenuItems" class="item">
+    <li
+        *ngFor="let item of allMenuItems$ | async; trackBy: identityTrackByFunction"
+        class="item"
+    >
         <a class="link" [routerLink]="item.navigateTo">{{ item.title }}</a>
     </li>
 </ul>

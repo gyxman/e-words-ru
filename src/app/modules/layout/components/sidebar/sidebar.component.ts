@@ -1,6 +1,5 @@
 import {Component, EventEmitter, HostListener, Output} from '@angular/core';
 import {SidebarFacadeService} from '../../services/sidebar-facade.service';
-import {SidebarMenuItem} from '../../models/sidebar-menu-item';
 
 @Component({
     selector: 'app-sidebar',
@@ -14,7 +13,8 @@ export class SidebarComponent {
         this.sidebarOnClick.emit();
     }
 
-    readonly allMenuItems: SidebarMenuItem[] = this.sidebarFacadeService.allMenu;
+    readonly identityTrackByFunction = (_index: number, item: any) => item;
+    readonly allMenuItems$ = this.sidebarFacadeService.allMenu$;
 
     constructor(private sidebarFacadeService: SidebarFacadeService) {}
 }
