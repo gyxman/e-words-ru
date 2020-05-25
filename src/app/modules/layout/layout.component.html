@@ -13,6 +13,7 @@
             *ngIf="sidebar.opened"
             automation-id="sidebar-content"
             class="sidebar-content"
+            (sidebarOnClick)="sidebar.close()"
         ></app-sidebar>
     </mat-sidenav>
     <mat-sidenav-content class="wrapper">

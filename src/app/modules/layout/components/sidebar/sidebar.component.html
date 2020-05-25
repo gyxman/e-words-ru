@@ -1,1 +1,5 @@
-<p>sidebar works!</p>
+<ul class="list">
+    <li *ngFor="let item of allMenuItems" class="item">
+        <a class="link" [routerLink]="item.navigateTo">{{ item.title }}</a>
+    </li>
+</ul>
