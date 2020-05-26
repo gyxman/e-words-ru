@@ -30,4 +30,9 @@ export class ManageWordFormService {
     removeSynonym(index: number) {
         this.synonymsControl.removeAt(index);
     }
+
+    clearForm() {
+        this.form.reset();
+        this.synonymsControl.clear();
+    }
 }

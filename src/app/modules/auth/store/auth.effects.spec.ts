@@ -81,17 +81,18 @@ describe('AuthEffects - эффекты по работе с авторизаци
                 password: 'testPassword',
             };
 
-            actionsMock$ = hot('x', {
-                x: authActions.signInWithEmailAndPasswordStart({data}),
-            });
-
             when(apiServiceMock.signInWithEmailAndPassword(data)).thenReturn(
                 of({user: {refreshToken: 'token', uid: 'id'}}) as Observable<
                     firebase.auth.UserCredential
                 >,
             );
 
-            // act & assert
+            // act
+            actionsMock$ = hot('x', {
+                x: authActions.signInWithEmailAndPasswordStart({data}),
+            });
+
+            // assert
             const expected$ = hot('x', {
                 x: authActions.signInWithEmailAndPasswordSuccess({
                     data: {token: 'token', id: 'id'},
@@ -111,15 +112,16 @@ describe('AuthEffects - эффекты по работе с авторизаци
                 password: 'testPassword',
             };
 
-            actionsMock$ = hot('x', {
-                x: authActions.signInWithEmailAndPasswordStart({data}),
-            });
-
             when(apiServiceMock.signInWithEmailAndPassword(data)).thenReturn(
                 throwError('error'),
             );
 
-            // act & assert
+            // act
+            actionsMock$ = hot('x', {
+                x: authActions.signInWithEmailAndPasswordStart({data}),
+            });
+
+            // assert
             const expected$ = hot('(xy)', {
                 x: authActions.signInWithEmailAndPasswordError(),
                 y: authActions.showNotification({
@@ -144,15 +146,16 @@ describe('AuthEffects - эффекты по работе с авторизаци
                 password: 'testPassword',
             };
 
-            actionsMock$ = hot('x', {
-                x: authActions.signInWithEmailAndPasswordStart({data}),
-            });
-
             when(apiServiceMock.signInWithEmailAndPassword(data)).thenReturn(
                 throwError({code: 'auth/wrong-password'}),
             );
 
-            // act & assert
+            // act
+            actionsMock$ = hot('x', {
+                x: authActions.signInWithEmailAndPasswordStart({data}),
+            });
+
+            // assert
             const expected$ = hot('(xy)', {
                 x: authActions.signInWithEmailAndPasswordError(),
                 y: authActions.showNotification({
@@ -177,15 +180,16 @@ describe('AuthEffects - эффекты по работе с авторизаци
                 password: 'testPassword',
             };
 
-            actionsMock$ = hot('x', {
-                x: authActions.signInWithEmailAndPasswordStart({data}),
-            });
-
             when(apiServiceMock.signInWithEmailAndPassword(data)).thenReturn(
                 throwError({code: 'auth/user-not-found'}),
             );
 
-            // act & assert
+            // act
+            actionsMock$ = hot('x', {
+                x: authActions.signInWithEmailAndPasswordStart({data}),
+            });
+
+            // assert
             const expected$ = hot('(xy)', {
                 x: authActions.signInWithEmailAndPasswordError(),
                 y: authActions.showNotification({

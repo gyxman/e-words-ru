@@ -70,4 +70,20 @@ describe('ManageWordFormService - сервис по работе с формой
         // assert
         expect(testedService.synonymsControl.controls.length).toBe(0);
     });
+
+    it('Если вызывается метод очистки формы, то форма сбрасывается в первоначальное состояние', () => {
+        // arrange
+        testedService.russianWordControl.setValue('testValue');
+        testedService.addSynonym();
+
+        // act
+        testedService.clearForm();
+
+        // assert
+        expect(testedService.form.value).toEqual({
+            englishWord: null,
+            russianWord: null,
+            synonyms: [],
+        });
+    });
 });

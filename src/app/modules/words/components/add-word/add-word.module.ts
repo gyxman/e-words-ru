@@ -7,6 +7,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {FormControlErrorModule} from '../../../auth/components/form-control-error/form-control-error.module';
 import {MatIconModule} from '@angular/material/icon';
 import {ManageWordFormService} from '../../services/manage-word-form.service';
+import {LoaderModule} from '../../../utils/components/loader/loader.module';
 
 @NgModule({
     imports: [
@@ -16,6 +17,7 @@ import {ManageWordFormService} from '../../services/manage-word-form.service';
         MatButtonModule,
         FormControlErrorModule,
         MatIconModule,
+        LoaderModule,
     ],
     declarations: [AddWordComponent],
     exports: [AddWordComponent],

@@ -4,6 +4,8 @@ import {WordsFacadeService} from './words-facade.service';
 import {WordsState} from '../store/words.state';
 import {Word} from '../models/word';
 import {wordsActions} from '../store/words.actions';
+import {cold} from 'jest-marbles';
+import {fromWords} from '../store/words.selectors';
 
 describe('WordsFacadeService - сервис по работе со словами для изучения', () => {
     let testedService: WordsFacadeService;
@@ -16,6 +18,20 @@ describe('WordsFacadeService - сервис по работе со словам�
 
         testedService = TestBed.inject(WordsFacadeService);
         storeMock = TestBed.inject(MockStore);
+    });
+
+    describe('showLoader$ - отображение лоадера при отправке формы', () => {
+        it('Если пришла информация об отображении лоадера, храним ее в showLoader$', () => {
+            // arrange
+            storeMock.overrideSelector(fromWords.isLoading, true);
+
+            // act & assert
+            expect(testedService.showLoader$).toBeObservable(
+                cold('x', {
+                    x: true,
+                }),
+            );
+        });
     });
 
     describe('addWord - метод по добавлению нового слова на изучение', () => {

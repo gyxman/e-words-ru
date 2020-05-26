@@ -2,21 +2,37 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {AddWordComponent} from './add-word.component';
 import {AddWordComponentPo} from './add-word.component.po';
 import {ReactiveFormsModule} from '@angular/forms';
-import {MockModule} from 'ng-mocks';
+import {MockComponent, MockModule} from 'ng-mocks';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {FormControlErrorModule} from '../../../auth/components/form-control-error/form-control-error.module';
 import {MatIconModule} from '@angular/material/icon';
 import {ManageWordFormService} from '../../services/manage-word-form.service';
+import {WordsFacadeService} from '../../services/words-facade.service';
+import {instance, mock, when} from 'ts-mockito';
+import {BehaviorSubject} from 'rxjs';
+import {LoaderComponent} from '../../../utils/components/loader/loader.component';
 
 describe('AddWordComponent - форма добавления нового слова', () => {
     let component: AddWordComponent;
     let fixture: ComponentFixture<AddWordComponent>;
     let pageObject: AddWordComponentPo<AddWordComponent>;
+    let wordsFacadeServiceMock: WordsFacadeService;
+    let showLoader$: BehaviorSubject<boolean>;
+
+    beforeEach(() => {
+        wordsFacadeServiceMock = mock(WordsFacadeService);
+
+        showLoader$ = new BehaviorSubject(false);
+    });
+
+    beforeEach(() => {
+        when(wordsFacadeServiceMock.showLoader$).thenReturn(showLoader$);
+    });
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [AddWordComponent],
+            declarations: [AddWordComponent, MockComponent(LoaderComponent)],
             imports: [
                 ReactiveFormsModule,
                 MockModule(MatInputModule),
@@ -24,7 +40,13 @@ describe('AddWordComponent - форма добавления нового сло
                 MockModule(FormControlErrorModule),
                 MockModule(MatIconModule),
             ],
-            providers: [ManageWordFormService],
+            providers: [
+                ManageWordFormService,
+                {
+                    provide: WordsFacadeService,
+                    useFactory: () => instance(wordsFacadeServiceMock),
+                },
+            ],
         }).compileComponents();
     }));
 
@@ -32,6 +54,28 @@ describe('AddWordComponent - форма добавления нового сло
         fixture = TestBed.createComponent(AddWordComponent);
         component = fixture.componentInstance;
         pageObject = new AddWordComponentPo(fixture);
+    });
+
+    it('Если информация по лоадеру не пришла, он не отображается', () => {
+        // arrange
+        showLoader$.next(false);
+
+        // act
+        fixture.detectChanges();
+
+        // assert
+        expect(pageObject.loader.showLoader).toBe(false);
+    });
+
+    it('Если информация по лоадеру пришла, он отображается', () => {
+        // arrange
+        showLoader$.next(true);
+
+        // act
+        fixture.detectChanges();
+
+        // assert
+        expect(pageObject.loader.showLoader).toBe(true);
     });
 
     it('Если пользователь открывает форму добавления слова, то кнопка "Добавить слово" недоступна', () => {

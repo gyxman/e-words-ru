@@ -3,9 +3,12 @@ import {Word} from '../models/word';
 import {Store} from '@ngrx/store';
 import {WordsState} from '../store/words.state';
 import {wordsActions} from '../store/words.actions';
+import {fromWords} from '../store/words.selectors';
 
 @Injectable()
 export class WordsFacadeService {
+    showLoader$ = this.store$.select(fromWords.isLoading);
+
     constructor(private store$: Store<WordsState>) {}
 
     addWord(data: Word) {

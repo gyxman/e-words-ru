@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {MatIconRegistry} from '@angular/material/icon';
 import {DomSanitizer} from '@angular/platform-browser';
 import {ManageWordFormService} from '../../services/manage-word-form.service';
+import {WordsFacadeService} from '../../services/words-facade.service';
 
 @Component({
     selector: 'app-add-word',
@@ -10,6 +11,8 @@ import {ManageWordFormService} from '../../services/manage-word-form.service';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddWordComponent {
+    showLoader$ = this.wordsFacadeService.showLoader$;
+
     form = this.formService.form;
     englishWordControl = this.formService.englishWordControl;
     russianWordControl = this.formService.russianWordControl;
@@ -19,6 +22,7 @@ export class AddWordComponent {
         iconRegistry: MatIconRegistry,
         sanitizer: DomSanitizer,
         private formService: ManageWordFormService,
+        private wordsFacadeService: WordsFacadeService,
     ) {
         iconRegistry.addSvgIcon(
             'delete',
@@ -35,6 +39,6 @@ export class AddWordComponent {
     }
 
     onSubmit() {
-        console.log(this.form.value);
+        this.wordsFacadeService.addWord(this.form.value);
     }
 }
