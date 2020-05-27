@@ -12,6 +12,7 @@ import {NotificationsModule} from './modules/utils/modules/notification/componen
 import {NotificationFacadeService} from './modules/utils/modules/notification/services/notification-facade.service';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {ApiService} from './services/api.service';
+import {AppEffects} from './store/app.effects';
 
 @NgModule({
     declarations: [AppComponent],
@@ -23,7 +24,7 @@ import {ApiService} from './services/api.service';
         AngularFireModule.initializeApp(environment.firebase),
         StoreModule.forRoot({}),
         !environment.production ? StoreDevtoolsModule.instrument() : [],
-        EffectsModule.forRoot([]),
+        EffectsModule.forRoot([AppEffects]),
         NotificationsModule,
     ],
     providers: [NotificationFacadeService, ApiService],

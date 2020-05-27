@@ -5,9 +5,7 @@ import {TestBed} from '@angular/core/testing';
 import {provideMockActions} from '@ngrx/effects/testing';
 import {EffectsMetadata, getEffectsMetadata} from '@ngrx/effects';
 import {ApiService} from '../../../services/api.service';
-import {deepEqual, instance, mock, verify, when} from 'ts-mockito';
-import {NotificationFacadeService} from '../../utils/modules/notification/services/notification-facade.service';
-import {NotificationModel} from '../../utils/modules/notification/models/notification';
+import {deepEqual, instance, mock, when} from 'ts-mockito';
 import {Router} from '@angular/router';
 import {WordsEffects} from './words.effects';
 import {WordsState} from './words.state';
@@ -17,7 +15,7 @@ import {ManageWordFormService} from '../services/manage-word-form.service';
 import {AuthFacadeService} from '../../auth/services/auth-facade.service';
 import {hot} from 'jest-marbles';
 import {Word} from '../models/word';
-import {catchError} from 'rxjs/operators';
+import {appActions} from '../../../store/app.actions';
 
 describe('WordsEffects - эффекты по работе со словами на изучении', () => {
     let testedEffects: WordsEffects;
@@ -26,7 +24,6 @@ describe('WordsEffects - эффекты по работе со словами н
     let storeMock: MockStore<WordsState>;
     let apiServiceMock: ApiService;
     let wordsFacadeServiceMock: WordsFacadeService;
-    let notificationFacadeServiceMock: NotificationFacadeService;
     let routerMock: Router;
     let authFacadeServiceMock: AuthFacadeService;
     let manageWordFormServiceMock: ManageWordFormService;
@@ -34,7 +31,6 @@ describe('WordsEffects - эффекты по работе со словами н
     beforeEach(() => {
         apiServiceMock = mock(ApiService);
         wordsFacadeServiceMock = mock(WordsFacadeService);
-        notificationFacadeServiceMock = mock(NotificationFacadeService);
         routerMock = mock(Router);
         authFacadeServiceMock = mock(AuthFacadeService);
         manageWordFormServiceMock = mock(ManageWordFormService);
@@ -57,10 +53,6 @@ describe('WordsEffects - эффекты по работе со словами н
                 {
                     provide: WordsFacadeService,
                     useFactory: () => instance(wordsFacadeServiceMock),
-                },
-                {
-                    provide: NotificationFacadeService,
-                    useFactory: () => instance(notificationFacadeServiceMock),
                 },
                 {
                     provide: Router,
@@ -110,7 +102,7 @@ describe('WordsEffects - эффекты по работе со словами н
             // assert
             const expected$ = hot('(xy)', {
                 x: wordsActions.addWordSuccess(),
-                y: wordsActions.showNotification({
+                y: appActions.showNotification({
                     data: {
                         text: 'Слово успешно добавлено',
                         type: 'success',
@@ -140,7 +132,7 @@ describe('WordsEffects - эффекты по работе со словами н
             // assert
             const expected$ = hot('(xy)', {
                 x: wordsActions.addWordError(),
-                y: wordsActions.showNotification({
+                y: appActions.showNotification({
                     data: {
                         text: 'Ошибка при добавлении слова',
                         type: 'error',
@@ -149,34 +141,6 @@ describe('WordsEffects - эффекты по работе со словами н
             });
 
             expect(testedEffects.addWordStart$).toBeObservable(expected$);
-        });
-    });
-
-    describe('showNotification$ - эффект по показу нотификаций', () => {
-        it('Эффект по показу нотификаций не диспатчит экшен, переподписывается при ошибке', () => {
-            // assert
-            expect(metadata.showNotification$).toEqual({
-                dispatch: false,
-                useEffectsErrorHandler: true,
-            });
-        });
-
-        it(`Если приходит экшен на показ нотификаций, вызываем метод показа нотификаций и передаем данные`, () => {
-            // arrange
-            const data = {
-                text: 'Слово успешно добавлено',
-                type: 'success',
-            } as NotificationModel;
-
-            actionsMock$ = of(wordsActions.showNotification({data}));
-
-            // act
-            testedEffects.showNotification$.subscribe();
-
-            // assert
-            verify(
-                notificationFacadeServiceMock.showNotification(deepEqual(data)),
-            ).once();
         });
     });
 });

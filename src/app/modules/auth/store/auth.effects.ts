@@ -6,11 +6,11 @@ import {ApiService} from '../../../services/api.service';
 import {authActions} from './auth.actions';
 import {catchError, map, switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
-import {NotificationFacadeService} from '../../utils/modules/notification/services/notification-facade.service';
 import {AuthErrorEnum} from '../enums/auth-error.enum';
 import {AuthFacadeService} from '../services/auth-facade.service';
 import {Router} from '@angular/router';
 import {RouteEnum} from '../../../enums/route.enum';
+import {appActions} from '../../../store/app.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -27,7 +27,7 @@ export class AuthEffects {
                     catchError(({code}) =>
                         of(
                             authActions.signInWithEmailAndPasswordError(),
-                            authActions.showNotification({
+                            appActions.showNotification({
                                 data: {
                                     text: AuthErrorEnum[code]
                                         ? AuthErrorEnum[code]
@@ -54,21 +54,11 @@ export class AuthEffects {
         {dispatch: false},
     );
 
-    showNotification$ = createEffect(
-        () =>
-            this.actions$.pipe(
-                ofType(authActions.showNotification),
-                map(({data}) => this.notificationService.showNotification(data)),
-            ),
-        {dispatch: false},
-    );
-
     constructor(
         private readonly actions$: Actions,
         private readonly store$: Store<AuthState>,
         private readonly apiService: ApiService,
         private readonly authFacadeService: AuthFacadeService,
-        private readonly notificationService: NotificationFacadeService,
         private readonly router: Router,
     ) {}
 }

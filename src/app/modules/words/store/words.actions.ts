@@ -1,5 +1,4 @@
 import {createAction, props} from '@ngrx/store';
-import {NotificationModel} from '../../utils/modules/notification/models/notification';
 import {Word} from '../models/word';
 
 const addWordStart = createAction(
@@ -11,14 +10,8 @@ const addWordSuccess = createAction('[words] Новое слово успешн�
 
 const addWordError = createAction('[words] Ошибка при добавлении нового слова');
 
-const showNotification = createAction(
-    '[auth] Показать нотификацию',
-    props<{data: NotificationModel}>(),
-);
-
 export const wordsActions = {
     addWordStart,
     addWordSuccess,
     addWordError,
-    showNotification,
 };

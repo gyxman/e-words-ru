@@ -11,11 +11,10 @@ import {deepEqual, instance, mock, verify, when} from 'ts-mockito';
 import {hot} from 'jest-marbles';
 import {authActions} from './auth.actions';
 import * as firebase from 'firebase';
-import {NotificationFacadeService} from '../../utils/modules/notification/services/notification-facade.service';
-import {NotificationModel} from '../../utils/modules/notification/models/notification';
 import {AuthFacadeService} from '../services/auth-facade.service';
 import {Router} from '@angular/router';
 import {RouteEnum} from '../../../enums/route.enum';
+import {appActions} from '../../../store/app.actions';
 
 describe('AuthEffects - эффекты по работе с авторизационной группой', () => {
     let testedEffects: AuthEffects;
@@ -24,13 +23,11 @@ describe('AuthEffects - эффекты по работе с авторизаци
     let storeMock: MockStore<AuthState>;
     let apiServiceMock: ApiService;
     let authFacadeServiceMock: AuthFacadeService;
-    let notificationFacadeServiceMock: NotificationFacadeService;
     let routerMock: Router;
 
     beforeEach(() => {
         apiServiceMock = mock(ApiService);
         authFacadeServiceMock = mock(AuthFacadeService);
-        notificationFacadeServiceMock = mock(NotificationFacadeService);
         routerMock = mock(Router);
     });
 
@@ -47,10 +44,6 @@ describe('AuthEffects - эффекты по работе с авторизаци
                 {
                     provide: AuthFacadeService,
                     useFactory: () => instance(authFacadeServiceMock),
-                },
-                {
-                    provide: NotificationFacadeService,
-                    useFactory: () => instance(notificationFacadeServiceMock),
                 },
                 {
                     provide: Router,
@@ -124,7 +117,7 @@ describe('AuthEffects - эффекты по работе с авторизаци
             // assert
             const expected$ = hot('(xy)', {
                 x: authActions.signInWithEmailAndPasswordError(),
-                y: authActions.showNotification({
+                y: appActions.showNotification({
                     data: {
                         text: 'Неизвестная ошибка, попробуйте позже',
                         type: 'error',
@@ -158,7 +151,7 @@ describe('AuthEffects - эффекты по работе с авторизаци
             // assert
             const expected$ = hot('(xy)', {
                 x: authActions.signInWithEmailAndPasswordError(),
-                y: authActions.showNotification({
+                y: appActions.showNotification({
                     data: {
                         text: 'Неверный e-mail или пароль',
                         type: 'error',
@@ -192,7 +185,7 @@ describe('AuthEffects - эффекты по работе с авторизаци
             // assert
             const expected$ = hot('(xy)', {
                 x: authActions.signInWithEmailAndPasswordError(),
-                y: authActions.showNotification({
+                y: appActions.showNotification({
                     data: {
                         text: 'Пользователь не найден',
                         type: 'error',
@@ -247,34 +240,6 @@ describe('AuthEffects - эффекты по работе с авторизаци
 
             // assert
             verify(routerMock.navigate(deepEqual([RouteEnum.User]))).once();
-        });
-    });
-
-    describe('showNotification$ - эффект по показу нотификаций', () => {
-        it('Эффект по показу нотификаций не диспатчит экшен, переподписывается при ошибке', () => {
-            // assert
-            expect(metadata.showNotification$).toEqual({
-                dispatch: false,
-                useEffectsErrorHandler: true,
-            });
-        });
-
-        it(`Если приходит экшен на показ нотификаций, вызываем метод показа нотификаций и передаем данные`, () => {
-            // arrange
-            const data = {
-                text: 'Неверный e-mail или пароль',
-                type: 'error',
-            } as NotificationModel;
-
-            actionsMock$ = of(authActions.showNotification({data}));
-
-            // act
-            testedEffects.showNotification$.subscribe();
-
-            // assert
-            verify(
-                notificationFacadeServiceMock.showNotification(deepEqual(data)),
-            ).once();
         });
     });
 });

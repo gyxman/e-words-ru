@@ -1,6 +1,5 @@
 import {createAction, props} from '@ngrx/store';
 import {SignInWithEmailAndPassword} from '../models/sign-in-with-email-and-password';
-import {NotificationModel} from '../../utils/modules/notification/models/notification';
 import {LocalstorageUserInfo} from '../models/localstorage-user-info';
 
 const signInWithEmailAndPasswordStart = createAction(
@@ -17,14 +16,8 @@ const signInWithEmailAndPasswordError = createAction(
     '[auth] Ошибка при авторизации в приложении с помощью логина и пароля',
 );
 
-const showNotification = createAction(
-    '[auth] Показать нотификацию',
-    props<{data: NotificationModel}>(),
-);
-
 export const authActions = {
     signInWithEmailAndPasswordStart,
     signInWithEmailAndPasswordSuccess,
     signInWithEmailAndPasswordError,
-    showNotification,
 };

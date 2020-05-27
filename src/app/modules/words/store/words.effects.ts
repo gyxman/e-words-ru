@@ -3,13 +3,13 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {Store} from '@ngrx/store';
 import {ApiService} from '../../../services/api.service';
 import {catchError, map, switchMap, withLatestFrom} from 'rxjs/operators';
-import {NotificationFacadeService} from '../../utils/modules/notification/services/notification-facade.service';
 import {wordsActions} from './words.actions';
 import {WordsState} from './words.state';
 import {WordsFacadeService} from '../services/words-facade.service';
 import {AuthFacadeService} from '../../auth/services/auth-facade.service';
 import {of} from 'rxjs';
 import {ManageWordFormService} from '../services/manage-word-form.service';
+import {appActions} from '../../../store/app.actions';
 
 @Injectable()
 export class WordsEffects {
@@ -22,7 +22,7 @@ export class WordsEffects {
                     switchMap(() =>
                         of(
                             wordsActions.addWordSuccess(),
-                            wordsActions.showNotification({
+                            appActions.showNotification({
                                 data: {
                                     text: 'Слово успешно добавлено',
                                     type: 'success',
@@ -33,7 +33,7 @@ export class WordsEffects {
                     catchError(() =>
                         of(
                             wordsActions.addWordError(),
-                            wordsActions.showNotification({
+                            appActions.showNotification({
                                 data: {
                                     text: 'Ошибка при добавлении слова',
                                     type: 'error',
@@ -57,15 +57,6 @@ export class WordsEffects {
         {dispatch: false},
     );
 
-    showNotification$ = createEffect(
-        () =>
-            this.actions$.pipe(
-                ofType(wordsActions.showNotification),
-                map(({data}) => this.notificationService.showNotification(data)),
-            ),
-        {dispatch: false},
-    );
-
     constructor(
         private readonly actions$: Actions,
         private readonly store$: Store<WordsState>,
@@ -73,6 +64,5 @@ export class WordsEffects {
         private readonly authFacadeService: AuthFacadeService,
         private readonly wordsFacadeService: WordsFacadeService,
         private readonly manageWordFormService: ManageWordFormService,
-        private readonly notificationService: NotificationFacadeService,
     ) {}
 }
