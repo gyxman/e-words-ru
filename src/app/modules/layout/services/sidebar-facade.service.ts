@@ -13,9 +13,14 @@ const menuItems: SidebarMenuItemWithKey = {
         key: 'addWord',
         navigateTo: LayoutRouteEnum.AddWord,
     },
+    catalog: {
+        title: 'Каталог упражнений',
+        key: 'catalog',
+        navigateTo: LayoutRouteEnum.Catalog,
+    },
 };
 
-const sortedMenuItems = ['addWord'];
+const sortedMenuItems = ['addWord', 'catalog'];
 
 @Injectable()
 export class SidebarFacadeService {

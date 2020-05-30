@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CatalogComponent - каталог упражнений Если компонент загрузился, то все элементы корректно отрисовались 1`] = `
+<div
+  id="root0"
+>
+  <div
+    class="list"
+  >
+    
+    <div
+      class="item"
+    >
+      <div
+        automation-id="item-0"
+        class="item-content"
+      >
+        <h3
+          class="name"
+        >
+          С английского на русский
+        </h3>
+      </div>
+    </div>
+  </div>
+</div>
+`;

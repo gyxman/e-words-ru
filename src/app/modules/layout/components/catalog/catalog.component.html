@@ -1,0 +1,14 @@
+<div class="list">
+    <div
+        *ngFor="let item of items; let i = index; trackBy: identityTrackByFunction"
+        class="item"
+    >
+        <div
+            class="item-content"
+            [attr.automation-id]="'item-' + i"
+            (click)="onClick(item)"
+        >
+            <h3 class="name">{{ item.name }}</h3>
+        </div>
+    </div>
+</div>

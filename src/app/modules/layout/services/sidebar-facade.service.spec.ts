@@ -24,6 +24,11 @@ describe('SidebarFacadeService - сервис по управлению лево
                     key: 'addWord',
                     navigateTo: LayoutRouteEnum.AddWord,
                 },
+                {
+                    title: 'Каталог упражнений',
+                    key: 'catalog',
+                    navigateTo: LayoutRouteEnum.Catalog,
+                },
             ];
 
             expect(testedService.allMenu$).toBeObservable(cold('(x|)', {x: result}));
