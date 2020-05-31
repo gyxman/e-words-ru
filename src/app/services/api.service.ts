@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
 import {Word} from '../modules/words/models/word';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {DocumentReference} from '@angular/fire/firestore/interfaces';
+import {map} from 'rxjs/operators';
 
 const MAIN_COLLECTION = 'e-words-ru';
 
@@ -24,5 +25,24 @@ export class ApiService {
         return fromPromise(
             this.db.collection(MAIN_COLLECTION).doc(userId).collection('words').add(word),
         );
+    }
+
+    getWords(userId: string): Observable<Word[]> {
+        return this.db
+            .collection(MAIN_COLLECTION)
+            .doc(userId)
+            .collection('words')
+            .get()
+            .pipe(
+                map(querySnapshot => {
+                    const arr = [];
+
+                    querySnapshot.forEach(doc => {
+                        arr.push({id: doc.id, ...doc.data()});
+                    });
+
+                    return arr;
+                }),
+            );
     }
 }

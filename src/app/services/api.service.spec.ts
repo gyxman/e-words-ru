@@ -8,6 +8,8 @@ import {
     AngularFirestoreDocument,
 } from '@angular/fire/firestore';
 import {Word} from '../modules/words/models/word';
+import {of} from 'rxjs';
+import {cold} from 'jest-marbles';
 
 describe('ApiService - сервис по работе с авторизацией в FireBase', () => {
     let testedService: ApiService;
@@ -91,6 +93,46 @@ describe('ApiService - сервис по работе с авторизацие�
             verify(angularFirestoreCollectionMock1.doc('userId')).once();
             verify(angularFirestoreDocumentMock.collection('words')).once();
             verify(angularFirestoreCollectionMock2.add(deepEqual({id: 'wordId'}))).once();
+        });
+    });
+
+    describe('getWords - метод получения слов из базы данных', () => {
+        it('Если вызывается метод на получение слов из базы данных, то передаем полученные слова в массиве', () => {
+            // arrange
+            const data = [
+                {
+                    id: 'wordId',
+                    data: () =>
+                        ({
+                            russianWord: 'russianWord',
+                            englishWord: 'englishWord',
+                        } as Word),
+                },
+            ] as any;
+
+            when(dbMock.collection('e-words-ru')).thenReturn(
+                instance(angularFirestoreCollectionMock1),
+            );
+            when(angularFirestoreCollectionMock1.doc('userId')).thenReturn(
+                instance(angularFirestoreDocumentMock),
+            );
+            when(angularFirestoreDocumentMock.collection('words')).thenReturn(
+                instance(angularFirestoreCollectionMock2),
+            );
+            when(angularFirestoreCollectionMock2.get()).thenReturn(of(data));
+
+            // act & assert
+            expect(testedService.getWords('userId')).toBeObservable(
+                cold('(x|)', {
+                    x: [
+                        {
+                            id: 'wordId',
+                            russianWord: 'russianWord',
+                            englishWord: 'englishWord',
+                        },
+                    ],
+                }),
+            );
         });
     });
 });
