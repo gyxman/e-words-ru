@@ -10,7 +10,7 @@ describe('Получение информации из стейта прилож
 
     it('Получение информации загружены ли слова', () => {
         // assert
-        const state = {isWordsLoaded: true};
+        const state = {wordsLoaded: true};
 
         expect(fromApp.isWordsLoaded.projector(state)).toBe(true);
     });
