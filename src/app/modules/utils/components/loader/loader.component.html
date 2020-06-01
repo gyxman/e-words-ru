@@ -1,4 +1,8 @@
-<div automation-id="content" class="content" [class.content_with-overlay]="showOverlay">
+<div
+    automation-id="content"
+    class="content"
+    [class.content_with-overlay]="showOverlay && showLoader"
+>
     <ng-content> </ng-content>
 </div>
 <div *ngIf="showLoader" automation-id="loader" class="loader">

@@ -1,55 +1,65 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LayoutComponent - компонент авторизованной зоны Если компонент загрузился, то все элементы отрисовались 1`] = `
+exports[`LayoutComponent - компонент авторизованной зоны Проверка общей верстки компонента Если компонент загрузился, то все элементы отрисовались 1`] = `
 <div
   id="root0"
 >
-  <mat-sidenav-container
-    automation-id="layout"
-    class="layout mat-drawer-container mat-sidenav-container"
+  <app-loader
+    automation-id="loader"
   >
-    
     <div
-      class="mat-drawer-backdrop"
-    />
-    <div
-      aria-hidden="true"
-      class="cdk-visually-hidden cdk-focus-trap-anchor"
-    />
-    <mat-sidenav
-      automation-id="sidebar"
-      class="sidebar mat-drawer mat-sidenav ng-trigger ng-trigger-transform mat-drawer-over"
-      style="box-shadow:none;visibility:hidden;0:box-shadow;1:visibility;"
-      tabindex="-1"
+      automation-id="content"
+      class="content"
     >
-      <div
-        class="mat-drawer-inner-container"
+      <mat-sidenav-container
+        automation-id="layout"
+        class="layout mat-drawer-container mat-sidenav-container"
       >
         
-      </div>
-    </mat-sidenav>
-    <div
-      aria-hidden="true"
-      class="cdk-visually-hidden cdk-focus-trap-anchor"
-    />
-    <mat-sidenav-content
-      class="wrapper mat-drawer-content mat-sidenav-content"
-    >
-      <app-header
-        automation-id="header"
-        class="header"
-      />
-      <div
-        class="content"
-      >
         <div
-          class="container"
+          class="mat-drawer-backdrop"
+        />
+        <div
+          aria-hidden="true"
+          class="cdk-visually-hidden cdk-focus-trap-anchor"
+        />
+        <mat-sidenav
+          automation-id="sidebar"
+          class="sidebar mat-drawer mat-sidenav ng-trigger ng-trigger-transform mat-drawer-over"
+          style="box-shadow:none;visibility:hidden;0:box-shadow;1:visibility;"
+          tabindex="-1"
         >
-          <router-outlet />
-        </div>
-      </div>
-    </mat-sidenav-content>
+          <div
+            class="mat-drawer-inner-container"
+          >
+            
+          </div>
+        </mat-sidenav>
+        <div
+          aria-hidden="true"
+          class="cdk-visually-hidden cdk-focus-trap-anchor"
+        />
+        <mat-sidenav-content
+          class="wrapper mat-drawer-content mat-sidenav-content"
+        >
+          <app-header
+            automation-id="header"
+            class="header"
+          />
+          <div
+            class="content"
+          >
+            <div
+              class="container"
+            >
+              <router-outlet />
+            </div>
+          </div>
+        </mat-sidenav-content>
+        
+      </mat-sidenav-container>
+    </div>
     
-  </mat-sidenav-container>
+  </app-loader>
 </div>
 `;

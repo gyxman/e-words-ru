@@ -140,7 +140,7 @@ describe('LoaderComponent - компонент отображения лоаде
         expect(pageObject.overlay).toBeTruthy();
     });
 
-    it('Если оверлей показывается, то у контента есть класс для оверлея', () => {
+    it('Если оверлей показывается и лоадер показывается, то у контента есть класс для оверлея', () => {
         // arrange
         testComponent.showLoader = true;
         testComponent.showOverlay = true;
@@ -150,5 +150,17 @@ describe('LoaderComponent - компонент отображения лоаде
 
         // assert
         expect(pageObject.content.classes).toEqual({'content_with-overlay': true});
+    });
+
+    it('Если оверлей показывается, а лоадер не показывается, то у контента нет класса для оверлея', () => {
+        // arrange
+        testComponent.showLoader = false;
+        testComponent.showOverlay = true;
+
+        // act
+        fixture.detectChanges();
+
+        // assert
+        expect(pageObject.content.classes).toEqual({'content_with-overlay': false});
     });
 });

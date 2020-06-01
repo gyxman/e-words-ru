@@ -1,31 +1,37 @@
-<mat-sidenav-container
-    automation-id="layout"
-    class="layout"
-    (backdropClick)="sidebar.close()"
+<app-loader
+    automation-id="loader"
+    [showLoader]="showLoader$ | async"
+    [showOverlay]="true"
 >
-    <mat-sidenav
-        #sidebar
-        automation-id="sidebar"
-        class="sidebar"
-        (keydown.escape)="sidebar.close()"
+    <mat-sidenav-container
+        automation-id="layout"
+        class="layout"
+        (backdropClick)="sidebar.close()"
     >
-        <app-sidebar
-            *ngIf="sidebar.opened"
-            automation-id="sidebar-content"
-            class="sidebar-content"
-            (sidebarOnClick)="sidebar.close()"
-        ></app-sidebar>
-    </mat-sidenav>
-    <mat-sidenav-content class="wrapper">
-        <app-header
-            automation-id="header"
-            class="header"
-            (openSidebar)="sidebar.open()"
-        ></app-header>
-        <div class="content">
-            <div class="container">
-                <router-outlet></router-outlet>
+        <mat-sidenav
+            #sidebar
+            automation-id="sidebar"
+            class="sidebar"
+            (keydown.escape)="sidebar.close()"
+        >
+            <app-sidebar
+                *ngIf="sidebar.opened"
+                automation-id="sidebar-content"
+                class="sidebar-content"
+                (sidebarOnClick)="sidebar.close()"
+            ></app-sidebar>
+        </mat-sidenav>
+        <mat-sidenav-content class="wrapper">
+            <app-header
+                automation-id="header"
+                class="header"
+                (openSidebar)="sidebar.open()"
+            ></app-header>
+            <div class="content">
+                <div class="container">
+                    <router-outlet></router-outlet>
+                </div>
             </div>
-        </div>
-    </mat-sidenav-content>
-</mat-sidenav-container>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</app-loader>

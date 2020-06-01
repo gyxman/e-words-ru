@@ -11,6 +11,8 @@ import {WordsStoreModule} from '../words/store/words-store.module';
 import {WordsFacadeService} from '../words/services/words-facade.service';
 import {DashboardModule} from './components/dashboard/dashboard.module';
 import {CatalogModule} from './components/catalog/catalog.module';
+import {LoaderModule} from '../utils/components/loader/loader.module';
+import {LayoutFacadeService} from './services/layout-facade.service';
 
 @NgModule({
     imports: [
@@ -24,9 +26,10 @@ import {CatalogModule} from './components/catalog/catalog.module';
         WordsStoreModule,
         DashboardModule,
         CatalogModule,
+        LoaderModule,
     ],
     declarations: [LayoutComponent],
     exports: [LayoutComponent],
-    providers: [WordsFacadeService],
+    providers: [WordsFacadeService, LayoutFacadeService],
 })
 export class LayoutModule {}
