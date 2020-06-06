@@ -1,0 +1,28 @@
+<ng-container *ngIf="word$ | async as word">
+    <app-loader automation-id="loader" [showLoader]="showLoader$ | async">
+        <div class="form">
+            <h3 class="title">Введите перевод для слова:</h3>
+            <div class="word">{{ word | mapper: getCurrentWord }}</div>
+            <mat-form-field class="form-field">
+                <mat-label>Ответ</mat-label>
+                <input
+                    automation-id="answer-input"
+                    matInput
+                    placeholder="Введите слово на русском языке"
+                    [formControl]="answerControl"
+                    (keydown.enter)="onSubmit()"
+                />
+                <app-form-control-error
+                    class="form-error"
+                    [control]="answerControl"
+                ></app-form-control-error>
+            </mat-form-field>
+            <app-actions
+                automation-id="actions"
+                class="actions"
+                [disabledSubmit]="!answerControl.value"
+                (submit)="onSubmit()"
+            ></app-actions>
+        </div>
+    </app-loader>
+</ng-container>
