@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Actions, createEffect, ofType} from '@ngrx/effects';
+import {Actions, createEffect, ofType, OnInitEffects} from '@ngrx/effects';
 import {appActions} from './app.actions';
 import {map, switchMap, withLatestFrom} from 'rxjs/operators';
 import {NotificationFacadeService} from '../modules/utils/modules/notification/services/notification-facade.service';
@@ -10,7 +10,7 @@ import {AuthFacadeService} from '../modules/auth/services/auth-facade.service';
 const APP_EFFECTS_INIT = '[app] Инициализация эффектов';
 
 @Injectable()
-export class AppEffects {
+export class AppEffects implements OnInitEffects {
     ngrxOnInitEffects(): Action {
         return {type: APP_EFFECTS_INIT};
     }

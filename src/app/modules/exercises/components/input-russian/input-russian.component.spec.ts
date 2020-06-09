@@ -11,6 +11,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {FormControlErrorModule} from '../../../auth/components/form-control-error/form-control-error.module';
 import {ActionsModule} from '../actions/actions.module';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {ExerciseTypeEnum} from '../../enums/exercise-type.enum';
 
 @Component({
     template:
@@ -23,9 +24,11 @@ class TestComponent {
     } as Word);
     showLoader$: ReplaySubject<boolean> = new ReplaySubject(1);
 
+    type: ExerciseTypeEnum;
     answer: string;
 
-    onAnswer(answer: string) {
+    onAnswer({type, answer}) {
+        this.type = type;
         this.answer = answer;
     }
 }
@@ -111,6 +114,6 @@ describe('InputRussianComponent - упражнение, где пользова�
         pageObject.actions.triggerEventHandler('submit', null);
 
         // assert
-        expect(testComponent.onAnswer).toHaveBeenCalledWith('ответ');
+        expect(testComponent.onAnswer).toHaveBeenCalledWith({type: 1, answer: 'ответ'});
     });
 });

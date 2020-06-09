@@ -23,11 +23,11 @@ const routes: Routes = [
                 path: LayoutRouteEnum.AddWord,
                 component: AddWordComponent,
             },
-            // {
-            //     path: LayoutRouteEnum.Start,
-            //     loadChildren: () =>
-            //         import('../exercises/exercises.module').then(m => m.ExercisesModule),
-            // },
+            {
+                path: LayoutRouteEnum.Start,
+                loadChildren: () =>
+                    import('../exercises/exercises.module').then(m => m.ExercisesModule),
+            },
             {path: '', redirectTo: LayoutRouteEnum.Dashboard, pathMatch: 'full'},
             {path: '**', redirectTo: ''},
         ],
