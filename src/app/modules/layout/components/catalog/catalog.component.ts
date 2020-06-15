@@ -1,13 +1,10 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Inject} from '@angular/core';
 import {CatalogItem} from '../../models/catalog-item';
 import {Router} from '@angular/router';
 import {LayoutRouteEnum} from '../../enums/layout-route.enum';
 import {RouteEnum} from '../../../../enums/route.enum';
-import {ComponentEnum} from '../../../exercises/enums/component.enum';
-
-const items: CatalogItem[] = [
-    {name: 'С английского на русский', component: ComponentEnum.InputRussian},
-];
+import {CATALOG_ITEM_MANAGER_PLUGIN} from '../../tokens/catalog-item-manager-plugin.token';
+import {CatalogItemManagerPlugin} from '../../interfaces/catalog-item-manager-plugin';
 
 @Component({
     selector: 'app-catalog',
@@ -18,9 +15,13 @@ const items: CatalogItem[] = [
 export class CatalogComponent {
     readonly identityTrackByFunction = (_index: number, item: any) => item;
 
-    constructor(private router: Router) {}
+    constructor(
+        private router: Router,
+        @Inject(CATALOG_ITEM_MANAGER_PLUGIN)
+        private readonly catalogItemManagerPlugins: CatalogItemManagerPlugin[],
+    ) {}
 
-    items = items;
+    items = this.catalogItemManagerPlugins.map(item => item.getItem());
 
     onClick({component}: CatalogItem) {
         this.router.navigate([RouteEnum.User, LayoutRouteEnum.Start], {
