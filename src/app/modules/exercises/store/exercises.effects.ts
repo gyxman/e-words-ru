@@ -40,10 +40,10 @@ export class ExercisesEffects implements OnInitEffects {
                         this.store$.select(fromApp.words),
                         this.store$.select(fromExercises.currentWord),
                     ),
+                    takeUntil(timer(5000)),
+                    defaultIfEmpty([false, [], {}]),
                 ),
             ),
-            takeUntil(timer(5000)),
-            defaultIfEmpty([false, [], {}]),
             map(([_, words, currentWord]: [boolean, Word[], Word]) => {
                 if (!words.length) {
                     return appActions.showNotification({
