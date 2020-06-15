@@ -42,7 +42,19 @@ export class ExercisesEffects implements OnInitEffects {
                     ),
                 ),
             ),
-            map(([_, words, currentWord]) => {
+            takeUntil(timer(5000)),
+            defaultIfEmpty([false, [], {}]),
+            map(([_, words, currentWord]: [boolean, Word[], Word]) => {
+                if (!words.length) {
+                    return appActions.showNotification({
+                        data: {
+                            text: 'Не удалось загрузить слова, попробуйте позже',
+                            type: 'error',
+                            time: 2000,
+                        },
+                    });
+                }
+
                 let word: Word;
 
                 do {
@@ -51,16 +63,6 @@ export class ExercisesEffects implements OnInitEffects {
 
                 return exercisesActions.generateWordSuccess({word});
             }),
-            takeUntil(timer(5000)),
-            defaultIfEmpty(
-                appActions.showNotification({
-                    data: {
-                        text: 'Не удалось загрузить слова, попробуйте позже',
-                        type: 'error',
-                        time: 2000,
-                    },
-                }) as Action,
-            ),
         ),
     );
 
