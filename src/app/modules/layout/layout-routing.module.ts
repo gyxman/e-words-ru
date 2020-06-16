@@ -29,7 +29,7 @@ const routes: Routes = [
                     import('../exercises/exercises.module').then(m => m.ExercisesModule),
             },
             {path: '', redirectTo: LayoutRouteEnum.Dashboard, pathMatch: 'full'},
-            {path: '**', redirectTo: ''},
+            {path: '**', redirectTo: LayoutRouteEnum.Dashboard},
         ],
     },
 ];
