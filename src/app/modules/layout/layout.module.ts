@@ -13,6 +13,7 @@ import {DashboardModule} from './components/dashboard/dashboard.module';
 import {CatalogModule} from './components/catalog/catalog.module';
 import {LoaderModule} from '../utils/components/loader/loader.module';
 import {LayoutFacadeService} from './services/layout-facade.service';
+import {LayoutStoreModule} from './store/layout-store.module';
 
 @NgModule({
     imports: [
@@ -27,6 +28,7 @@ import {LayoutFacadeService} from './services/layout-facade.service';
         DashboardModule,
         CatalogModule,
         LoaderModule,
+        LayoutStoreModule,
     ],
     declarations: [LayoutComponent],
     exports: [LayoutComponent],

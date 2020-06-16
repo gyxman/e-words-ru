@@ -1,13 +1,13 @@
 import {LayoutFacadeService} from './layout-facade.service';
 import {MockStore, provideMockStore} from '@ngrx/store/testing';
-import {AppState} from '../../../store/app.state';
 import {TestBed} from '@angular/core/testing';
-import {fromApp} from '../../../store/app.selectors';
 import {hot} from 'jest-marbles';
+import {LayoutState} from '../store/layout.state';
+import {fromLayout} from '../store/layout.selectors';
 
 describe('LayoutFacadeService - сервис по работе с компонентом авторизованной зоны', () => {
     let testedService: LayoutFacadeService;
-    let storeMock: MockStore<AppState>;
+    let storeMock: MockStore<LayoutState>;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -21,7 +21,7 @@ describe('LayoutFacadeService - сервис по работе с компоне
     describe('showLoader$ - информация о показе лоадера', () => {
         it('Если слова еще не загрузились, то отображаем лоадер', () => {
             // arrange
-            storeMock.overrideSelector(fromApp.isWordsLoaded, false);
+            storeMock.overrideSelector(fromLayout.isWordsLoaded, false);
 
             // act & assert
             expect(testedService.showLoader$).toBeObservable(hot('x', {x: true}));
@@ -29,7 +29,7 @@ describe('LayoutFacadeService - сервис по работе с компоне
 
         it('Если слова уже загрузились, то не отображаем лоадер', () => {
             // arrange
-            storeMock.overrideSelector(fromApp.isWordsLoaded, true);
+            storeMock.overrideSelector(fromLayout.isWordsLoaded, true);
 
             // act & assert
             expect(testedService.showLoader$).toBeObservable(hot('x', {x: false}));

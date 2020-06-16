@@ -3,24 +3,24 @@ import {Observable} from 'rxjs';
 import {Action} from '@ngrx/store';
 import {MockStore, provideMockStore} from '@ngrx/store/testing';
 import {ExercisesState} from './exercises.state';
-import {AppState} from '../../../store/app.state';
 import {ExercisesEffects} from './exercises.effects';
 import {TestBed} from '@angular/core/testing';
 import {provideMockActions} from '@ngrx/effects/testing';
 import {hot} from 'jest-marbles';
-import {fromApp} from '../../../store/app.selectors';
 import {exercisesActions} from './exercises.actions';
 import {fromExercises} from './exercises.selectors';
 import {TestScheduler} from 'rxjs/testing';
 import {appActions} from '../../../store/app.actions';
 import {Word} from '../../words/models/word';
 import {ExerciseTypeEnum} from '../enums/exercise-type.enum';
+import {fromLayout} from '../../layout/store/layout.selectors';
+import {LayoutState} from '../../layout/store/layout.state';
 
 describe('ExercisesEffects - эффекты по работе с упражнениями', () => {
     let testedEffects: ExercisesEffects;
     let metadata: EffectsMetadata<ExercisesEffects>;
     let actionsMock$: Observable<Action>;
-    let storeMock: MockStore<ExercisesState & AppState>;
+    let storeMock: MockStore<ExercisesState & LayoutState>;
     let testScheduler: TestScheduler;
 
     beforeEach(() => {
@@ -54,8 +54,8 @@ describe('ExercisesEffects - эффекты по работе с упражне�
 
         it('Если необходимо подобрать слово для изучения, но слова еще не загружены, то ничего не делаем', () => {
             // arrange
-            storeMock.overrideSelector(fromApp.isWordsLoaded, false);
-            storeMock.overrideSelector(fromApp.words, []);
+            storeMock.overrideSelector(fromLayout.isWordsLoaded, false);
+            storeMock.overrideSelector(fromLayout.words, []);
             storeMock.overrideSelector(fromExercises.currentWord, null);
 
             // act
@@ -71,8 +71,8 @@ describe('ExercisesEffects - эффекты по работе с упражне�
             показываем нотификацию, что не удалось загрузить слова`, () => {
             testScheduler.run(({expectObservable, hot}) => {
                 // arrange
-                storeMock.overrideSelector(fromApp.isWordsLoaded, false);
-                storeMock.overrideSelector(fromApp.words, []);
+                storeMock.overrideSelector(fromLayout.isWordsLoaded, false);
+                storeMock.overrideSelector(fromLayout.words, []);
                 storeMock.overrideSelector(fromExercises.currentWord, null);
 
                 // act
@@ -98,8 +98,8 @@ describe('ExercisesEffects - эффекты по работе с упражне�
         it(`Если необходимо подобрать слово для изучения, то получаем все необходимые данные,
             подбираем слово (отличное от текущего) и диспатчим экшен о подборе`, () => {
             // arrange
-            storeMock.overrideSelector(fromApp.isWordsLoaded, true);
-            storeMock.overrideSelector(fromApp.words, [
+            storeMock.overrideSelector(fromLayout.isWordsLoaded, true);
+            storeMock.overrideSelector(fromLayout.words, [
                 {id: 'wordId1'} as Word,
                 {id: 'wordId2'} as Word,
             ]);

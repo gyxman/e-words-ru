@@ -1,20 +1,20 @@
-import {AppState} from './app.state';
-import {appReducer} from './app.reducer';
-import {appActions} from './app.actions';
-import {Word} from '../modules/words/models/word';
+import {LayoutState} from './layout.state';
+import {Word} from '../../words/models/word';
+import {layoutReducer} from './layout.reducer';
+import {layoutActions} from './layout.actions';
 
-describe('appReducer - редьюсер приложения', () => {
+describe('layoutReducer - редьюсер авторизованной зоны приложения', () => {
     it('Если приходит информация об успешной загрузке слов, то устанавливаем полученные слова', () => {
         // arrange
         const initialState = {
             wordsLoaded: true,
             words: [],
-        } as AppState;
+        } as LayoutState;
 
         const data = [{id: 'wordId'} as Word];
 
         // act & assert
-        expect(appReducer(undefined, appActions.getWordsSuccess({data}))).toEqual({
+        expect(layoutReducer(undefined, layoutActions.getWordsSuccess({data}))).toEqual({
             ...initialState,
             words: data,
         });
@@ -25,12 +25,12 @@ describe('appReducer - редьюсер приложения', () => {
         const initialState = {
             wordsLoaded: false,
             words: [],
-        } as AppState;
+        } as LayoutState;
 
         const data = [];
 
         // act & assert
-        expect(appReducer(undefined, appActions.getWordsSuccess({data}))).toEqual({
+        expect(layoutReducer(undefined, layoutActions.getWordsSuccess({data}))).toEqual({
             ...initialState,
             wordsLoaded: true,
         });
