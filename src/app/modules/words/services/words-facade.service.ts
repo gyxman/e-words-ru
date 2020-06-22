@@ -8,6 +8,7 @@ import {fromWords} from '../store/words.selectors';
 @Injectable()
 export class WordsFacadeService {
     showLoader$ = this.store$.select(fromWords.isLoading);
+    words$ = this.store$.select(fromWords.words);
 
     constructor(private store$: Store<WordsState>) {}
 

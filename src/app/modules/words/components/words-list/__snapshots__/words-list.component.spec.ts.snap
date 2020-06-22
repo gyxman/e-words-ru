@@ -1,0 +1,1403 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WordsListComponent - компонент списка слов на изучение Если компонент загрузился, все элементы отрисовались 1`] = `
+<div
+  id="root0"
+>
+  <div
+    class="filter"
+  >
+    <mat-form-field
+      class="mat-form-field mat-primary mat-form-field-type-mat-input mat-form-field-appearance-legacy mat-form-field-can-float mat-form-field-has-label mat-form-field-hide-placeholder _mat-animation-noopable"
+    >
+      <div
+        class="mat-form-field-wrapper"
+      >
+        <div
+          class="mat-form-field-flex"
+        >
+          
+          
+          <div
+            class="mat-form-field-infix"
+          >
+            <input
+              aria-invalid="false"
+              aria-required="false"
+              automation-id="filter-input"
+              class="mat-input-element mat-form-field-autofill-control cdk-text-field-autofill-monitored"
+              matinput=""
+              placeholder="Введите слово для поиска"
+            />
+            <span
+              class="mat-form-field-label-wrapper"
+            >
+              
+              <label
+                class="mat-form-field-label mat-empty mat-form-field-empty"
+              >
+                
+                
+                <mat-label>
+                  Поиск
+                </mat-label>
+                
+                
+              </label>
+            </span>
+          </div>
+          
+        </div>
+        
+        <div
+          class="mat-form-field-underline"
+        >
+          <span
+            class="mat-form-field-ripple"
+          />
+        </div>
+        <div
+          class="mat-form-field-subscript-wrapper"
+        >
+          
+          
+          <div
+            class="mat-form-field-hint-wrapper ng-trigger ng-trigger-transitionMessages"
+            style="opacity:1;transform:translateY(0%);0:opacity;1:transform;"
+          >
+            
+            <div
+              class="mat-form-field-hint-spacer"
+            />
+          </div>
+        </div>
+      </div>
+    </mat-form-field>
+  </div>
+  <div
+    class="table-wrapper"
+  >
+    <table
+      class="mat-table mat-sort"
+      mat-table=""
+      matsort=""
+      role="grid"
+    >
+      <thead
+        role="rowgroup"
+      >
+        
+        <tr
+          class="mat-header-row"
+          mat-header-row=""
+          role="row"
+        >
+          
+          <th
+            class="mat-header-cell mat-sort-header cdk-column-word mat-column-word"
+            mat-header-cell=""
+            mat-sort-header=""
+            role="columnheader"
+          >
+            <div
+              class="mat-sort-header-container"
+            >
+              <button
+                aria-label="Change sorting for word"
+                class="mat-sort-header-button mat-focus-indicator"
+                type="button"
+              >
+                Слово
+              </button>
+              
+              <div
+                class="mat-sort-header-arrow ng-trigger ng-trigger-arrowPosition ng-animating"
+                style="transform:translateY(25%);0:transform;"
+              >
+                <div
+                  class="mat-sort-header-stem"
+                />
+                <div
+                  class="mat-sort-header-indicator ng-trigger ng-trigger-indicator"
+                  style="transform:translateY(0px);0:transform;"
+                >
+                  <div
+                    class="mat-sort-header-pointer-left ng-trigger ng-trigger-leftPointer"
+                    style="transform:rotate(-45deg);0:transform;"
+                  />
+                  <div
+                    class="mat-sort-header-pointer-right ng-trigger ng-trigger-rightPointer"
+                    style="transform:rotate(45deg);0:transform;"
+                  />
+                  <div
+                    class="mat-sort-header-pointer-middle"
+                  />
+                </div>
+              </div>
+            </div>
+          </th>
+          <th
+            class="mat-header-cell mat-sort-header cdk-column-translate mat-column-translate"
+            mat-header-cell=""
+            mat-sort-header=""
+            role="columnheader"
+          >
+            <div
+              class="mat-sort-header-container"
+            >
+              <button
+                aria-label="Change sorting for translate"
+                class="mat-sort-header-button mat-focus-indicator"
+                type="button"
+              >
+                Перевод
+              </button>
+              
+              <div
+                class="mat-sort-header-arrow ng-trigger ng-trigger-arrowPosition ng-animating"
+                style="transform:translateY(25%);0:transform;"
+              >
+                <div
+                  class="mat-sort-header-stem"
+                />
+                <div
+                  class="mat-sort-header-indicator ng-trigger ng-trigger-indicator"
+                  style="transform:translateY(0px);0:transform;"
+                >
+                  <div
+                    class="mat-sort-header-pointer-left ng-trigger ng-trigger-leftPointer"
+                    style="transform:rotate(-45deg);0:transform;"
+                  />
+                  <div
+                    class="mat-sort-header-pointer-right ng-trigger ng-trigger-rightPointer"
+                    style="transform:rotate(45deg);0:transform;"
+                  />
+                  <div
+                    class="mat-sort-header-pointer-middle"
+                  />
+                </div>
+              </div>
+            </div>
+          </th>
+          <th
+            class="mat-header-cell mat-sort-header cdk-column-synonyms mat-column-synonyms"
+            mat-header-cell=""
+            mat-sort-header=""
+            role="columnheader"
+          >
+            <div
+              class="mat-sort-header-container"
+            >
+              <button
+                aria-label="Change sorting for synonyms"
+                class="mat-sort-header-button mat-focus-indicator"
+                type="button"
+              >
+                Синонимы
+              </button>
+              
+              <div
+                class="mat-sort-header-arrow ng-trigger ng-trigger-arrowPosition ng-animating"
+                style="transform:translateY(25%);0:transform;"
+              >
+                <div
+                  class="mat-sort-header-stem"
+                />
+                <div
+                  class="mat-sort-header-indicator ng-trigger ng-trigger-indicator"
+                  style="transform:translateY(0px);0:transform;"
+                >
+                  <div
+                    class="mat-sort-header-pointer-left ng-trigger ng-trigger-leftPointer"
+                    style="transform:rotate(-45deg);0:transform;"
+                  />
+                  <div
+                    class="mat-sort-header-pointer-right ng-trigger ng-trigger-rightPointer"
+                    style="transform:rotate(45deg);0:transform;"
+                  />
+                  <div
+                    class="mat-sort-header-pointer-middle"
+                  />
+                </div>
+              </div>
+            </div>
+          </th>
+          <th
+            class="mat-header-cell mat-sort-header cdk-column-date mat-column-date"
+            mat-header-cell=""
+            mat-sort-header=""
+            role="columnheader"
+          >
+            <div
+              class="mat-sort-header-container"
+            >
+              <button
+                aria-label="Change sorting for date"
+                class="mat-sort-header-button mat-focus-indicator"
+                type="button"
+              >
+                Дата добавления
+              </button>
+              
+              <div
+                class="mat-sort-header-arrow ng-trigger ng-trigger-arrowPosition ng-animating"
+                style="transform:translateY(25%);0:transform;"
+              >
+                <div
+                  class="mat-sort-header-stem"
+                />
+                <div
+                  class="mat-sort-header-indicator ng-trigger ng-trigger-indicator"
+                  style="transform:translateY(0px);0:transform;"
+                >
+                  <div
+                    class="mat-sort-header-pointer-left ng-trigger ng-trigger-leftPointer"
+                    style="transform:rotate(-45deg);0:transform;"
+                  />
+                  <div
+                    class="mat-sort-header-pointer-right ng-trigger ng-trigger-rightPointer"
+                    style="transform:rotate(45deg);0:transform;"
+                  />
+                  <div
+                    class="mat-sort-header-pointer-middle"
+                  />
+                </div>
+              </div>
+            </div>
+          </th>
+          <th
+            class="mat-header-cell mat-sort-header cdk-column-score mat-column-score"
+            mat-header-cell=""
+            mat-sort-header=""
+            role="columnheader"
+          >
+            <div
+              class="mat-sort-header-container"
+            >
+              <button
+                aria-label="Change sorting for score"
+                class="mat-sort-header-button mat-focus-indicator"
+                type="button"
+              >
+                 Накопленный результат 
+              </button>
+              
+              <div
+                class="mat-sort-header-arrow ng-trigger ng-trigger-arrowPosition ng-animating"
+                style="transform:translateY(25%);0:transform;"
+              >
+                <div
+                  class="mat-sort-header-stem"
+                />
+                <div
+                  class="mat-sort-header-indicator ng-trigger ng-trigger-indicator"
+                  style="transform:translateY(0px);0:transform;"
+                >
+                  <div
+                    class="mat-sort-header-pointer-left ng-trigger ng-trigger-leftPointer"
+                    style="transform:rotate(-45deg);0:transform;"
+                  />
+                  <div
+                    class="mat-sort-header-pointer-right ng-trigger ng-trigger-rightPointer"
+                    style="transform:rotate(45deg);0:transform;"
+                  />
+                  <div
+                    class="mat-sort-header-pointer-middle"
+                  />
+                </div>
+              </div>
+            </div>
+          </th>
+          <th
+            class="mat-header-cell mat-sort-header cdk-column-actions mat-column-actions"
+            mat-header-cell=""
+            mat-sort-header=""
+            role="columnheader"
+          >
+            <div
+              class="mat-sort-header-container"
+            >
+              <button
+                aria-label="Change sorting for actions"
+                class="mat-sort-header-button mat-focus-indicator"
+                type="button"
+              >
+                Действия
+              </button>
+              
+              <div
+                class="mat-sort-header-arrow ng-trigger ng-trigger-arrowPosition ng-animating"
+                style="transform:translateY(25%);0:transform;"
+              >
+                <div
+                  class="mat-sort-header-stem"
+                />
+                <div
+                  class="mat-sort-header-indicator ng-trigger ng-trigger-indicator"
+                  style="transform:translateY(0px);0:transform;"
+                >
+                  <div
+                    class="mat-sort-header-pointer-left ng-trigger ng-trigger-leftPointer"
+                    style="transform:rotate(-45deg);0:transform;"
+                  />
+                  <div
+                    class="mat-sort-header-pointer-right ng-trigger ng-trigger-rightPointer"
+                    style="transform:rotate(45deg);0:transform;"
+                  />
+                  <div
+                    class="mat-sort-header-pointer-middle"
+                  />
+                </div>
+              </div>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        role="rowgroup"
+      >
+        
+        <tr
+          class="mat-row"
+          mat-row=""
+          role="row"
+        >
+          
+          <td
+            class="mat-cell cdk-column-word mat-column-word"
+            mat-cell=""
+            role="gridcell"
+          >
+             hello 
+          </td>
+          <td
+            class="mat-cell cdk-column-translate mat-column-translate"
+            mat-cell=""
+            role="gridcell"
+          >
+             привет 
+          </td>
+          <td
+            class="mat-cell cdk-column-synonyms mat-column-synonyms"
+            mat-cell=""
+            role="gridcell"
+          >
+             здравствуй 
+          </td>
+          <td
+            class="mat-cell cdk-column-date mat-column-date"
+            mat-cell=""
+            role="gridcell"
+          >
+             17.12.1995 в 03:24 
+          </td>
+          <td
+            class="mat-cell cdk-column-score mat-column-score"
+            mat-cell=""
+            role="gridcell"
+          >
+             0 
+          </td>
+          <td
+            class="mat-cell cdk-column-actions mat-column-actions"
+            mat-cell=""
+            role="gridcell"
+          >
+            <div
+              class="actions"
+            >
+              <button
+                class="action mat-focus-indicator mat-icon-button mat-button-base mat-primary _mat-animation-noopable"
+                color="primary"
+                mat-icon-button=""
+                mattooltip="Редактировать слово"
+                mattooltipposition="above"
+              >
+                <span
+                  class="mat-button-wrapper"
+                >
+                  <mat-icon
+                    aria-hidden="true"
+                    class="mat-icon notranslate mat-icon-no-color"
+                    role="img"
+                    svgicon="edit"
+                  />
+                </span>
+                <div
+                  class="mat-button-ripple mat-ripple mat-button-ripple-round"
+                  matripple=""
+                />
+                <div
+                  class="mat-button-focus-overlay"
+                />
+              </button>
+              <button
+                class="action mat-focus-indicator mat-icon-button mat-button-base mat-warn _mat-animation-noopable"
+                color="warn"
+                mat-icon-button=""
+                mattooltip="Удалить слово"
+                mattooltipposition="above"
+              >
+                <span
+                  class="mat-button-wrapper"
+                >
+                  <mat-icon
+                    aria-hidden="true"
+                    class="action mat-icon notranslate mat-icon-no-color"
+                    role="img"
+                    svgicon="delete"
+                  />
+                </span>
+                <div
+                  class="mat-button-ripple mat-ripple mat-button-ripple-round"
+                  matripple=""
+                />
+                <div
+                  class="mat-button-focus-overlay"
+                />
+              </button>
+            </div>
+          </td>
+        </tr>
+        <tr
+          class="mat-row"
+          mat-row=""
+          role="row"
+        >
+          
+          <td
+            class="mat-cell cdk-column-word mat-column-word"
+            mat-cell=""
+            role="gridcell"
+          >
+             car 
+          </td>
+          <td
+            class="mat-cell cdk-column-translate mat-column-translate"
+            mat-cell=""
+            role="gridcell"
+          >
+             машина 
+          </td>
+          <td
+            class="mat-cell cdk-column-synonyms mat-column-synonyms"
+            mat-cell=""
+            role="gridcell"
+          >
+             автомобиль 
+          </td>
+          <td
+            class="mat-cell cdk-column-date mat-column-date"
+            mat-cell=""
+            role="gridcell"
+          >
+             19.12.2000 в 11:15 
+          </td>
+          <td
+            class="mat-cell cdk-column-score mat-column-score"
+            mat-cell=""
+            role="gridcell"
+          >
+             0 
+          </td>
+          <td
+            class="mat-cell cdk-column-actions mat-column-actions"
+            mat-cell=""
+            role="gridcell"
+          >
+            <div
+              class="actions"
+            >
+              <button
+                class="action mat-focus-indicator mat-icon-button mat-button-base mat-primary _mat-animation-noopable"
+                color="primary"
+                mat-icon-button=""
+                mattooltip="Редактировать слово"
+                mattooltipposition="above"
+              >
+                <span
+                  class="mat-button-wrapper"
+                >
+                  <mat-icon
+                    aria-hidden="true"
+                    class="mat-icon notranslate mat-icon-no-color"
+                    role="img"
+                    svgicon="edit"
+                  />
+                </span>
+                <div
+                  class="mat-button-ripple mat-ripple mat-button-ripple-round"
+                  matripple=""
+                />
+                <div
+                  class="mat-button-focus-overlay"
+                />
+              </button>
+              <button
+                class="action mat-focus-indicator mat-icon-button mat-button-base mat-warn _mat-animation-noopable"
+                color="warn"
+                mat-icon-button=""
+                mattooltip="Удалить слово"
+                mattooltipposition="above"
+              >
+                <span
+                  class="mat-button-wrapper"
+                >
+                  <mat-icon
+                    aria-hidden="true"
+                    class="action mat-icon notranslate mat-icon-no-color"
+                    role="img"
+                    svgicon="delete"
+                  />
+                </span>
+                <div
+                  class="mat-button-ripple mat-ripple mat-button-ripple-round"
+                  matripple=""
+                />
+                <div
+                  class="mat-button-focus-overlay"
+                />
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot
+        class="mat-table-sticky"
+        role="rowgroup"
+        style="display: none; bottom: 0px; position: sticky; z-index: 10;"
+      >
+        
+      </tfoot>
+    </table>
+    <mat-paginator
+      class="mat-paginator"
+    >
+      <div
+        class="mat-paginator-outer-container"
+      >
+        <div
+          class="mat-paginator-container"
+        >
+          
+          <div
+            class="mat-paginator-page-size"
+          >
+            <div
+              class="mat-paginator-page-size-label"
+            >
+               Items per page: 
+            </div>
+            
+            <mat-form-field
+              class="mat-paginator-page-size-select mat-form-field mat-primary mat-form-field-type-mat-select mat-form-field-appearance-legacy mat-form-field-can-float mat-form-field-hide-placeholder _mat-animation-noopable"
+            >
+              <div
+                class="mat-form-field-wrapper"
+              >
+                <div
+                  class="mat-form-field-flex"
+                >
+                  
+                  
+                  <div
+                    class="mat-form-field-infix"
+                  >
+                    <mat-select
+                      aria-disabled="false"
+                      aria-invalid="false"
+                      aria-label="Items per page:"
+                      aria-multiselectable="false"
+                      aria-required="false"
+                      class="mat-select mat-select-empty"
+                      role="listbox"
+                      tabindex="0"
+                    >
+                      <div
+                        aria-hidden="true"
+                        cdk-overlay-origin=""
+                        class="mat-select-trigger"
+                      >
+                        <div
+                          class="mat-select-value"
+                        >
+                          
+                          <span
+                            class="mat-select-placeholder"
+                          >
+                             
+                          </span>
+                          
+                        </div>
+                        <div
+                          class="mat-select-arrow-wrapper"
+                        >
+                          <div
+                            class="mat-select-arrow"
+                          />
+                        </div>
+                      </div>
+                      
+                    </mat-select>
+                    <span
+                      class="mat-form-field-label-wrapper"
+                    >
+                      
+                    </span>
+                  </div>
+                  
+                </div>
+                
+                <div
+                  class="mat-form-field-underline"
+                >
+                  <span
+                    class="mat-form-field-ripple"
+                  />
+                </div>
+                <div
+                  class="mat-form-field-subscript-wrapper"
+                >
+                  
+                  
+                  <div
+                    class="mat-form-field-hint-wrapper ng-trigger ng-trigger-transitionMessages"
+                    style="opacity:1;transform:translateY(0%);0:opacity;1:transform;"
+                  >
+                    
+                    <div
+                      class="mat-form-field-hint-spacer"
+                    />
+                  </div>
+                </div>
+              </div>
+            </mat-form-field>
+            
+          </div>
+          <div
+            class="mat-paginator-range-actions"
+          >
+            <div
+              class="mat-paginator-range-label"
+            >
+               0 of 0 
+            </div>
+            
+            <button
+              aria-label="Previous page"
+              class="mat-paginator-navigation-previous mat-focus-indicator mat-icon-button mat-button-base _mat-animation-noopable"
+              disabled="true"
+              mat-icon-button=""
+              type="button"
+            >
+              <span
+                class="mat-button-wrapper"
+              >
+                <svg
+                  class="mat-paginator-icon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
+                  />
+                </svg>
+              </span>
+              <div
+                class="mat-button-ripple mat-ripple mat-button-ripple-round"
+                matripple=""
+              />
+              <div
+                class="mat-button-focus-overlay"
+              />
+            </button>
+            <button
+              aria-label="Next page"
+              class="mat-paginator-navigation-next mat-focus-indicator mat-icon-button mat-button-base _mat-animation-noopable"
+              disabled="true"
+              mat-icon-button=""
+              type="button"
+            >
+              <span
+                class="mat-button-wrapper"
+              >
+                <svg
+                  class="mat-paginator-icon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+                  />
+                </svg>
+              </span>
+              <div
+                class="mat-button-ripple mat-ripple mat-button-ripple-round"
+                matripple=""
+              />
+              <div
+                class="mat-button-focus-overlay"
+              />
+            </button>
+            
+          </div>
+        </div>
+      </div>
+    </mat-paginator>
+  </div>
+</div>
+`;
+
+exports[`WordsListComponent - компонент списка слов на изучение Если пользователь вводит в поиск поисковую фразу, результат фильтруется по этой фразе 1`] = `
+<div
+  id="root0"
+>
+  <div
+    class="filter"
+  >
+    <mat-form-field
+      class="mat-form-field mat-primary mat-form-field-type-mat-input mat-form-field-appearance-legacy mat-form-field-can-float mat-form-field-has-label _mat-animation-noopable mat-form-field-should-float"
+    >
+      <div
+        class="mat-form-field-wrapper"
+      >
+        <div
+          class="mat-form-field-flex"
+        >
+          
+          
+          <div
+            class="mat-form-field-infix"
+          >
+            <input
+              aria-invalid="false"
+              aria-required="false"
+              automation-id="filter-input"
+              class="mat-input-element mat-form-field-autofill-control cdk-text-field-autofill-monitored"
+              matinput=""
+              placeholder="Введите слово для поиска"
+            />
+            <span
+              class="mat-form-field-label-wrapper"
+            >
+              
+              <label
+                class="mat-form-field-label"
+              >
+                
+                
+                <mat-label>
+                  Поиск
+                </mat-label>
+                
+                
+              </label>
+            </span>
+          </div>
+          
+        </div>
+        
+        <div
+          class="mat-form-field-underline"
+        >
+          <span
+            class="mat-form-field-ripple"
+          />
+        </div>
+        <div
+          class="mat-form-field-subscript-wrapper"
+        >
+          
+          
+          <div
+            class="mat-form-field-hint-wrapper ng-trigger ng-trigger-transitionMessages"
+            style="opacity:1;transform:translateY(0%);0:opacity;1:transform;"
+          >
+            
+            <div
+              class="mat-form-field-hint-spacer"
+            />
+          </div>
+        </div>
+      </div>
+    </mat-form-field>
+  </div>
+  <div
+    class="table-wrapper"
+  >
+    <table
+      class="mat-table mat-sort"
+      mat-table=""
+      matsort=""
+      role="grid"
+    >
+      <thead
+        role="rowgroup"
+      >
+        
+        <tr
+          class="mat-header-row"
+          mat-header-row=""
+          role="row"
+        >
+          
+          <th
+            class="mat-header-cell mat-sort-header cdk-column-word mat-column-word"
+            mat-header-cell=""
+            mat-sort-header=""
+            role="columnheader"
+          >
+            <div
+              class="mat-sort-header-container"
+            >
+              <button
+                aria-label="Change sorting for word"
+                class="mat-sort-header-button mat-focus-indicator"
+                type="button"
+              >
+                Слово
+              </button>
+              
+              <div
+                class="mat-sort-header-arrow ng-trigger ng-trigger-arrowPosition"
+                style="transform:translateY(25%);opacity:0;0:transform;1:opacity;"
+              >
+                <div
+                  class="mat-sort-header-stem"
+                />
+                <div
+                  class="mat-sort-header-indicator ng-trigger ng-trigger-indicator"
+                  style="transform:translateY(0px);0:transform;"
+                >
+                  <div
+                    class="mat-sort-header-pointer-left ng-trigger ng-trigger-leftPointer"
+                    style="transform:rotate(-45deg);0:transform;"
+                  />
+                  <div
+                    class="mat-sort-header-pointer-right ng-trigger ng-trigger-rightPointer"
+                    style="transform:rotate(45deg);0:transform;"
+                  />
+                  <div
+                    class="mat-sort-header-pointer-middle"
+                  />
+                </div>
+              </div>
+            </div>
+          </th>
+          <th
+            class="mat-header-cell mat-sort-header cdk-column-translate mat-column-translate"
+            mat-header-cell=""
+            mat-sort-header=""
+            role="columnheader"
+          >
+            <div
+              class="mat-sort-header-container"
+            >
+              <button
+                aria-label="Change sorting for translate"
+                class="mat-sort-header-button mat-focus-indicator"
+                type="button"
+              >
+                Перевод
+              </button>
+              
+              <div
+                class="mat-sort-header-arrow ng-trigger ng-trigger-arrowPosition"
+                style="transform:translateY(25%);opacity:0;0:transform;1:opacity;"
+              >
+                <div
+                  class="mat-sort-header-stem"
+                />
+                <div
+                  class="mat-sort-header-indicator ng-trigger ng-trigger-indicator"
+                  style="transform:translateY(0px);0:transform;"
+                >
+                  <div
+                    class="mat-sort-header-pointer-left ng-trigger ng-trigger-leftPointer"
+                    style="transform:rotate(-45deg);0:transform;"
+                  />
+                  <div
+                    class="mat-sort-header-pointer-right ng-trigger ng-trigger-rightPointer"
+                    style="transform:rotate(45deg);0:transform;"
+                  />
+                  <div
+                    class="mat-sort-header-pointer-middle"
+                  />
+                </div>
+              </div>
+            </div>
+          </th>
+          <th
+            class="mat-header-cell mat-sort-header cdk-column-synonyms mat-column-synonyms"
+            mat-header-cell=""
+            mat-sort-header=""
+            role="columnheader"
+          >
+            <div
+              class="mat-sort-header-container"
+            >
+              <button
+                aria-label="Change sorting for synonyms"
+                class="mat-sort-header-button mat-focus-indicator"
+                type="button"
+              >
+                Синонимы
+              </button>
+              
+              <div
+                class="mat-sort-header-arrow ng-trigger ng-trigger-arrowPosition"
+                style="transform:translateY(25%);opacity:0;0:transform;1:opacity;"
+              >
+                <div
+                  class="mat-sort-header-stem"
+                />
+                <div
+                  class="mat-sort-header-indicator ng-trigger ng-trigger-indicator"
+                  style="transform:translateY(0px);0:transform;"
+                >
+                  <div
+                    class="mat-sort-header-pointer-left ng-trigger ng-trigger-leftPointer"
+                    style="transform:rotate(-45deg);0:transform;"
+                  />
+                  <div
+                    class="mat-sort-header-pointer-right ng-trigger ng-trigger-rightPointer"
+                    style="transform:rotate(45deg);0:transform;"
+                  />
+                  <div
+                    class="mat-sort-header-pointer-middle"
+                  />
+                </div>
+              </div>
+            </div>
+          </th>
+          <th
+            class="mat-header-cell mat-sort-header cdk-column-date mat-column-date"
+            mat-header-cell=""
+            mat-sort-header=""
+            role="columnheader"
+          >
+            <div
+              class="mat-sort-header-container"
+            >
+              <button
+                aria-label="Change sorting for date"
+                class="mat-sort-header-button mat-focus-indicator"
+                type="button"
+              >
+                Дата добавления
+              </button>
+              
+              <div
+                class="mat-sort-header-arrow ng-trigger ng-trigger-arrowPosition"
+                style="transform:translateY(25%);opacity:0;0:transform;1:opacity;"
+              >
+                <div
+                  class="mat-sort-header-stem"
+                />
+                <div
+                  class="mat-sort-header-indicator ng-trigger ng-trigger-indicator"
+                  style="transform:translateY(0px);0:transform;"
+                >
+                  <div
+                    class="mat-sort-header-pointer-left ng-trigger ng-trigger-leftPointer"
+                    style="transform:rotate(-45deg);0:transform;"
+                  />
+                  <div
+                    class="mat-sort-header-pointer-right ng-trigger ng-trigger-rightPointer"
+                    style="transform:rotate(45deg);0:transform;"
+                  />
+                  <div
+                    class="mat-sort-header-pointer-middle"
+                  />
+                </div>
+              </div>
+            </div>
+          </th>
+          <th
+            class="mat-header-cell mat-sort-header cdk-column-score mat-column-score"
+            mat-header-cell=""
+            mat-sort-header=""
+            role="columnheader"
+          >
+            <div
+              class="mat-sort-header-container"
+            >
+              <button
+                aria-label="Change sorting for score"
+                class="mat-sort-header-button mat-focus-indicator"
+                type="button"
+              >
+                 Накопленный результат 
+              </button>
+              
+              <div
+                class="mat-sort-header-arrow ng-trigger ng-trigger-arrowPosition"
+                style="transform:translateY(25%);opacity:0;0:transform;1:opacity;"
+              >
+                <div
+                  class="mat-sort-header-stem"
+                />
+                <div
+                  class="mat-sort-header-indicator ng-trigger ng-trigger-indicator"
+                  style="transform:translateY(0px);0:transform;"
+                >
+                  <div
+                    class="mat-sort-header-pointer-left ng-trigger ng-trigger-leftPointer"
+                    style="transform:rotate(-45deg);0:transform;"
+                  />
+                  <div
+                    class="mat-sort-header-pointer-right ng-trigger ng-trigger-rightPointer"
+                    style="transform:rotate(45deg);0:transform;"
+                  />
+                  <div
+                    class="mat-sort-header-pointer-middle"
+                  />
+                </div>
+              </div>
+            </div>
+          </th>
+          <th
+            class="mat-header-cell mat-sort-header cdk-column-actions mat-column-actions"
+            mat-header-cell=""
+            mat-sort-header=""
+            role="columnheader"
+          >
+            <div
+              class="mat-sort-header-container"
+            >
+              <button
+                aria-label="Change sorting for actions"
+                class="mat-sort-header-button mat-focus-indicator"
+                type="button"
+              >
+                Действия
+              </button>
+              
+              <div
+                class="mat-sort-header-arrow ng-trigger ng-trigger-arrowPosition"
+                style="transform:translateY(25%);opacity:0;0:transform;1:opacity;"
+              >
+                <div
+                  class="mat-sort-header-stem"
+                />
+                <div
+                  class="mat-sort-header-indicator ng-trigger ng-trigger-indicator"
+                  style="transform:translateY(0px);0:transform;"
+                >
+                  <div
+                    class="mat-sort-header-pointer-left ng-trigger ng-trigger-leftPointer"
+                    style="transform:rotate(-45deg);0:transform;"
+                  />
+                  <div
+                    class="mat-sort-header-pointer-right ng-trigger ng-trigger-rightPointer"
+                    style="transform:rotate(45deg);0:transform;"
+                  />
+                  <div
+                    class="mat-sort-header-pointer-middle"
+                  />
+                </div>
+              </div>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        role="rowgroup"
+      >
+        
+        <tr
+          class="mat-row"
+          mat-row=""
+          role="row"
+        >
+          
+          <td
+            class="mat-cell cdk-column-word mat-column-word"
+            mat-cell=""
+            role="gridcell"
+          >
+             car 
+          </td>
+          <td
+            class="mat-cell cdk-column-translate mat-column-translate"
+            mat-cell=""
+            role="gridcell"
+          >
+             машина 
+          </td>
+          <td
+            class="mat-cell cdk-column-synonyms mat-column-synonyms"
+            mat-cell=""
+            role="gridcell"
+          >
+             автомобиль 
+          </td>
+          <td
+            class="mat-cell cdk-column-date mat-column-date"
+            mat-cell=""
+            role="gridcell"
+          >
+             19.12.2000 в 11:15 
+          </td>
+          <td
+            class="mat-cell cdk-column-score mat-column-score"
+            mat-cell=""
+            role="gridcell"
+          >
+             0 
+          </td>
+          <td
+            class="mat-cell cdk-column-actions mat-column-actions"
+            mat-cell=""
+            role="gridcell"
+          >
+            <div
+              class="actions"
+            >
+              <button
+                aria-describedby="cdk-describedby-message-0"
+                cdk-describedby-host=""
+                class="action mat-focus-indicator mat-icon-button mat-button-base mat-primary _mat-animation-noopable"
+                color="primary"
+                mat-icon-button=""
+                mattooltip="Редактировать слово"
+                mattooltipposition="above"
+              >
+                <span
+                  class="mat-button-wrapper"
+                >
+                  <mat-icon
+                    aria-hidden="true"
+                    class="mat-icon notranslate mat-icon-no-color"
+                    role="img"
+                    svgicon="edit"
+                  />
+                </span>
+                <div
+                  class="mat-button-ripple mat-ripple mat-button-ripple-round"
+                  matripple=""
+                />
+                <div
+                  class="mat-button-focus-overlay"
+                />
+              </button>
+              <button
+                aria-describedby="cdk-describedby-message-1"
+                cdk-describedby-host=""
+                class="action mat-focus-indicator mat-icon-button mat-button-base mat-warn _mat-animation-noopable"
+                color="warn"
+                mat-icon-button=""
+                mattooltip="Удалить слово"
+                mattooltipposition="above"
+              >
+                <span
+                  class="mat-button-wrapper"
+                >
+                  <mat-icon
+                    aria-hidden="true"
+                    class="action mat-icon notranslate mat-icon-no-color"
+                    role="img"
+                    svgicon="delete"
+                  />
+                </span>
+                <div
+                  class="mat-button-ripple mat-ripple mat-button-ripple-round"
+                  matripple=""
+                />
+                <div
+                  class="mat-button-focus-overlay"
+                />
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot
+        class="mat-table-sticky"
+        role="rowgroup"
+        style="display: none; bottom: 0px; position: sticky; z-index: 10;"
+      >
+        
+      </tfoot>
+    </table>
+    <mat-paginator
+      class="mat-paginator"
+    >
+      <div
+        class="mat-paginator-outer-container"
+      >
+        <div
+          class="mat-paginator-container"
+        >
+          
+          <div
+            class="mat-paginator-page-size"
+          >
+            <div
+              class="mat-paginator-page-size-label"
+            >
+               Items per page: 
+            </div>
+            
+            <mat-form-field
+              class="mat-paginator-page-size-select mat-form-field mat-primary mat-form-field-type-mat-select mat-form-field-appearance-legacy mat-form-field-can-float mat-form-field-hide-placeholder _mat-animation-noopable mat-form-field-should-float"
+            >
+              <div
+                class="mat-form-field-wrapper"
+              >
+                <div
+                  class="mat-form-field-flex"
+                >
+                  
+                  
+                  <div
+                    class="mat-form-field-infix"
+                  >
+                    <mat-select
+                      aria-disabled="false"
+                      aria-invalid="false"
+                      aria-label="Items per page:"
+                      aria-multiselectable="false"
+                      aria-required="false"
+                      class="mat-select"
+                      role="listbox"
+                      tabindex="0"
+                    >
+                      <div
+                        aria-hidden="true"
+                        cdk-overlay-origin=""
+                        class="mat-select-trigger"
+                      >
+                        <div
+                          class="mat-select-value"
+                        >
+                          
+                          
+                          <span
+                            class="mat-select-value-text"
+                          >
+                            
+                            <span>
+                              10
+                            </span>
+                            
+                          </span>
+                        </div>
+                        <div
+                          class="mat-select-arrow-wrapper"
+                        >
+                          <div
+                            class="mat-select-arrow"
+                          />
+                        </div>
+                      </div>
+                      
+                    </mat-select>
+                    <span
+                      class="mat-form-field-label-wrapper"
+                    >
+                      
+                    </span>
+                  </div>
+                  
+                </div>
+                
+                <div
+                  class="mat-form-field-underline"
+                >
+                  <span
+                    class="mat-form-field-ripple"
+                  />
+                </div>
+                <div
+                  class="mat-form-field-subscript-wrapper"
+                >
+                  
+                  
+                  <div
+                    class="mat-form-field-hint-wrapper ng-trigger ng-trigger-transitionMessages"
+                    style="opacity:1;transform:translateY(0%);0:opacity;1:transform;"
+                  >
+                    
+                    <div
+                      class="mat-form-field-hint-spacer"
+                    />
+                  </div>
+                </div>
+              </div>
+            </mat-form-field>
+            
+          </div>
+          <div
+            class="mat-paginator-range-actions"
+          >
+            <div
+              class="mat-paginator-range-label"
+            >
+               0 of 0 
+            </div>
+            
+            <button
+              aria-label="Previous page"
+              class="mat-paginator-navigation-previous mat-focus-indicator mat-icon-button mat-button-base _mat-animation-noopable"
+              disabled="true"
+              mat-icon-button=""
+              type="button"
+            >
+              <span
+                class="mat-button-wrapper"
+              >
+                <svg
+                  class="mat-paginator-icon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
+                  />
+                </svg>
+              </span>
+              <div
+                class="mat-button-ripple mat-ripple mat-button-ripple-round"
+                matripple=""
+              />
+              <div
+                class="mat-button-focus-overlay"
+              />
+            </button>
+            <button
+              aria-label="Next page"
+              class="mat-paginator-navigation-next mat-focus-indicator mat-icon-button mat-button-base _mat-animation-noopable"
+              disabled="true"
+              mat-icon-button=""
+              type="button"
+            >
+              <span
+                class="mat-button-wrapper"
+              >
+                <svg
+                  class="mat-paginator-icon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+                  />
+                </svg>
+              </span>
+              <div
+                class="mat-button-ripple mat-ripple mat-button-ripple-round"
+                matripple=""
+              />
+              <div
+                class="mat-button-focus-overlay"
+              />
+            </button>
+            
+          </div>
+        </div>
+      </div>
+    </mat-paginator>
+  </div>
+</div>
+`;

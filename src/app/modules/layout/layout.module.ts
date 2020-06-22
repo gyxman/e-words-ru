@@ -14,6 +14,7 @@ import {CatalogModule} from './components/catalog/catalog.module';
 import {LoaderModule} from '../utils/components/loader/loader.module';
 import {LayoutFacadeService} from './services/layout-facade.service';
 import {LayoutStoreModule} from './store/layout-store.module';
+import {WordsListModule} from '../words/components/words-list/words-list.module';
 
 @NgModule({
     imports: [
@@ -29,6 +30,7 @@ import {LayoutStoreModule} from './store/layout-store.module';
         CatalogModule,
         LoaderModule,
         LayoutStoreModule,
+        WordsListModule,
     ],
     declarations: [LayoutComponent],
     exports: [LayoutComponent],

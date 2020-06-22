@@ -5,6 +5,7 @@ import {LayoutRouteEnum} from './enums/layout-route.enum';
 import {AddWordComponent} from '../words/components/add-word/add-word.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {CatalogComponent} from './components/catalog/catalog.component';
+import {WordsListComponent} from '../words/components/words-list/words-list.component';
 
 const routes: Routes = [
     {
@@ -22,6 +23,10 @@ const routes: Routes = [
             {
                 path: LayoutRouteEnum.AddWord,
                 component: AddWordComponent,
+            },
+            {
+                path: LayoutRouteEnum.Words,
+                component: WordsListComponent,
             },
             {
                 path: LayoutRouteEnum.Start,
