@@ -3,11 +3,24 @@ import {WordsState} from './words.state';
 import {wordsActions} from './words.actions';
 
 const initialState: WordsState = {
+    words: [],
+    wordsLoaded: false,
     isLoading: false,
 };
 
 const reducer = createReducer(
     initialState,
+
+    on(wordsActions.getWordsSuccess, (state, {data: words}) => ({
+        ...state,
+        words,
+        wordsLoaded: true,
+    })),
+
+    on(wordsActions.getWordsError, state => ({
+        ...state,
+        wordsLoaded: false,
+    })),
 
     on(wordsActions.addWordStart, state => ({
         ...state,

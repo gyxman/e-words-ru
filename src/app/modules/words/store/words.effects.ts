@@ -13,6 +13,15 @@ import {appActions} from '../../../store/app.actions';
 
 @Injectable()
 export class WordsEffects {
+    getWordsStart$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(wordsActions.getWordsStart),
+            withLatestFrom(this.authFacadeService.userId),
+            switchMap(([_, userId]) => this.apiService.getWords(userId)),
+            map(words => wordsActions.getWordsSuccess({data: words})),
+        ),
+    );
+
     addWordStart$ = createEffect(() =>
         this.actions$.pipe(
             ofType(wordsActions.addWordStart),

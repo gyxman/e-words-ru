@@ -15,9 +15,9 @@ import {Word} from '../../words/models/word';
 import {fromExercises} from './exercises.selectors';
 import {of, timer} from 'rxjs';
 import {ExerciseTypeEnum} from '../enums/exercise-type.enum';
-import {fromLayout} from '../../layout/store/layout.selectors';
 import {appActions} from '../../../store/app.actions';
-import {LayoutState} from '../../layout/store/layout.state';
+import {WordsState} from '../../words/store/words.state';
+import {fromWords} from '../../words/store/words.selectors';
 
 type CheckWordResult = Readonly<{
     result: boolean;
@@ -34,10 +34,10 @@ export class ExercisesEffects implements OnInitEffects {
         this.actions$.pipe(
             ofType(exercisesActions.generateWord),
             switchMap(() =>
-                this.store$.select(fromLayout.isWordsLoaded).pipe(
+                this.store$.select(fromWords.isWordsLoaded).pipe(
                     filter(isWordsLoaded => isWordsLoaded),
                     withLatestFrom(
-                        this.store$.select(fromLayout.words),
+                        this.store$.select(fromWords.words),
                         this.store$.select(fromExercises.currentWord),
                     ),
                     takeUntil(timer(5000)),
@@ -100,7 +100,7 @@ export class ExercisesEffects implements OnInitEffects {
 
     constructor(
         private readonly actions$: Actions,
-        private readonly store$: Store<ExercisesState & LayoutState>,
+        private readonly store$: Store<ExercisesState & WordsState>,
     ) {}
 
     private getRandomInt(min, max) {

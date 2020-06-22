@@ -51,16 +51,16 @@ describe('WordsEffects - эффекты по работе со словами н
                     useFactory: () => instance(apiServiceMock),
                 },
                 {
+                    provide: AuthFacadeService,
+                    useFactory: () => instance(authFacadeServiceMock),
+                },
+                {
                     provide: WordsFacadeService,
                     useFactory: () => instance(wordsFacadeServiceMock),
                 },
                 {
                     provide: Router,
                     useFactory: () => instance(routerMock),
-                },
-                {
-                    provide: AuthFacadeService,
-                    useFactory: () => instance(authFacadeServiceMock),
                 },
                 {
                     provide: ManageWordFormService,
@@ -72,6 +72,35 @@ describe('WordsEffects - эффекты по работе со словами н
         testedEffects = TestBed.inject(WordsEffects);
         metadata = getEffectsMetadata(testedEffects);
         storeMock = TestBed.inject(MockStore);
+    });
+
+    describe('getWordsStart$ - эффект по загрузке слов из базы данных', () => {
+        it('Эффект по загрузке слов из базы данных диспатчит экшен, переподписывается при ошибке', () => {
+            // assert
+            expect(metadata.getWordsStart$).toEqual({
+                dispatch: true,
+                useEffectsErrorHandler: true,
+            });
+        });
+
+        it('Если эффекты проинициализировись, начинается загрузка слов из базы данных', () => {
+            // arrange
+            when(apiServiceMock.getWords('userId')).thenReturn(
+                of([{id: 'wordId'} as Word]),
+            );
+
+            // act
+            actionsMock$ = hot('x', {
+                x: wordsActions.getWordsStart(),
+            });
+
+            // assert
+            const expected$ = hot('x', {
+                x: wordsActions.getWordsSuccess({data: [{id: 'wordId'} as Word]}),
+            });
+
+            expect(testedEffects.getWordsStart$).toBeObservable(expected$);
+        });
     });
 
     describe('addWordStart$ - эффект начала добавления слова на изучение', () => {

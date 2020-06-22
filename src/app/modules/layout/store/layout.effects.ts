@@ -1,10 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType, OnInitEffects} from '@ngrx/effects';
-import {map, switchMap, withLatestFrom} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {Action} from '@ngrx/store';
-import {layoutActions} from './layout.actions';
-import {ApiService} from '../../../services/api.service';
-import {AuthFacadeService} from '../../auth/services/auth-facade.service';
+import {wordsActions} from '../../words/store/words.actions';
 
 const LAYOUT_EFFECTS_INIT = '[layout] Инициализация эффектов';
 
@@ -17,15 +15,9 @@ export class LayoutEffects implements OnInitEffects {
     getWordsStart$ = createEffect(() =>
         this.actions$.pipe(
             ofType(LAYOUT_EFFECTS_INIT),
-            withLatestFrom(this.authFacadeService.userId),
-            switchMap(([_, userId]) => this.apiService.getWords(userId)),
-            map(words => layoutActions.getWordsSuccess({data: words})),
+            map(() => wordsActions.getWordsStart()),
         ),
     );
 
-    constructor(
-        private readonly actions$: Actions,
-        private readonly apiService: ApiService,
-        private readonly authFacadeService: AuthFacadeService,
-    ) {}
+    constructor(private readonly actions$: Actions) {}
 }

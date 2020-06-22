@@ -2,8 +2,41 @@ import {WordsState} from './words.state';
 import {Word} from '../models/word';
 import {wordsActions} from './words.actions';
 import {wordsReducer} from './words.reducer';
+import {layoutReducer} from '../../layout/store/layout.reducer';
 
 describe('wordsReducer - редьюсер слов на изучении', () => {
+    it('Если приходит информация об успешной загрузке слов, то устанавливаем полученные слова', () => {
+        // arrange
+        const initialState = {
+            wordsLoaded: true,
+            words: [],
+        } as WordsState;
+
+        const data = [{id: 'wordId'} as Word];
+
+        // act & assert
+        expect(layoutReducer(undefined, wordsActions.getWordsSuccess({data}))).toEqual({
+            ...initialState,
+            words: data,
+        });
+    });
+
+    it('Если приходит информация об успешной загрузке слов, то устанавливаем флаг о том, что слова загружены', () => {
+        // arrange
+        const initialState = {
+            wordsLoaded: false,
+            words: [],
+        } as WordsState;
+
+        const data = [];
+
+        // act & assert
+        expect(layoutReducer(undefined, wordsActions.getWordsSuccess({data}))).toEqual({
+            ...initialState,
+            wordsLoaded: true,
+        });
+    });
+
     it('Если приходит информация о начале добавления нового слова, то ставим флаг о загрузке', () => {
         // arrange
         const initialState = {

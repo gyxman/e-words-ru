@@ -13,14 +13,14 @@ import {TestScheduler} from 'rxjs/testing';
 import {appActions} from '../../../store/app.actions';
 import {Word} from '../../words/models/word';
 import {ExerciseTypeEnum} from '../enums/exercise-type.enum';
-import {fromLayout} from '../../layout/store/layout.selectors';
-import {LayoutState} from '../../layout/store/layout.state';
+import {WordsState} from '../../words/store/words.state';
+import {fromWords} from '../../words/store/words.selectors';
 
 describe('ExercisesEffects - эффекты по работе с упражнениями', () => {
     let testedEffects: ExercisesEffects;
     let metadata: EffectsMetadata<ExercisesEffects>;
     let actionsMock$: Observable<Action>;
-    let storeMock: MockStore<ExercisesState & LayoutState>;
+    let storeMock: MockStore<ExercisesState & WordsState>;
     let testScheduler: TestScheduler;
 
     beforeEach(() => {
@@ -54,8 +54,8 @@ describe('ExercisesEffects - эффекты по работе с упражне�
 
         it('Если необходимо подобрать слово для изучения, но слова еще не загружены, то ничего не делаем', () => {
             // arrange
-            storeMock.overrideSelector(fromLayout.isWordsLoaded, false);
-            storeMock.overrideSelector(fromLayout.words, []);
+            storeMock.overrideSelector(fromWords.isWordsLoaded, false);
+            storeMock.overrideSelector(fromWords.words, []);
             storeMock.overrideSelector(fromExercises.currentWord, null);
 
             // act
@@ -71,8 +71,8 @@ describe('ExercisesEffects - эффекты по работе с упражне�
             показываем нотификацию, что не удалось загрузить слова`, () => {
             testScheduler.run(({expectObservable, hot}) => {
                 // arrange
-                storeMock.overrideSelector(fromLayout.isWordsLoaded, false);
-                storeMock.overrideSelector(fromLayout.words, []);
+                storeMock.overrideSelector(fromWords.isWordsLoaded, false);
+                storeMock.overrideSelector(fromWords.words, []);
                 storeMock.overrideSelector(fromExercises.currentWord, null);
 
                 // act
@@ -98,8 +98,8 @@ describe('ExercisesEffects - эффекты по работе с упражне�
         it(`Если необходимо подобрать слово для изучения, то получаем все необходимые данные,
             подбираем слово (отличное от текущего) и диспатчим экшен о подборе`, () => {
             // arrange
-            storeMock.overrideSelector(fromLayout.isWordsLoaded, true);
-            storeMock.overrideSelector(fromLayout.words, [
+            storeMock.overrideSelector(fromWords.isWordsLoaded, true);
+            storeMock.overrideSelector(fromWords.words, [
                 {id: 'wordId1'} as Word,
                 {id: 'wordId2'} as Word,
             ]);
