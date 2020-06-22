@@ -2,7 +2,6 @@ import {WordsState} from './words.state';
 import {Word} from '../models/word';
 import {wordsActions} from './words.actions';
 import {wordsReducer} from './words.reducer';
-import {layoutReducer} from '../../layout/store/layout.reducer';
 
 describe('wordsReducer - редьюсер слов на изучении', () => {
     it('Если приходит информация об успешной загрузке слов, то устанавливаем полученные слова', () => {
@@ -15,7 +14,7 @@ describe('wordsReducer - редьюсер слов на изучении', () =>
         const data = [{id: 'wordId'} as Word];
 
         // act & assert
-        expect(layoutReducer(undefined, wordsActions.getWordsSuccess({data}))).toEqual({
+        expect(wordsReducer(undefined, wordsActions.getWordsSuccess({data}))).toEqual({
             ...initialState,
             words: data,
         });
@@ -31,7 +30,7 @@ describe('wordsReducer - редьюсер слов на изучении', () =>
         const data = [];
 
         // act & assert
-        expect(layoutReducer(undefined, wordsActions.getWordsSuccess({data}))).toEqual({
+        expect(wordsReducer(undefined, wordsActions.getWordsSuccess({data}))).toEqual({
             ...initialState,
             wordsLoaded: true,
         });
