@@ -750,7 +750,7 @@ exports[`WordsListComponent - компонент списка слов на из
 
 exports[`WordsListComponent - компонент списка слов на изучение Если пользователь вводит в поиск поисковую фразу, результат фильтруется по этой фразе 1`] = `
 <div
-  id="root0"
+  id="root1"
 >
   <div
     class="filter"
@@ -1155,7 +1155,7 @@ exports[`WordsListComponent - компонент списка слов на из
               class="actions"
             >
               <button
-                aria-describedby="cdk-describedby-message-0"
+                aria-describedby="cdk-describedby-message-2"
                 cdk-describedby-host=""
                 class="action mat-focus-indicator mat-icon-button mat-button-base mat-primary _mat-animation-noopable"
                 color="primary"
@@ -1182,7 +1182,7 @@ exports[`WordsListComponent - компонент списка слов на из
                 />
               </button>
               <button
-                aria-describedby="cdk-describedby-message-1"
+                aria-describedby="cdk-describedby-message-3"
                 cdk-describedby-host=""
                 class="action mat-focus-indicator mat-icon-button mat-button-base mat-warn _mat-animation-noopable"
                 color="warn"
