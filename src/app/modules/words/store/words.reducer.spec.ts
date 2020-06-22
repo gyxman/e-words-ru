@@ -9,6 +9,7 @@ describe('wordsReducer - редьюсер слов на изучении', () =>
         const initialState = {
             wordsLoaded: true,
             words: [],
+            isLoading: false,
         } as WordsState;
 
         const data = [{id: 'wordId'} as Word];
@@ -25,6 +26,7 @@ describe('wordsReducer - редьюсер слов на изучении', () =>
         const initialState = {
             wordsLoaded: false,
             words: [],
+            isLoading: false,
         } as WordsState;
 
         const data = [];
@@ -39,6 +41,8 @@ describe('wordsReducer - редьюсер слов на изучении', () =>
     it('Если приходит информация о начале добавления нового слова, то ставим флаг о загрузке', () => {
         // arrange
         const initialState = {
+            wordsLoaded: false,
+            words: [],
             isLoading: false,
         } as WordsState;
 
@@ -56,6 +60,8 @@ describe('wordsReducer - редьюсер слов на изучении', () =>
     it('Если приходит информация об успехе добавления нового слова на изучение, то снимаем флаг о загрузке', () => {
         // arrange
         const initialState = {
+            wordsLoaded: false,
+            words: [],
             isLoading: true,
         } as WordsState;
 
@@ -69,6 +75,8 @@ describe('wordsReducer - редьюсер слов на изучении', () =>
     it('Если приходит информация об ошибке при добавлении нового слова на изучение, то снимаем флаг о загрузке', () => {
         // arrange
         const initialState = {
+            wordsLoaded: false,
+            words: [],
             isLoading: true,
         } as WordsState;
 
