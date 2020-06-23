@@ -51,18 +51,28 @@ describe('WordsFacadeService - сервис по работе со словам�
     describe('addWord - метод по добавлению нового слова на изучение', () => {
         it('Если вызывается метод addWord, то диспатчим экшен о начале добавления нового слова и передаем необходимые данные', () => {
             // arrange
+            const MockDate = require('mockdate');
+            MockDate.set(1592900191950);
             jest.spyOn(storeMock, 'dispatch');
 
             const data = {
-                id: 'wordId',
-            } as Word;
+                russianWord: 'привет',
+                englishWord: 'hello',
+                synonyms: ['здравствуй'],
+            } as Pick<Word, 'russianWord' & 'englishWord' & 'synonyms'>;
 
             // act
             testedService.addWord(data);
 
             // assert
+            const expectedData = {
+                ...data,
+                date: new Date(1592900191950),
+                countOfSuccess: 0,
+            } as Omit<Word, 'id'>;
+
             expect(storeMock.dispatch).toHaveBeenCalledWith(
-                wordsActions.addWordStart({data}),
+                wordsActions.addWordStart({data: expectedData}),
             );
         });
     });
