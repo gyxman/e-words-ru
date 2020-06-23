@@ -5,7 +5,7 @@ import {TestBed} from '@angular/core/testing';
 import {provideMockActions} from '@ngrx/effects/testing';
 import {EffectsMetadata, getEffectsMetadata} from '@ngrx/effects';
 import {ApiService} from '../../../services/api.service';
-import {deepEqual, instance, mock, when} from 'ts-mockito';
+import {deepEqual, instance, mock, verify, when} from 'ts-mockito';
 import {Router} from '@angular/router';
 import {WordsEffects} from './words.effects';
 import {WordsState} from './words.state';
@@ -112,7 +112,8 @@ describe('WordsEffects - эффекты по работе со словами н
             });
         });
 
-        it('Если вызывается метод добавления слова и слово успешно добавляется в базу данных, диспатчим экшен об успехе и показе нотификации', () => {
+        it(`Если вызывается метод добавления слова и слово успешно добавляется в базу данных,
+            диспатчим экшен об успехе и показе нотификации`, () => {
             // arrange
             when(
                 apiServiceMock.addWord(
@@ -142,7 +143,8 @@ describe('WordsEffects - эффекты по работе со словами н
             expect(testedEffects.addWordStart$).toBeObservable(expected$);
         });
 
-        it('Если вызывается метод добавления слова, но слово не добавляется в базу данных, диспатчим экшен об ошибке и показе нотификации', () => {
+        it(`Если вызывается метод добавления слова, но слово не добавляется в базу данных,
+            диспатчим экшен об ошибке и показе нотификации`, () => {
             // arrange
             when(
                 apiServiceMock.addWord(
@@ -170,6 +172,27 @@ describe('WordsEffects - эффекты по работе со словами н
             });
 
             expect(testedEffects.addWordStart$).toBeObservable(expected$);
+        });
+    });
+
+    describe('addWordSuccess$ - эффект успешного добавления слова на изучение', () => {
+        it('Эффект успешного добавления слова на изучение не диспатчит экшен, переподписывается при ошибке', () => {
+            // assert
+            expect(metadata.addWordSuccess$).toEqual({
+                dispatch: false,
+                useEffectsErrorHandler: true,
+            });
+        });
+
+        it('Если вызывается метод успешного добавления слова, очищаем форму добавления слова', () => {
+            // arrange
+            actionsMock$ = of(wordsActions.addWordSuccess());
+
+            // act
+            testedEffects.addWordSuccess$.subscribe();
+
+            // assert
+            verify(manageWordFormServiceMock.clearForm()).once();
         });
     });
 });

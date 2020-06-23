@@ -24,12 +24,10 @@ type CheckWordResult = Readonly<{
     answer: string;
 }>;
 
+const EXERCISES_EFFECTS_INIT = '[exercises] Инициализация эффектов';
+
 @Injectable()
 export class ExercisesEffects implements OnInitEffects {
-    ngrxOnInitEffects(): Action {
-        return {type: '[exercises] Подобрать следующее слово'};
-    }
-
     generateWord$ = createEffect(() =>
         this.actions$.pipe(
             ofType(exercisesActions.generateWord),
@@ -102,6 +100,10 @@ export class ExercisesEffects implements OnInitEffects {
         private readonly actions$: Actions,
         private readonly store$: Store<ExercisesState & WordsState>,
     ) {}
+
+    ngrxOnInitEffects(): Action {
+        return {type: EXERCISES_EFFECTS_INIT};
+    }
 
     private getRandomInt(min, max) {
         min = Math.ceil(min);

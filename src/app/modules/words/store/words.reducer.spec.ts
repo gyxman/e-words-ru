@@ -38,6 +38,21 @@ describe('wordsReducer - редьюсер слов на изучении', () =>
         });
     });
 
+    it('Если приходит информация об ошибке при загрузке слов, то устанавливаем флаг о том, что слова не загрузились', () => {
+        // arrange
+        const initialState = {
+            wordsLoaded: true,
+            words: [],
+            isLoading: false,
+        } as WordsState;
+
+        // act & assert
+        expect(wordsReducer(undefined, wordsActions.getWordsError())).toEqual({
+            ...initialState,
+            wordsLoaded: false,
+        });
+    });
+
     it('Если приходит информация о начале добавления нового слова, то ставим флаг о загрузке', () => {
         // arrange
         const initialState = {

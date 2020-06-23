@@ -189,4 +189,13 @@ describe('ExercisesEffects - эффекты по работе с упражне�
             expect(testedEffects.checkAnswer$).toBeObservable(expected$);
         });
     });
+
+    describe('ngrxOnInitEffects - инициализация эффектов', () => {
+        it('Если эффекты проинициализировались, возвращаем экшен об инициализации эффектов', () => {
+            // assert
+            expect(testedEffects.ngrxOnInitEffects()).toEqual({
+                type: '[exercises] Инициализация эффектов',
+            });
+        });
+    });
 });

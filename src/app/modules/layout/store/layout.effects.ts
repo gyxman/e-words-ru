@@ -8,10 +8,6 @@ const LAYOUT_EFFECTS_INIT = '[layout] Инициализация эффекто�
 
 @Injectable()
 export class LayoutEffects implements OnInitEffects {
-    ngrxOnInitEffects(): Action {
-        return {type: LAYOUT_EFFECTS_INIT};
-    }
-
     getWordsStart$ = createEffect(() =>
         this.actions$.pipe(
             ofType(LAYOUT_EFFECTS_INIT),
@@ -20,4 +16,8 @@ export class LayoutEffects implements OnInitEffects {
     );
 
     constructor(private readonly actions$: Actions) {}
+
+    ngrxOnInitEffects(): Action {
+        return {type: LAYOUT_EFFECTS_INIT};
+    }
 }

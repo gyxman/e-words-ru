@@ -44,4 +44,13 @@ describe('LayoutEffects - эффекты по работе с авторизов
             expect(testedEffects.getWordsStart$).toBeObservable(expected$);
         });
     });
+
+    describe('ngrxOnInitEffects - инициализация эффектов', () => {
+        it('Если эффекты проинициализировались, возвращаем экшен об инициализации эффектов', () => {
+            // assert
+            expect(testedEffects.ngrxOnInitEffects()).toEqual({
+                type: '[layout] Инициализация эффектов',
+            });
+        });
+    });
 });
