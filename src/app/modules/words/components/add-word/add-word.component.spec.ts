@@ -9,7 +9,7 @@ import {FormControlErrorModule} from '../../../auth/components/form-control-erro
 import {MatIconModule} from '@angular/material/icon';
 import {ManageWordFormService} from '../../services/manage-word-form.service';
 import {WordsFacadeService} from '../../services/words-facade.service';
-import {instance, mock, when} from 'ts-mockito';
+import {deepEqual, instance, mock, verify, when} from 'ts-mockito';
 import {BehaviorSubject} from 'rxjs';
 import {LoaderComponent} from '../../../utils/components/loader/loader.component';
 
@@ -187,5 +187,31 @@ describe('AddWordComponent - форма добавления нового сло
 
         // assert
         expect(pageObject.submitButton.attributes['ng-reflect-disabled']).toBe('false');
+    });
+
+    it(`Если пользователь открывает форму добавления слова, заполняет английское слово,
+        заполняет русское слово, затем нажимает на кнопку "Добавить слово", отправляем запрос на добавление слова в базу`, () => {
+        // arrange
+        fixture.detectChanges();
+
+        pageObject.englishWord.value = 'englishWord';
+        pageObject.englishWord.dispatchEvent(new Event('input'));
+
+        pageObject.russianWord.value = 'englishWord';
+        pageObject.russianWord.dispatchEvent(new Event('input'));
+
+        // act
+        fixture.detectChanges();
+
+        pageObject.form.triggerEventHandler('ngSubmit', null);
+
+        // assert
+        const formData = {
+            englishWord: 'englishWord',
+            russianWord: 'englishWord',
+            synonyms: [],
+        };
+
+        verify(wordsFacadeServiceMock.addWord(deepEqual(formData))).once();
     });
 });

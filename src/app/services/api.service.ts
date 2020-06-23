@@ -21,7 +21,13 @@ export class ApiService {
         return fromPromise(firebase.auth().signInWithEmailAndPassword(email, password));
     }
 
-    addWord({word, userId}: {word: Word; userId: string}): Observable<DocumentReference> {
+    addWord({
+        word,
+        userId,
+    }: {
+        word: Omit<Word, 'id'>;
+        userId: string;
+    }): Observable<DocumentReference> {
         return fromPromise(
             this.db.collection(MAIN_COLLECTION).doc(userId).collection('words').add(word),
         );

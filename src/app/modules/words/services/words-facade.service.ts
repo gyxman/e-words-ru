@@ -12,7 +12,9 @@ export class WordsFacadeService {
 
     constructor(private store$: Store<WordsState>) {}
 
-    addWord(data: Word) {
-        this.store$.dispatch(wordsActions.addWordStart({data}));
+    addWord(data: Pick<Word, 'russianWord' & 'englishWord' & 'synonyms'>) {
+        const word = {...data, date: new Date(), countOfSuccess: 0} as Omit<Word, 'id'>;
+
+        this.store$.dispatch(wordsActions.addWordStart({data: word}));
     }
 }

@@ -12,7 +12,7 @@ const getWordsError = createAction('[words] Загрузка слов завер
 
 const addWordStart = createAction(
     '[words] Начать добавление нового слова',
-    props<{data: Word}>(),
+    props<{data: Omit<Word, 'id'>}>(),
 );
 
 const addWordSuccess = createAction('[words] Новое слово успешно добавлено');
