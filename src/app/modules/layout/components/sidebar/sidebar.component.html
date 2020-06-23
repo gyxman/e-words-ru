@@ -3,6 +3,8 @@
         *ngFor="let item of allMenuItems$ | async; trackBy: identityTrackByFunction"
         class="item"
     >
-        <a class="link" [routerLink]="item.navigateTo">{{ item.title }}</a>
+        <a class="link" routerLinkActive="link_active" [routerLink]="item.navigateTo">{{
+            item.title
+        }}</a>
     </li>
 </ul>

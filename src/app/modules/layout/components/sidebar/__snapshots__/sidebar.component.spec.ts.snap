@@ -17,6 +17,7 @@ exports[`SidebarComponent Если компонент загрузился, то
         <a
           class="link"
           href="/add-word"
+          routerlinkactive="link_active"
         >
           Добавить слово
         </a>
