@@ -15,6 +15,8 @@ import {LoaderModule} from '../utils/components/loader/loader.module';
 import {LayoutFacadeService} from './services/layout-facade.service';
 import {LayoutStoreModule} from './store/layout-store.module';
 import {WordsListModule} from '../words/components/words-list/words-list.module';
+import {MatPaginatorIntl} from '@angular/material/paginator';
+import {getDutchPaginatorIntl} from './langs/dutch-paginator-intl';
 
 @NgModule({
     imports: [
@@ -34,6 +36,10 @@ import {WordsListModule} from '../words/components/words-list/words-list.module'
     ],
     declarations: [LayoutComponent],
     exports: [LayoutComponent],
-    providers: [WordsFacadeService, LayoutFacadeService],
+    providers: [
+        WordsFacadeService,
+        LayoutFacadeService,
+        {provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl()},
+    ],
 })
 export class LayoutModule {}
