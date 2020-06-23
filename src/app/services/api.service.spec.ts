@@ -18,6 +18,7 @@ describe('ApiService - сервис по работе с авторизацие�
     let angularFirestoreCollectionMock1: AngularFirestoreCollection;
     let angularFirestoreDocumentMock: AngularFirestoreDocument;
     let angularFirestoreCollectionMock2: AngularFirestoreCollection;
+    let angularFirestoreDocumentMock2: AngularFirestoreDocument;
 
     beforeEach(() => {
         firebaseMock = require('firebase');
@@ -25,6 +26,7 @@ describe('ApiService - сервис по работе с авторизацие�
         angularFirestoreCollectionMock1 = mock(AngularFirestoreCollection);
         angularFirestoreDocumentMock = mock(AngularFirestoreDocument);
         angularFirestoreCollectionMock2 = mock(AngularFirestoreCollection);
+        angularFirestoreDocumentMock2 = mock(AngularFirestoreDocument);
     });
 
     beforeEach(() => {
@@ -44,6 +46,10 @@ describe('ApiService - сервис по работе с авторизацие�
                 {
                     provide: AngularFirestoreCollection,
                     useFactory: () => instance(angularFirestoreCollectionMock2),
+                },
+                {
+                    provide: AngularFirestoreDocument,
+                    useFactory: () => instance(angularFirestoreDocumentMock2),
                 },
             ],
         });
@@ -69,30 +75,6 @@ describe('ApiService - сервис по работе с авторизацие�
                 'test@mail.ru',
                 'easyPassword',
             );
-        });
-    });
-
-    describe('addWord - метод добавления слова на изучение в базу данных', () => {
-        it('Если вызывается метод добавления слова на изучение, то отправляем запрос в firebase с переданными данными', () => {
-            // arrange
-            when(dbMock.collection('e-words-ru')).thenReturn(
-                instance(angularFirestoreCollectionMock1),
-            );
-            when(angularFirestoreCollectionMock1.doc('userId')).thenReturn(
-                instance(angularFirestoreDocumentMock),
-            );
-            when(angularFirestoreDocumentMock.collection('words')).thenReturn(
-                instance(angularFirestoreCollectionMock2),
-            );
-
-            // act
-            testedService.addWord({word: {id: 'wordId'} as Word, userId: 'userId'});
-
-            // assert
-            verify(dbMock.collection('e-words-ru')).once();
-            verify(angularFirestoreCollectionMock1.doc('userId')).once();
-            verify(angularFirestoreDocumentMock.collection('words')).once();
-            verify(angularFirestoreCollectionMock2.add(deepEqual({id: 'wordId'}))).once();
         });
     });
 
@@ -133,6 +115,58 @@ describe('ApiService - сервис по работе с авторизацие�
                     ],
                 }),
             );
+        });
+    });
+
+    describe('addWord - метод добавления слова на изучение в базу данных', () => {
+        it('Если вызывается метод добавления слова на изучение, то отправляем запрос в firebase с переданными данными', () => {
+            // arrange
+            when(dbMock.collection('e-words-ru')).thenReturn(
+                instance(angularFirestoreCollectionMock1),
+            );
+            when(angularFirestoreCollectionMock1.doc('userId')).thenReturn(
+                instance(angularFirestoreDocumentMock),
+            );
+            when(angularFirestoreDocumentMock.collection('words')).thenReturn(
+                instance(angularFirestoreCollectionMock2),
+            );
+
+            // act
+            testedService.addWord({word: {id: 'wordId'} as Word, userId: 'userId'});
+
+            // assert
+            verify(dbMock.collection('e-words-ru')).once();
+            verify(angularFirestoreCollectionMock1.doc('userId')).once();
+            verify(angularFirestoreDocumentMock.collection('words')).once();
+            verify(angularFirestoreCollectionMock2.add(deepEqual({id: 'wordId'}))).once();
+        });
+    });
+
+    describe('removeWord - метод удаления слова из базы данных', () => {
+        it('Если вызывается метод удаления слова, то отправляем запрос в firebase с переданными данными', () => {
+            // arrange
+            when(dbMock.collection('e-words-ru')).thenReturn(
+                instance(angularFirestoreCollectionMock1),
+            );
+            when(angularFirestoreCollectionMock1.doc('userId')).thenReturn(
+                instance(angularFirestoreDocumentMock),
+            );
+            when(angularFirestoreDocumentMock.collection('words')).thenReturn(
+                instance(angularFirestoreCollectionMock2),
+            );
+            when(angularFirestoreCollectionMock2.doc('wordId')).thenReturn(
+                instance(angularFirestoreDocumentMock2),
+            );
+
+            // act
+            testedService.removeWord({wordId: 'wordId', userId: 'userId'});
+
+            // assert
+            verify(dbMock.collection('e-words-ru')).once();
+            verify(angularFirestoreCollectionMock1.doc('userId')).once();
+            verify(angularFirestoreDocumentMock.collection('words')).once();
+            verify(angularFirestoreCollectionMock2.doc('wordId')).once();
+            verify(angularFirestoreDocumentMock2.delete()).once();
         });
     });
 });

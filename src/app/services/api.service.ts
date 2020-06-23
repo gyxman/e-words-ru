@@ -9,6 +9,7 @@ import {DocumentReference} from '@angular/fire/firestore/interfaces';
 import {map} from 'rxjs/operators';
 
 const MAIN_COLLECTION = 'e-words-ru';
+const WORDS_COLLECTION = 'words';
 
 @Injectable()
 export class ApiService {
@@ -19,18 +20,6 @@ export class ApiService {
         password,
     }: SignInWithEmailAndPasswordDto): Observable<firebase.auth.UserCredential> {
         return fromPromise(firebase.auth().signInWithEmailAndPassword(email, password));
-    }
-
-    addWord({
-        word,
-        userId,
-    }: {
-        word: Omit<Word, 'id'>;
-        userId: string;
-    }): Observable<DocumentReference> {
-        return fromPromise(
-            this.db.collection(MAIN_COLLECTION).doc(userId).collection('words').add(word),
-        );
     }
 
     getWords(userId: string): Observable<Word[]> {
@@ -50,5 +39,32 @@ export class ApiService {
                     return arr;
                 }),
             );
+    }
+
+    addWord({
+        word,
+        userId,
+    }: {
+        word: Omit<Word, 'id'>;
+        userId: string;
+    }): Observable<DocumentReference> {
+        return fromPromise(
+            this.db
+                .collection(MAIN_COLLECTION)
+                .doc(userId)
+                .collection(WORDS_COLLECTION)
+                .add(word),
+        );
+    }
+
+    removeWord({wordId, userId}: {wordId: string; userId: string}): Observable<void> {
+        return fromPromise(
+            this.db
+                .collection(MAIN_COLLECTION)
+                .doc(userId)
+                .collection(WORDS_COLLECTION)
+                .doc(wordId)
+                .delete(),
+        );
     }
 }

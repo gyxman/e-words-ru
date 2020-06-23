@@ -9,13 +9,14 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatInputModule} from '@angular/material/input';
 import {WordsFacadeService} from '../../services/words-facade.service';
-import {instance, mock, when} from 'ts-mockito';
+import {instance, mock, verify, when} from 'ts-mockito';
 import {BehaviorSubject} from 'rxjs';
 import {Word} from '../../models/word';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 
 describe('WordsListComponent - компонент списка слов на изучение', () => {
+    let component: WordsListComponent;
     let fixture: ComponentFixture<WordsListComponent>;
     let pageObject: WordsListComponentPo<WordsListComponent>;
     let wordsFacadeServiceMock: WordsFacadeService;
@@ -56,6 +57,7 @@ describe('WordsListComponent - компонент списка слов на и�
 
     beforeEach(() => {
         fixture = TestBed.createComponent(WordsListComponent);
+        component = fixture.componentInstance;
         pageObject = new WordsListComponentPo(fixture);
     });
 
@@ -134,5 +136,15 @@ describe('WordsListComponent - компонент списка слов на и�
 
         // assert
         expect(fixture.nativeElement).toMatchSnapshot();
+    });
+
+    describe('removeWord - метод удаления слова', () => {
+        it('Если пользователь нажимает на кнопку удаления слова, то вызывается метод удаления слова', () => {
+            // act
+            component.removeWord('0');
+
+            // assert
+            verify(wordsFacadeServiceMock.removeWord('0')).once();
+        });
     });
 });

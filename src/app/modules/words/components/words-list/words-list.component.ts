@@ -76,4 +76,8 @@ export class WordsListComponent implements OnInit, OnDestroy {
             this.data.paginator.firstPage();
         }
     }
+
+    removeWord(wordId: string) {
+        this.wordsFacadeService.removeWord(wordId);
+    }
 }

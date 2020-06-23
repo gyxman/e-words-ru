@@ -15,7 +15,7 @@ describe('wordsReducer - редьюсер слов на изучении', () =>
         const data = [{id: 'wordId'} as Word];
 
         // act & assert
-        expect(wordsReducer(undefined, wordsActions.getWordsSuccess({data}))).toEqual({
+        expect(wordsReducer(initialState, wordsActions.getWordsSuccess({data}))).toEqual({
             ...initialState,
             words: data,
         });
@@ -32,7 +32,7 @@ describe('wordsReducer - редьюсер слов на изучении', () =>
         const data = [];
 
         // act & assert
-        expect(wordsReducer(undefined, wordsActions.getWordsSuccess({data}))).toEqual({
+        expect(wordsReducer(initialState, wordsActions.getWordsSuccess({data}))).toEqual({
             ...initialState,
             wordsLoaded: true,
         });
@@ -47,7 +47,7 @@ describe('wordsReducer - редьюсер слов на изучении', () =>
         } as WordsState;
 
         // act & assert
-        expect(wordsReducer(undefined, wordsActions.getWordsError())).toEqual({
+        expect(wordsReducer(initialState, wordsActions.getWordsError())).toEqual({
             ...initialState,
             wordsLoaded: false,
         });
@@ -66,7 +66,24 @@ describe('wordsReducer - редьюсер слов на изучении', () =>
         } as Word;
 
         // act & assert
-        expect(wordsReducer(undefined, wordsActions.addWordStart({data}))).toEqual({
+        expect(wordsReducer(initialState, wordsActions.addWordStart({data}))).toEqual({
+            ...initialState,
+            isLoading: true,
+        });
+    });
+
+    it('Если приходит информация о начале удаления слова, то ставим флаг о загрузке', () => {
+        // arrange
+        const initialState = {
+            wordsLoaded: false,
+            words: [],
+            isLoading: false,
+        } as WordsState;
+
+        // act & assert
+        expect(
+            wordsReducer(initialState, wordsActions.removeWordStart({wordId: 'wordId'})),
+        ).toEqual({
             ...initialState,
             isLoading: true,
         });
@@ -81,7 +98,7 @@ describe('wordsReducer - редьюсер слов на изучении', () =>
         } as WordsState;
 
         // act & assert
-        expect(wordsReducer(undefined, wordsActions.addWordSuccess())).toEqual({
+        expect(wordsReducer(initialState, wordsActions.addWordSuccess())).toEqual({
             ...initialState,
             isLoading: false,
         });
@@ -96,7 +113,59 @@ describe('wordsReducer - редьюсер слов на изучении', () =>
         } as WordsState;
 
         // act & assert
-        expect(wordsReducer(undefined, wordsActions.addWordError())).toEqual({
+        expect(wordsReducer(initialState, wordsActions.addWordError())).toEqual({
+            ...initialState,
+            isLoading: false,
+        });
+    });
+
+    it('Если приходит информация об успехе удаления слова, то снимаем флаг о загрузке', () => {
+        // arrange
+        const initialState = {
+            wordsLoaded: false,
+            words: [],
+            isLoading: true,
+        } as WordsState;
+
+        // act & assert
+        expect(
+            wordsReducer(
+                initialState,
+                wordsActions.removeWordSuccess({wordId: 'wordId'}),
+            ),
+        ).toEqual({
+            ...initialState,
+            isLoading: false,
+        });
+    });
+
+    it('Если приходит информация об успехе удаления слова, то обновляем список слов', () => {
+        // arrange
+        const initialState = {
+            wordsLoaded: false,
+            words: [{id: '1'} as Word, {id: '2'} as Word],
+            isLoading: false,
+        } as WordsState;
+
+        // act & assert
+        expect(
+            wordsReducer(initialState, wordsActions.removeWordSuccess({wordId: '1'})),
+        ).toEqual({
+            ...initialState,
+            words: [{id: '2'} as Word],
+        });
+    });
+
+    it('Если приходит информация об ошибке при удалениии слова, то снимаем флаг о загрузке', () => {
+        // arrange
+        const initialState = {
+            wordsLoaded: false,
+            words: [],
+            isLoading: true,
+        } as WordsState;
+
+        // act & assert
+        expect(wordsReducer(initialState, wordsActions.removeWordError())).toEqual({
             ...initialState,
             isLoading: false,
         });

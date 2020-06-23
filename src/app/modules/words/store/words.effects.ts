@@ -66,6 +66,39 @@ export class WordsEffects {
         {dispatch: false},
     );
 
+    removeWordStart$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(wordsActions.removeWordStart),
+            withLatestFrom(this.authFacadeService.userId),
+            switchMap(([{wordId}, userId]) =>
+                this.apiService.removeWord({wordId, userId}).pipe(
+                    switchMap(() =>
+                        of(
+                            wordsActions.removeWordSuccess({wordId}),
+                            appActions.showNotification({
+                                data: {
+                                    text: 'Слово успешно удалено',
+                                    type: 'success',
+                                },
+                            }),
+                        ),
+                    ),
+                    catchError(() =>
+                        of(
+                            wordsActions.removeWordError(),
+                            appActions.showNotification({
+                                data: {
+                                    text: 'Ошибка при удалении слова',
+                                    type: 'error',
+                                },
+                            }),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+    );
+
     constructor(
         private readonly actions$: Actions,
         private readonly store$: Store<WordsState>,

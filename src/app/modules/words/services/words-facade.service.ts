@@ -17,4 +17,8 @@ export class WordsFacadeService {
 
         this.store$.dispatch(wordsActions.addWordStart({data: word}));
     }
+
+    removeWord(wordId: string) {
+        this.store$.dispatch(wordsActions.removeWordStart({wordId}));
+    }
 }

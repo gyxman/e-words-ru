@@ -1,4 +1,4 @@
-import {Observable, of, throwError} from 'rxjs';
+import {EMPTY, Observable, of, throwError} from 'rxjs';
 import {Action} from '@ngrx/store';
 import {MockStore, provideMockStore} from '@ngrx/store/testing';
 import {TestBed} from '@angular/core/testing';
@@ -193,6 +193,78 @@ describe('WordsEffects - эффекты по работе со словами н
 
             // assert
             verify(manageWordFormServiceMock.clearForm()).once();
+        });
+    });
+
+    describe('removeWordStart$ - эффект начала удаления слова', () => {
+        it('Эффект начала удаления слова диспатчит экшен, переподписывается при ошибке', () => {
+            // assert
+            expect(metadata.removeWordStart$).toEqual({
+                dispatch: true,
+                useEffectsErrorHandler: true,
+            });
+        });
+
+        it(`Если вызывается метод удаления слова и слово успешно удаляется из базы данных,
+            диспатчим экшен об успехе и показе нотификации`, () => {
+            // arrange
+            when(
+                apiServiceMock.removeWord(
+                    deepEqual({
+                        wordId: 'wordId',
+                        userId: 'userId',
+                    }),
+                ),
+            ).thenReturn(of(true) as Observable<any>);
+
+            // act
+            actionsMock$ = hot('x', {
+                x: wordsActions.removeWordStart({wordId: 'wordId'}),
+            });
+
+            // assert
+            const expected$ = hot('(xy)', {
+                x: wordsActions.removeWordSuccess({wordId: 'wordId'}),
+                y: appActions.showNotification({
+                    data: {
+                        text: 'Слово успешно удалено',
+                        type: 'success',
+                    },
+                }),
+            });
+
+            expect(testedEffects.removeWordStart$).toBeObservable(expected$);
+        });
+
+        it(`Если вызывается метод удаления слова, но слово не удаляется из базы данных,
+            диспатчим экшен об ошибке и показе нотификации`, () => {
+            // arrange
+            when(
+                apiServiceMock.removeWord(
+                    deepEqual({
+                        wordId: 'wordId',
+                        userId: 'userId',
+                    }),
+                ),
+            ).thenReturn(throwError('error'));
+
+            // act
+            actionsMock$ = hot('x', {
+                x: wordsActions.removeWordStart({wordId: 'wordId'}),
+            });
+
+            // assert
+            const expected$ = hot('(xy)', {
+                x: wordsActions.removeWordError(),
+                y: appActions.showNotification({
+                    data: {
+                        text: 'Ошибка при удалении слова',
+                        type: 'error',
+                    },
+                }),
+            });
+
+            expect(testedEffects.removeWordStart$).toBeObservable(expected$);
         });
     });
 });

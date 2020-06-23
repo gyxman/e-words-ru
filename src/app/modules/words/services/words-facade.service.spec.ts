@@ -76,4 +76,19 @@ describe('WordsFacadeService - сервис по работе со словам�
             );
         });
     });
+
+    describe('removeWord - метод по удалению слова из базы данных', () => {
+        it('Если вызывается метод removeWord, то диспатчим экшен о начале удаления слова и передаем id слова', () => {
+            // arrange
+            jest.spyOn(storeMock, 'dispatch');
+
+            // act
+            testedService.removeWord('wordId');
+
+            // assert
+            expect(storeMock.dispatch).toHaveBeenCalledWith(
+                wordsActions.removeWordStart({wordId: 'wordId'}),
+            );
+        });
+    });
 });
