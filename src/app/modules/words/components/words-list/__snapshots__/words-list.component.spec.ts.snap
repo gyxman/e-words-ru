@@ -498,7 +498,7 @@ exports[`WordsListComponent - компонент списка слов на из
             mat-cell=""
             role="gridcell"
           >
-             0 
+             1 
           </td>
           <td
             class="mat-cell cdk-column-actions mat-column-actions"

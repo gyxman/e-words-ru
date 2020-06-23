@@ -67,7 +67,11 @@ describe('WordsListComponent - компонент списка слов на и�
                 englishWord: 'hello',
                 russianWord: 'привет',
                 synonyms: ['здравствуй'],
-                date: new Date('December 17, 1995 03:24:00'),
+                date: {
+                    toDate: () => {
+                        return new Date('December 17, 1995 03:24:00');
+                    },
+                } as any,
                 countOfSuccess: 0,
             },
             {
@@ -75,8 +79,12 @@ describe('WordsListComponent - компонент списка слов на и�
                 englishWord: 'car',
                 russianWord: 'машина',
                 synonyms: ['автомобиль'],
-                date: new Date('December 19, 2000 11:15:10'),
-                countOfSuccess: 0,
+                date: {
+                    toDate: () => {
+                        return new Date('December 19, 2000 11:15:10');
+                    },
+                } as any,
+                countOfSuccess: 1,
             },
         ]);
 
@@ -95,7 +103,11 @@ describe('WordsListComponent - компонент списка слов на и�
                 englishWord: 'hello',
                 russianWord: 'привет',
                 synonyms: ['здравствуй'],
-                date: new Date('December 17, 1995 03:24:00'),
+                date: {
+                    toDate: () => {
+                        return new Date('December 17, 1995 03:24:00');
+                    },
+                } as any,
                 countOfSuccess: 0,
             },
             {
@@ -103,7 +115,11 @@ describe('WordsListComponent - компонент списка слов на и�
                 englishWord: 'car',
                 russianWord: 'машина',
                 synonyms: ['автомобиль'],
-                date: new Date('December 19, 2000 11:15:10'),
+                date: {
+                    toDate: () => {
+                        return new Date('December 19, 2000 11:15:10');
+                    },
+                } as any,
                 countOfSuccess: 0,
             },
         ]);

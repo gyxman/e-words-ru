@@ -13,7 +13,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {WordsFacadeService} from '../../services/words-facade.service';
 import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import {takeUntil, filter} from 'rxjs/operators';
 
 @Component({
     selector: 'app-words-list',
@@ -53,11 +53,16 @@ export class WordsListComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.wordsFacadeService.words$.pipe(takeUntil(this.destroy$)).subscribe(data => {
-            this.data = new MatTableDataSource(data);
-            this.data.paginator = this.paginator;
-            this.data.sort = this.sort;
-        });
+        this.wordsFacadeService.words$
+            .pipe(
+                filter(data => !!data.length),
+                takeUntil(this.destroy$),
+            )
+            .subscribe(data => {
+                this.data = new MatTableDataSource(data);
+                this.data.paginator = this.paginator;
+                this.data.sort = this.sort;
+            });
     }
 
     ngOnDestroy() {
