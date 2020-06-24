@@ -17,14 +17,19 @@ const reducer = createReducer(
         wordsLoaded: true,
     })),
 
-    on(wordsActions.removeWordSuccess, (state, {wordId}) => ({
-        ...state,
-        words: state.words.filter(({id}) => id !== wordId),
-    })),
-
     on(wordsActions.getWordsError, state => ({
         ...state,
         wordsLoaded: false,
+    })),
+
+    on(wordsActions.addWordSuccess, (state, {data}) => ({
+        ...state,
+        words: state.words.concat(data),
+    })),
+
+    on(wordsActions.removeWordSuccess, (state, {wordId}) => ({
+        ...state,
+        words: state.words.filter(({id}) => id !== wordId),
     })),
 
     on(wordsActions.addWordStart, wordsActions.removeWordStart, state => ({

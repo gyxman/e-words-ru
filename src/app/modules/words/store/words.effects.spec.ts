@@ -16,6 +16,7 @@ import {AuthFacadeService} from '../../auth/services/auth-facade.service';
 import {hot} from 'jest-marbles';
 import {Word} from '../models/word';
 import {appActions} from '../../../store/app.actions';
+import {DocumentReference} from '@angular/fire/firestore';
 
 describe('WordsEffects - эффекты по работе со словами на изучении', () => {
     let testedEffects: WordsEffects;
@@ -118,20 +119,24 @@ describe('WordsEffects - эффекты по работе со словами н
             when(
                 apiServiceMock.addWord(
                     deepEqual({
-                        word: deepEqual({id: 'wordId'}) as Word,
+                        word: deepEqual({englishWord: 'englishWord'} as Word),
                         userId: 'userId',
                     }),
                 ),
-            ).thenReturn(of(true) as any);
+            ).thenReturn(of({id: 'wordId'} as DocumentReference));
 
             // act
             actionsMock$ = hot('x', {
-                x: wordsActions.addWordStart({data: {id: 'wordId'} as Word}),
+                x: wordsActions.addWordStart({
+                    data: {englishWord: 'englishWord'} as Word,
+                }),
             });
 
             // assert
             const expected$ = hot('(xy)', {
-                x: wordsActions.addWordSuccess(),
+                x: wordsActions.addWordSuccess({
+                    data: {id: 'wordId', englishWord: 'englishWord'} as Word,
+                }),
                 y: appActions.showNotification({
                     data: {
                         text: 'Слово успешно добавлено',
@@ -186,7 +191,9 @@ describe('WordsEffects - эффекты по работе со словами н
 
         it('Если вызывается метод успешного добавления слова, очищаем форму добавления слова', () => {
             // arrange
-            actionsMock$ = of(wordsActions.addWordSuccess());
+            actionsMock$ = of(
+                wordsActions.addWordSuccess({data: {id: 'wordId'} as Word}),
+            );
 
             // act
             testedEffects.addWordSuccess$.subscribe();

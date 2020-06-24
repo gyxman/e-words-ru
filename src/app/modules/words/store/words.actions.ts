@@ -15,7 +15,10 @@ const addWordStart = createAction(
     props<{data: Omit<Word, 'id'>}>(),
 );
 
-const addWordSuccess = createAction('[words] Новое слово успешно добавлено');
+const addWordSuccess = createAction(
+    '[words] Новое слово успешно добавлено',
+    props<{data: Word}>(),
+);
 
 const addWordError = createAction('[words] Ошибка при добавлении нового слова');
 

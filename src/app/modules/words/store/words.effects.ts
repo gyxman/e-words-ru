@@ -28,9 +28,9 @@ export class WordsEffects {
             withLatestFrom(this.authFacadeService.userId),
             switchMap(([{data}, userId]) =>
                 this.apiService.addWord({word: data, userId}).pipe(
-                    switchMap(() =>
+                    switchMap(({id}) =>
                         of(
-                            wordsActions.addWordSuccess(),
+                            wordsActions.addWordSuccess({data: {id, ...data}}),
                             appActions.showNotification({
                                 data: {
                                     text: 'Слово успешно добавлено',
